@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Daily Diplomat — Diplomatic Intelligence, Daily</title>
+  <meta name="description" content="AI-powered diplomatic intelligence covering 8 global desks. Daily cables delivered at 08:00 WET. East Asia desk always Open Access."/>
+  <meta property="og:title" content="The Daily Diplomat"/>
+  <meta property="og:description" content="Diplomatic intelligence covering 8 global desks. Daily cables delivered at 08:00 WET."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://www.thedailydiplomat.com"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="The Daily Diplomat"/>
+  <meta name="twitter:description" content="Diplomatic intelligence covering 8 global desks. Daily cables delivered at 08:00 WET."/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%235a3a22'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23c49240' font-family='serif' font-weight='bold'>D</text></svg>"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown:    #5a3a22;
+      --brown2:   #6b4a2e;
+      --gold:     #c49240;
+      --gold2:    #ddb870;
+      --cream:    #f2e8d5;
+      --paper:    #fdf8f0;
+      --ink:      #2a1a0e;
+      --muted:    #9a8570;
+      --rule:     #d4c4a0;
+      --tan:      #c8986e;
+      --tan2:     #e0c090;
+      --red:      #b03a2a;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--brown);
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--ink);
+      border-bottom: 2px solid rgba(196,149,106,0.25);
+      padding: 9px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      color: rgba(212,168,67,0.45);
+      text-transform: uppercase;
+    }
+    .topbar-left { display: flex; gap: 20px; align-items: center; }
+    .topbar-right { display: flex; gap: 20px; align-items: center; }
+    .topbar-divider { color: rgba(212,168,67,0.2); }
+    .topbar-alert { color: #d4645a; font-weight: 600; }
+    .topbar-cta {
+      background: var(--gold);
+      color: var(--ink);
+      padding: 5px 14px;
+      font-size: 9px;
+      letter-spacing: 2px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-transform: uppercase;
+    }
+
+    /* ── THREE COLUMNS ── */
+    .columns {
+      display: grid;
+      grid-template-columns: 280px 1fr 260px;
+      min-height: calc(100vh - 41px);
+    }
+
+    /* ── LEFT SIDEBAR ── */
+    .sidebar-left {
+      background: var(--brown2);
+      border-right: 1px solid rgba(212,168,67,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .folder-tab {
+      background: var(--tan);
+      padding: 28px 24px 20px;
+      position: relative;
+    }
+    .folder-tab::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: repeating-linear-gradient(90deg, var(--tan2) 0px, var(--tan2) 8px, var(--tan) 8px, var(--tan) 16px);
+    }
+    .folder-notch {
+      position: absolute;
+      top: -1px; right: 40px;
+      width: 60px; height: 18px;
+      background: var(--brown2);
+      border-radius: 0 0 8px 8px;
+    }
+    .folder-eyebrow { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: rgba(46,31,20,0.55); margin-bottom: 6px; }
+    .folder-title { font-family: 'Playfair Display', serif; font-size: 27px; font-weight: 900; color: var(--ink); line-height: 1.05; text-transform: uppercase; letter-spacing: 1px; }
+    .folder-sub { font-size: 9px; letter-spacing: 2px; color: rgba(46,31,20,0.5); margin-top: 6px; text-transform: uppercase; }
+
+    .sidebar-nav { padding: 20px 0; flex: 1; }
+    .nav-section { padding: 0 20px 16px; }
+    .nav-section-title {
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--tan2); font-weight: 600; margin-bottom: 10px;
+      padding-bottom: 6px; border-bottom: 1px solid rgba(196,149,106,0.25);
+    }
+
+    /* FREE desk */
+    .nav-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; cursor: pointer;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.15s;
+    }
+    .nav-item.active { background: rgba(212,168,67,0.1); margin: 0 -20px; padding: 8px 20px; }
+    .nav-item-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+    .nav-item.active .nav-item-label { color: rgba(220,190,155,0.9); }
+    .nav-badge-free {
+      font-size: 8px; letter-spacing: 1px; color: #7ab88a;
+      border: 1px solid rgba(122,184,138,0.3); padding: 1px 6px; text-transform: uppercase;
+    }
+
+    /* LOCKED desks */
+    .nav-item-locked {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; cursor: pointer;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      opacity: 0.7;
+      transition: opacity 0.15s;
+    }
+    .nav-item-locked:hover { opacity: 1; }
+    .nav-label-redacted {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .redact-bar {
+      display: inline-block;
+      background: rgba(0,0,0,0.5);
+      height: 10px;
+      border-radius: 1px;
+    }
+    .nav-item-locked .nav-item-label { color: rgba(255,255,255,0.25); }
+    .nav-item-locked .nav-item-label.readable { color: rgba(220,190,155,0.55); }
+    .lock-badge {
+      font-size: 8px; letter-spacing: 1px; color: rgba(212,168,67,0.4);
+      border: 1px solid rgba(212,168,67,0.15); padding: 1px 6px; text-transform: uppercase;
+    }
+    .desk-selectable { cursor: pointer; }
+    .desk-selectable:hover .nav-item-label { color: rgba(220,190,155,0.85) !important; }
+    .desk-selectable:hover .select-hint { color: rgba(219,184,138,0.7); border-color: rgba(219,184,138,0.3); }
+    .desk-selectable.active { background: rgba(122,184,138,0.08); margin: 0 -20px; padding: 8px 20px; border-left: 2px solid rgba(122,184,138,0.4); }
+
+    /* ── ACCESS PANEL in sidebar ── */
+    .access-panel {
+      margin: 0 20px 16px;
+      border: 1px solid rgba(212,168,67,0.25);
+      background: rgba(0,0,0,0.2);
+      padding: 14px;
+    }
+    .access-panel-title {
+      font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold2); margin-bottom: 8px;
+    }
+    .access-panel-text {
+      font-size: 10px; color: rgba(220,190,155,0.5); line-height: 1.6; margin-bottom: 12px;
+    }
+    .access-panel-text strong { color: rgba(220,190,155,0.8); }
+    .access-input {
+      width: 100%; padding: 8px 10px; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(212,168,67,0.3); color: rgba(220,190,155,0.9);
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; outline: none;
+      margin-bottom: 6px;
+    }
+    .access-input::placeholder { color: rgba(220,190,155,0.25); }
+    .access-btn {
+      width: 100%; padding: 9px; background: var(--gold);
+      border: none; color: var(--ink); font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer;
+    }
+    .access-btn:hover { background: var(--tan2); }
+    .access-note { font-size: 8px; color: rgba(220,190,155,0.25); margin-top: 6px; letter-spacing: 0.5px; text-align: center; }
+
+    /* ── CLEARANCE CARD ── */
+    .clearance-card {
+      margin: 0 20px 16px;
+      border: 1px solid rgba(122,184,138,0.25);
+      background: rgba(0,0,0,0.15);
+      padding: 12px 14px;
+    }
+    .clearance-card-title { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: rgba(122,184,138,0.5); margin-bottom: 8px; }
+    .clearance-level { font-size: 13px; font-weight: 600; color: #7ab88a; letter-spacing: 2px; margin-bottom: 4px; }
+    .clearance-sub { font-size: 8px; color: rgba(122,184,138,0.35); letter-spacing: 1px; text-transform: uppercase; line-height: 1.6; }
+    .clearance-bar { display: flex; gap: 3px; margin-top: 8px; }
+    .clearance-pip { flex: 1; height: 3px; }
+    .clearance-pip.active { background: #7ab88a; }
+    .clearance-pip.inactive { background: rgba(255,255,255,0.08); }
+
+    /* ── CIPHER TEXT ── */
+    .cipher {
+      font-family: 'IBM Plex Mono', monospace;
+      color: rgba(220,190,155,0.3);
+      letter-spacing: 1px;
+      font-size: 10px;
+    }
+
+    /* ── ACTIVE THEATERS ── */
+    .theater-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .theater-name { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; }
+    .theater-name.clear { color: rgba(220,190,155,0.75); }
+    .theater-status { font-size: 8px; letter-spacing: 1px; }
+    .theater-status.hot { color: #d4645a; }
+    .theater-status.warm { color: var(--gold2); }
+
+    /* ── BUREAU NETWORK ── */
+    .bureau-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .bureau-name { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: rgba(220,190,155,0.45); }
+    .bureau-name.hq { color: rgba(219,184,138,0.75); }
+    .bureau-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .bureau-dot.active { background: #7ab88a; }
+    .bureau-dot.locked-dot { background: rgba(42,26,14,0.5); }
+
+    /* sidebar footer */
+    .sidebar-footer { padding: 16px 20px 20px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .sidebar-footer-text { font-size: 9px; color: rgba(255,255,255,0.2); line-height: 1.8; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .foundational-title { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: rgba(219,184,138,0.35); margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid rgba(219,184,138,0.12); }
+    .foundational-link { display: block; font-size: 9px; color: rgba(219,184,138,0.45); text-decoration: none; letter-spacing: 0.5px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); transition: color 0.15s; line-height: 1.4; }
+    .foundational-link:hover { color: rgba(219,184,138,0.85); }
+    .foundational-link span { display: block; font-size: 8px; color: rgba(219,184,138,0.25); margin-top: 1px; }
+    .sidebar-seal { width: 36px; height: 36px; border: 1px solid rgba(212,168,67,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(212,168,67,0.4); font-size: 14px; margin-top: 14px; }
+
+    /* ── CENTER ── */
+    .center { background: var(--paper); border-right: 1px solid var(--rule); overflow-y: auto; position: relative; }
+
+    .tri-border { display: block; width: 100%; height: 14px; }
+
+    .dispatch-header { padding: 24px 36px 0; border-bottom: 1px solid var(--rule); }
+    .dispatch-title-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; }
+    .dispatch-word { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--brown); letter-spacing: -1px; text-transform: uppercase; }
+    .dispatch-underline { height: 3px; background: var(--brown); margin-top: 3px; }
+    .dispatch-cable-num { font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+    .free-badge { display: inline-block; font-size: 8px; letter-spacing: 2px; color: #7ab88a; border: 1px solid rgba(122,184,138,0.4); padding: 2px 8px; text-transform: uppercase; margin-left: 10px; vertical-align: middle; }
+
+    .dispatch-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
+    .meta-cell { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+    .meta-cell:nth-child(odd) { border-right: 1px solid var(--rule); padding-right: 20px; }
+    .meta-cell:nth-child(even) { padding-left: 20px; }
+    .meta-key { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .meta-val { font-size: 11px; color: var(--ink); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
+    .priority-flash { color: var(--red); font-weight: 600; }
+
+    .dispatch-subject { padding: 16px 0; border-bottom: 1px solid var(--rule); }
+    .subject-key { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .subject-val { font-size: 11px; color: var(--ink); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; line-height: 1.5; }
+
+    .dispatch-body { padding: 28px 36px 0; }
+    .dispatch-headline { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--ink); line-height: 1.15; margin-bottom: 24px; text-align: justify; }
+    .dispatch-text { font-family: 'Source Serif 4', serif; font-size: 15px; line-height: 1.85; color: #2a1a0e; text-align: justify; margin-bottom: 18px; }
+    .dispatch-section-head { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--brown); font-weight: 600; margin: 24px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--rule); }
+
+    .key-dev { display: flex; gap: 14px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px dashed var(--rule); }
+    .key-dev-num { font-size: 10px; color: var(--gold); font-weight: 600; flex-shrink: 0; width: 20px; padding-top: 2px; }
+    .key-dev-text { font-family: 'Source Serif 4', serif; font-size: 14px; line-height: 1.7; color: #2a1a0e; }
+    .key-dev-text strong { color: var(--brown); font-weight: 600; }
+
+    .significance-box { border: 1px solid var(--ink); padding: 18px 20px; margin: 24px 0; background: var(--cream); }
+    .sig-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--brown); font-weight: 600; margin-bottom: 8px; }
+    .sig-text { font-family: 'Source Serif 4', serif; font-size: 13px; line-height: 1.7; color: var(--ink); font-style: italic; }
+
+    /* ── PAYWALL / REDACTION WALL ── */
+    .paywall-zone {
+      position: relative;
+      margin: 0 -36px;
+      padding: 0 36px;
+    }
+    .paywall-fade {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--paper));
+      pointer-events: none;
+      z-index: 2;
+    }
+    .redacted-block {
+      background: rgba(42,26,14,0.08);
+      border-left: 3px solid rgba(42,26,14,0.15);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .redacted-block::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(42,26,14,0.6) 0px,
+        rgba(42,26,14,0.6) 100%
+      );
+    }
+    .redacted-block-label {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(220,190,155,0.4);
+      z-index: 3;
+      white-space: nowrap;
+    }
+
+    /* CLEARANCE GATE */
+    .clearance-gate {
+      margin: 0 0 0;
+      padding: 36px 36px 48px;
+      text-align: center;
+      background: var(--paper);
+      position: relative;
+      border-top: 2px solid rgba(42,26,14,0.08);
+    }
+    .gate-stamp {
+      display: inline-block;
+      border: 2px solid rgba(176,58,42,0.5);
+      color: rgba(176,58,42,0.6);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      transform: rotate(-2deg);
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+    .gate-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .gate-sub {
+      font-family: 'Source Serif 4', serif;
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 380px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+    .gate-desks {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .gate-desk-chip {
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1px solid rgba(42,26,14,0.2);
+      padding: 4px 10px;
+      color: var(--muted);
+    }
+    .gate-desk-chip.unlocked {
+      border-color: rgba(122,184,138,0.5);
+      color: #7ab88a;
+      background: rgba(122,184,138,0.06);
+    }
+    .gate-desk-chip.locked {
+      border-color: rgba(42,26,14,0.15);
+      color: rgba(42,26,14,0.3);
+      background: rgba(42,26,14,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    .gate-desk-chip.locked::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(42,26,14,0.45);
+    }
+    .gate-form {
+      display: flex;
+      gap: 0;
+      max-width: 380px;
+      margin: 0 auto 10px;
+    }
+    .gate-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid var(--rule);
+      border-right: none;
+      background: var(--cream);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--ink);
+      outline: none;
+    }
+    .gate-input::placeholder { color: var(--muted); }
+    .gate-btn {
+      padding: 12px 20px;
+      background: var(--brown);
+      border: 1px solid var(--brown);
+      color: var(--tan2);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .gate-btn:hover { background: var(--brown2); }
+    .gate-note { font-size: 9px; color: var(--muted); letter-spacing: 0.5px; }
+    .gate-open-note { font-size: 9px; color: rgba(122,184,138,0.55); letter-spacing: 0.5px; margin-top: 4px; }
+
+    /* ── TIER CARDS ── */
+    .tier-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 520px;
+      margin: 0 auto 26px;
+      text-align: left;
+    }
+    .tier-card {
+      border: 1px solid rgba(42,26,14,0.18);
+      padding: 20px 18px;
+      background: rgba(42,26,14,0.025);
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .tier-card:hover { border-color: rgba(42,26,14,0.35); background: rgba(42,26,14,0.05); }
+    .tier-card.tier-featured {
+      border-color: rgba(196,146,64,0.4);
+      background: rgba(196,146,64,0.03);
+    }
+    .tier-card.tier-featured:hover { border-color: rgba(196,146,64,0.65); background: rgba(196,146,64,0.06); }
+    .tier-card.tier-active-sel { outline: 2px solid rgba(122,184,138,0.55); outline-offset: -1px; }
+    .tier-featured-label {
+      position: absolute;
+      top: 0; right: 12px;
+      font-size: 7px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(196,146,64,0.4);
+      background: var(--paper); padding: 2px 8px;
+      transform: translateY(-50%);
+    }
+    .tier-eyebrow {
+      font-size: 7px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 10px; padding-bottom: 8px;
+      border-bottom: 1px solid rgba(42,26,14,0.1);
+    }
+    .tier-featured .tier-eyebrow { color: rgba(196,146,64,0.7); border-bottom-color: rgba(196,146,64,0.15); }
+    .tier-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px; font-weight: 700; color: var(--ink);
+      line-height: 1; margin-bottom: 3px;
+    }
+    .tier-price sup { font-size: 14px; font-weight: 400; vertical-align: super; }
+    .tier-price-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--muted); letter-spacing: 1px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .tier-desc {
+      font-family: 'Source Serif 4', serif;
+      font-size: 12px; color: rgba(42,26,14,0.55); line-height: 1.6; margin-bottom: 14px;
+    }
+    .tier-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; min-height: 26px; }
+    .tier-chip {
+      font-size: 7px; letter-spacing: 1px; text-transform: uppercase;
+      border: 1px solid rgba(42,26,14,0.18); padding: 3px 7px; color: var(--muted);
+    }
+    .tier-chip.green { border-color: rgba(122,184,138,0.45); color: #7ab88a; background: rgba(122,184,138,0.04); }
+    .tier-chip.gold { border-color: rgba(196,146,64,0.35); color: var(--gold); background: rgba(196,146,64,0.04); }
+    .tier-btn {
+      width: 100%; padding: 9px 10px;
+      border: 1px solid rgba(42,26,14,0.3); background: transparent;
+      color: var(--ink); font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .tier-btn:hover { background: rgba(42,26,14,0.08); }
+    .tier-btn-primary {
+      background: var(--brown); border-color: var(--brown); color: var(--tan2);
+    }
+    .tier-btn-primary:hover { background: var(--brown2); }
+    .tier-divider {
+      display: flex; align-items: center; gap: 12px;
+      max-width: 520px; margin: 0 auto 20px;
+      font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
+    }
+    .tier-divider::before, .tier-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--rule);
+    }
+
+    /* ── RIGHT SIDEBAR ── */
+    .sidebar-right { background: var(--brown2); overflow-y: auto; }
+    .right-panel { border-bottom: 1px solid rgba(255,255,255,0.07); padding: 18px; }
+    .right-panel-title { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(220,190,155,0.5); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+    .right-panel-title span { font-size: 9px; color: #7ab88a; }
+
+    .tension-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(220,190,155,0.08); }
+    .tension-label { font-size: 9px; color: rgba(220,190,155,0.55); letter-spacing: 0.5px; width: 100px; flex-shrink: 0; text-transform: uppercase; }
+    .tension-bar-wrap { flex: 1; height: 4px; background: rgba(0,0,0,0.2); }
+    .tension-bar { height: 100%; }
+    .tension-bar.red { background: #c0392b; }
+    .tension-bar.amber { background: #c49240; }
+    .tension-bar.low { background: #7ab88a; }
+    .tension-score { font-size: 9px; font-weight: 600; width: 22px; text-align: right; flex-shrink: 0; }
+    .red-text { color: #d4645a; }
+    .amber-text { color: var(--gold2); }
+    .low-text { color: #7ab88a; }
+
+    .flashpoint { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid rgba(220,190,155,0.08); }
+    .fp-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+    .fp-dot.red-dot { background: #c0392b; box-shadow: 0 0 5px rgba(192,57,43,0.5); }
+    .fp-dot.amber-dot { background: #c49240; }
+    .fp-body { flex: 1; }
+    .fp-name { font-size: 10px; color: rgba(220,190,155,0.75); font-weight: 500; margin-bottom: 2px; }
+    .fp-detail { font-size: 9px; color: rgba(220,190,155,0.35); }
+    .fp-region { font-size: 8px; color: rgba(219,184,138,0.5); border: 1px solid rgba(196,146,64,0.2); padding: 1px 5px; align-self: center; letter-spacing: 1px; }
+
+    .status-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid rgba(220,190,155,0.08); font-size: 10px; }
+    .status-key { color: rgba(220,190,155,0.45); letter-spacing: 1px; text-transform: uppercase; }
+    .status-val { color: rgba(220,190,155,0.8); letter-spacing: 1px; }
+    .status-val.green { color: #7ab88a; }
+    .status-val.declassify-link { color: rgba(220,190,155,0.25); font-size: 9px; letter-spacing: 1px; }
+    .bureau-name.dimmed { color: rgba(220,190,155,0.25); }
+    .desk-hint { font-size: 8px; letter-spacing: 2px; color: rgba(219,184,138,0.4); text-transform: uppercase; padding: 6px 0 8px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 4px; }
+    .nav-item-locked .nav-item-label.readable { color: rgba(220,190,155,0.55); }
+    .analyst-desk-label { font-size: 8px; color: var(--tan2); letter-spacing: 2px; text-transform: uppercase; }
+    .analyst-desk-label.locked { color: rgba(219,184,138,0.3); }
+    .analyst-note-text { font-size: 10px; color: rgba(220,190,155,0.65); line-height: 1.5; font-style: italic; }
+    .analyst-note-row { flex-direction: column; align-items: flex-start; gap: 3px; padding: 8px 0; }
+    .analyst-section-hint { font-size: 8px; letter-spacing: 1px; color: rgba(219,184,138,0.3); margin-bottom: 10px; line-height: 1.5; }
+    .analyst-more { font-size: 8px; letter-spacing: 1.5px; color: rgba(219,184,138,0.25); text-transform: uppercase; padding: 8px 0 4px; text-align: center; }
+    .status-val.locked-val {
+      color: rgba(42,26,14,0.6);
+      background: rgba(42,26,14,0.4);
+      padding: 0 6px;
+      border-radius: 1px;
+      letter-spacing: 0;
+      font-size: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>TDD / GENEVA BUREAU</span>
+      <span class="topbar-divider">|</span>
+      <span style="color:#7ab88a;">● 8 DESKS ACTIVE</span>
+      <span class="topbar-divider">|</span>
+      <span>UNSC: SESSION 9342</span>
+      <span class="topbar-divider">|</span>
+      <span>NATO: ENHANCED FORWARD PRESENCE</span>
+    </div>
+    <div class="topbar-right">
+      <span id="topbar-date">07 APR 2026 // 08:00 WET</span>
+      <button class="topbar-cta">Request Clearance →</button>
+    </div>
+  </div>
+
+  <div class="columns">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar-left">
+      <div class="folder-tab">
+        <div class="folder-notch"></div>
+        <div class="folder-eyebrow">Daily Intelligence Brief</div>
+        <div class="folder-title">The Daily<br/>Diplomat</div>
+        <div class="folder-sub">Est. 1948 — Geneva Bureau</div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">I. Regional Desks</div>
+
+          <!-- OPEN ACCESS DESK -->
+          <div class="nav-item active">
+            <span class="nav-item-label">East Asia</span>
+            <span class="nav-badge-free">Open Access</span>
+          </div>
+
+          <!-- LOCKED DESKS — readable, selectable -->
+          <div class="desk-hint">Select a second desk to preview ↓</div>
+          <div class="nav-item-locked desk-selectable" data-desk="Russia & Eurasia">
+            <span class="nav-item-label readable">Russia &amp; Eurasia</span>
+            <span class="lock-badge select-hint">Preview</span>
+          </div>
+          <div class="nav-item-locked desk-selectable" data-desk="Middle East">
+            <span class="nav-item-label readable">Middle East</span>
+            <span class="lock-badge select-hint">Preview</span>
+          </div>
+          <div class="nav-item-locked desk-selectable" data-desk="Europe">
+            <span class="nav-item-label readable">Europe</span>
+            <span class="lock-badge select-hint">Preview</span>
+          </div>
+          <div class="nav-item-locked desk-selectable" data-desk="Africa">
+            <span class="nav-item-label readable">Africa</span>
+            <span class="lock-badge select-hint">Preview</span>
+          </div>
+          <div class="nav-item-locked desk-selectable" data-desk="South Asia">
+            <span class="nav-item-label readable">South Asia</span>
+            <span class="lock-badge select-hint">Preview</span>
+          </div>
+          <div class="nav-item-locked desk-selectable" data-desk="Southeast Asia">
+            <span class="nav-item-label readable">Southeast Asia</span>
+            <span class="lock-badge select-hint">Preview</span>
+          </div>
+          <div class="nav-item-locked desk-selectable" data-desk="Latin America">
+            <span class="nav-item-label readable">Latin America</span>
+            <span class="lock-badge select-hint">Preview</span>
+          </div>
+        </div>
+
+        <!-- CLEARANCE STATUS -->
+        <div style="padding: 0 20px 16px;">
+          <div class="nav-section-title" style="margin-bottom:10px;">II. Clearance Status</div>
+          <div class="clearance-card">
+            <div class="clearance-card-title">// Clearance Status</div>
+            <div class="clearance-level">UNCLASSIFIED</div>
+            <div class="clearance-sub">Preview Access: East Asia Desk<br/>Full Clearance: Declassify Below</div>
+            <div class="clearance-bar">
+              <div class="clearance-pip active"></div>
+              <div class="clearance-pip inactive"></div>
+              <div class="clearance-pip inactive"></div>
+              <div class="clearance-pip inactive"></div>
+              <div class="clearance-pip inactive"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ANALYST NOTES -->
+        <div class="nav-section">
+          <div class="nav-section-title">III. Analyst Notes</div>
+          <div class="analyst-section-hint">Analyst commentary — one note per desk, daily.</div>
+
+          <!-- Open Access desk note — readable -->
+          <div class="theater-row analyst-note-row">
+            <span class="analyst-desk-label">East Asia</span>
+            <span class="analyst-note-text">"Beijing's restraint is tactical. Watch the October plenum for the real signal."</span>
+          </div>
+
+          <!-- Locked notes — cipher scrambled -->
+          <div class="theater-row analyst-note-row">
+            <span class="analyst-desk-label locked">Russia & Eurasia</span>
+            <span class="cipher" data-cipher="true" data-original="The front has stabilized but fragility runs deep beneath the ceasefire optics.">The front has stabilized but fragility runs deep beneath the ceasefire optics.</span>
+          </div>
+          <div class="theater-row analyst-note-row">
+            <span class="analyst-desk-label locked">Middle East</span>
+            <span class="cipher" data-cipher="true" data-original="Iran is negotiating from a position of domestic weakness, not strategic strength.">Iran is negotiating from a position of domestic weakness, not strategic strength.</span>
+          </div>
+          <div class="theater-row analyst-note-row">
+            <span class="analyst-desk-label locked">Africa</span>
+            <span class="cipher" data-cipher="true" data-original="The AES bloc is testing how far it can go before the AU acts. The answer is further than expected.">The AES bloc is testing how far it can go before the AU acts. The answer is further than expected.</span>
+          </div>
+          <div class="analyst-more">+ 4 more desks — declassify to access</div>
+        </div>
+
+        <!-- BUREAU NETWORK -->
+        <div class="nav-section">
+          <div class="nav-section-title">IV. Bureau Network</div>
+          <div class="bureau-row">
+            <span class="bureau-name hq">Geneva — HQ</span>
+            <div class="bureau-dot active"></div>
+          </div>
+          <div class="bureau-row">
+            <span class="bureau-name dimmed">London Bureau</span>
+            <div class="bureau-dot locked-dot"></div>
+          </div>
+          <div class="bureau-row">
+            <span class="bureau-name dimmed">Singapore Bureau</span>
+            <div class="bureau-dot locked-dot"></div>
+          </div>
+          <div class="bureau-row">
+            <span class="bureau-name dimmed">Nairobi Bureau</span>
+            <div class="bureau-dot locked-dot"></div>
+          </div>
+          <div class="bureau-row">
+            <span class="bureau-name dimmed">Cairo Bureau</span>
+            <div class="bureau-dot locked-dot"></div>
+          </div>
+          <div class="bureau-row">
+            <span class="bureau-name dimmed">Mexico City Bureau</span>
+            <div class="bureau-dot locked-dot"></div>
+          </div>
+        </div>
+
+      </nav>
+
+      <!-- ACCESS PANEL -->
+      <div class="access-panel">
+        <div class="access-panel-title">// Request Clearance</div>
+        <p class="access-panel-text" id="access-panel-text">One desk — <strong>$1/mo</strong>. All 8 — <strong>$5/mo</strong>. East Asia always Open Access.</p>
+        <input class="access-input" type="email" placeholder="your@email.com"/>
+        <button class="access-btn">Declassify →</button>
+        <div class="access-note">Secure channel. No noise. Stand down anytime.</div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-footer-text">TDD-732 / CYCLE: DAILY<br/>UNCLASSIFIED // OPEN SOURCE<br/>FOR GENERAL DISTRIBUTION</div>
+        <div class="foundational-title">Foundational Texts</div>
+        <a class="foundational-link" href="https://www.un.org/en/about-us/un-charter" target="_blank">UN Charter (1945)<span>Art. 2(4) — Prohibition of force</span></a>
+        <a class="foundational-link" href="https://ihl-databases.icrc.org/en/ihl-treaties/gciv-1949" target="_blank">Geneva Conventions (1949)<span>Protection of civilians in conflict</span></a>
+        <a class="foundational-link" href="https://legal.un.org/ilc/texts/instruments/english/conventions/9_1_1961.pdf" target="_blank">Vienna Convention (1961)<span>Diplomatic relations & immunity</span></a>
+        <a class="foundational-link" href="https://www.jus.uio.no/english/services/library/treaties/01/1-02/rights-duties-states.xml" target="_blank">Montevideo Convention (1933)<span>Rights & duties of states</span></a>
+        <a class="foundational-link" href="https://www.un.org/securitycouncil/content/resolutions-0" target="_blank">UNSC Resolutions Index<span>Active & historical resolutions</span></a>
+        <div class="sidebar-seal">⊕</div>
+      </div>
+    </aside>
+
+    <!-- CENTER -->
+    <main class="center">
+      <svg class="tri-border" viewBox="0 0 800 14" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><pattern id="tri" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse"><polygon points="0,0 14,0 7,14" fill="#c8bfa8" opacity="0.4"/></pattern></defs>
+        <rect width="800" height="14" fill="url(#tri)"/>
+      </svg>
+
+      <div class="dispatch-header">
+        <div class="dispatch-title-row">
+          <div>
+            <div class="dispatch-word">Dispatch <span class="free-badge">Preview Access</span></div>
+            <div class="dispatch-underline"></div>
+          </div>
+          <div class="dispatch-cable-num">Cable No. EA-2026-096</div>
+        </div>
+        <div class="dispatch-meta">
+          <div class="meta-cell"><div class="meta-key">Theater</div><div class="meta-val">Indo-Pacific / Taiwan Strait</div></div>
+          <div class="meta-cell"><div class="meta-key">Priority</div><div class="meta-val priority-flash">Flash / Level 1</div></div>
+          <div class="meta-cell"><div class="meta-key">Actors</div><div class="meta-val">PRC · USA · TWN · JPN · DPRK</div></div>
+          <div class="meta-cell"><div class="meta-key">Bodies</div><div class="meta-val">UNSC · QUAD · US-Japan MST</div></div>
+          <div class="meta-cell"><div class="meta-key">Date</div><div class="meta-val" id="cable-date">07 Apr 2026</div></div>
+          <div class="meta-cell"><div class="meta-key">Classification</div><div class="meta-val">Unclassified // Open Source</div></div>
+        </div>
+        <div class="dispatch-subject">
+          <div class="subject-key">Subject</div>
+          <div class="subject-val">Taiwan Strait — Escalation Signals & Beijing's Strategic Posture</div>
+        </div>
+      </div>
+
+      <!-- OPEN ACCESS CONTENT -->
+      <div class="dispatch-body">
+        <div class="dispatch-headline">Beijing Signals Strategic Patience as Washington Escalates Taiwan Arms Transfer</div>
+
+        <p class="dispatch-text">China's foreign ministry issued a measured but pointed response Monday to the latest U.S. defense authorization package, which includes an accelerated timeline for Patriot PAC-3 missile system transfers to Taipei. Officials described the move as a "grave provocation" while stopping short of announcing immediate countermeasures — a posture analysts read as deliberate strategic restraint ahead of the Party's internal review calendar.</p>
+
+        <p class="dispatch-text">The announcement coincided with a PLAN naval exercise in the Luzon Strait corridor, the third such exercise this quarter. Defense attachés in the region report the exercises are notable for their scale but appear calibrated to signal resolve without crossing thresholds that would compel a formal allied response.</p>
+
+        <div class="dispatch-section-head">Key Developments</div>
+
+        <div class="key-dev">
+          <div class="key-dev-num">01.</div>
+          <div class="key-dev-text"><strong>Japan:</strong> Tokyo convened an emergency session of the National Security Council following confirmation of DPRK ballistic activity in the Sea of Japan. Officials declined to characterize the launch as a provocation.</div>
+        </div>
+      </div>
+
+      <!-- PAYWALL ZONE -->
+      <div class="paywall-zone">
+        <div class="paywall-fade"></div>
+
+        <!-- Fading redacted content -->
+        <div style="padding: 0 36px; opacity: 0.35; pointer-events:none;">
+          <div class="key-dev">
+            <div class="key-dev-num">02.</div>
+            <div class="key-dev-text"><strong>Taiwan:</strong> President Lai confirmed a new civil defense budget allocation...</div>
+          </div>
+          <div class="key-dev">
+            <div class="key-dev-num">03.</div>
+            <div class="key-dev-text"><strong>South Korea:</strong> Seoul's foreign ministry declined to publicly comment on the arms transfer...</div>
+          </div>
+        </div>
+
+        <!-- REDACTED BLOCKS -->
+        <div style="padding: 16px 36px 0; pointer-events:none;">
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(42,26,14,0.25);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(42,26,14,0.1);">3. Analysis</div>
+          <div class="redacted-block" style="height:18px;margin-bottom:8px;"><div class="redacted-block-label">Declassify to access full analysis</div></div>
+          <div class="redacted-block" style="height:18px;margin-bottom:8px;"></div>
+          <div class="redacted-block" style="height:18px;margin-bottom:24px;width:70%;"></div>
+
+          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(42,26,14,0.25);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(42,26,14,0.1);">■ Significance</div>
+          <div class="redacted-block" style="height:18px;margin-bottom:8px;"></div>
+          <div class="redacted-block" style="height:18px;width:85%;"></div>
+        </div>
+      </div>
+
+      <!-- CLEARANCE GATE -->
+      <div class="clearance-gate">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:20px;">// Transmission continues</div>
+        <div class="gate-title">Your clearance is<br/>waiting to be granted.</div>
+        <p class="gate-sub">Eight regional desks. Full analysis. Delivered to your inbox every morning at 08:00 WET.</p>
+
+        <!-- CLEARANCE TIER CARDS -->
+        <div class="tier-cards">
+
+          <!-- SINGLE DESK -->
+          <div class="tier-card" id="tier-card-single" onclick="selectTier('single')">
+            <div class="tier-eyebrow">Selective Clearance</div>
+            <div class="tier-price"><sup>$</sup>1</div>
+            <div class="tier-price-sub">per desk &nbsp;/&nbsp; month</div>
+            <div class="tier-desc">One desk. Your beat. Add more desks at any time.</div>
+            <div class="tier-chips" id="tier-single-chips">
+              <span class="tier-chip green" id="tier-single-selected">East Asia ✓</span>
+            </div>
+            <button class="tier-btn" id="tier-btn-single">Claim Your Desk →</button>
+          </div>
+
+          <!-- FULL CLEARANCE -->
+          <div class="tier-card tier-featured" id="tier-card-full" onclick="selectTier('full')">
+            <div class="tier-featured-label">Best Value</div>
+            <div class="tier-eyebrow">Full Clearance</div>
+            <div class="tier-price"><sup>$</sup>5</div>
+            <div class="tier-price-sub">all 8 desks &nbsp;/&nbsp; month</div>
+            <div class="tier-desc">Complete global coverage. Every theater, every morning.</div>
+            <div class="tier-chips">
+              <span class="tier-chip gold">East Asia</span>
+              <span class="tier-chip gold">Russia &amp; Eurasia</span>
+              <span class="tier-chip gold">Middle East</span>
+              <span class="tier-chip gold">Europe</span>
+              <span class="tier-chip gold">Africa</span>
+              <span class="tier-chip gold">South Asia</span>
+              <span class="tier-chip gold">SE Asia</span>
+              <span class="tier-chip gold">Latin America</span>
+            </div>
+            <button class="tier-btn tier-btn-primary" id="tier-btn-full">Declassify All →</button>
+          </div>
+
+        </div>
+
+        <div class="tier-divider">or enter your details below</div>
+
+        <form class="gate-form" onsubmit="return false;">
+          <input class="gate-input" type="email" placeholder="your@email.com" id="gate-email"/>
+          <button class="gate-btn" id="gate-submit-btn">Declassify →</button>
+        </form>
+        <div class="gate-note">Secure channel. No noise. Stand down anytime.</div>
+        <div class="gate-open-note">East Asia desk always open. No charge, no commitment.</div>
+      </div>
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar-right">
+
+      <div class="right-panel">
+        <div class="right-panel-title">Global Tension Index <span>Live</span></div>
+        <div class="tension-row"><div class="tension-label">Taiwan Strait</div><div class="tension-bar-wrap"><div class="tension-bar red" style="width:88%;"></div></div><div class="tension-score red-text">88</div></div>
+        <div class="tension-row"><div class="tension-label">Russia–Ukraine</div><div class="tension-bar-wrap"><div class="tension-bar red" style="width:82%;"></div></div><div class="tension-score red-text">82</div></div>
+        <div class="tension-row"><div class="tension-label">Iran–Israel</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:71%;"></div></div><div class="tension-score amber-text">71</div></div>
+        <div class="tension-row"><div class="tension-label">Korean Peninsula</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:64%;"></div></div><div class="tension-score amber-text">64</div></div>
+        <div class="tension-row"><div class="tension-label">Sahel Region</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:58%;"></div></div><div class="tension-score amber-text">58</div></div>
+        <div class="tension-row"><div class="tension-label">India–Pakistan</div><div class="tension-bar-wrap"><div class="tension-bar low" style="width:38%;"></div></div><div class="tension-score low-text">38</div></div>
+      </div>
+
+      <div class="right-panel">
+        <div class="right-panel-title">Geopolitical Map <span>Live</span></div>
+        <svg viewBox="0 0 236 118" width="100%" style="display:block;" xmlns="http://www.w3.org/2000/svg">
+          <rect width="236" height="118" fill="rgba(0,0,0,0.2)" rx="1"/>
+          <line x1="0" y1="59" x2="236" y2="59" stroke="rgba(220,190,155,0.1)" stroke-width="0.5"/>
+          <line x1="118" y1="0" x2="118" y2="118" stroke="rgba(220,190,155,0.1)" stroke-width="0.5"/>
+          <line x1="0" y1="29.5" x2="236" y2="29.5" stroke="rgba(220,190,155,0.05)" stroke-width="0.5"/>
+          <line x1="0" y1="88.5" x2="236" y2="88.5" stroke="rgba(220,190,155,0.05)" stroke-width="0.5"/>
+          <line x1="59" y1="0" x2="59" y2="118" stroke="rgba(220,190,155,0.05)" stroke-width="0.5"/>
+          <line x1="177" y1="0" x2="177" y2="118" stroke="rgba(220,190,155,0.05)" stroke-width="0.5"/>
+          <path d="M22,14 L62,13 L66,19 L63,30 L56,40 L46,47 L36,44 L26,37 L18,28 L20,20 Z" fill="rgba(220,190,155,0.12)" stroke="rgba(220,190,155,0.28)" stroke-width="0.6"/>
+          <path d="M52,54 L68,52 L73,62 L71,79 L65,93 L55,96 L48,86 L46,70 L48,56 Z" fill="rgba(220,190,155,0.12)" stroke="rgba(220,190,155,0.28)" stroke-width="0.6"/>
+          <path d="M104,12 L126,11 L132,17 L128,25 L118,27 L106,24 L101,17 Z" fill="rgba(220,190,155,0.12)" stroke="rgba(220,190,155,0.28)" stroke-width="0.6"/>
+          <path d="M102,28 L126,26 L131,38 L129,57 L122,74 L112,80 L102,76 L96,60 L96,42 Z" fill="rgba(220,190,155,0.12)" stroke="rgba(220,190,155,0.28)" stroke-width="0.6"/>
+          <path d="M128,8 L200,7 L216,18 L218,32 L210,42 L194,47 L174,45 L154,39 L136,33 L128,22 L126,14 Z" fill="rgba(220,190,155,0.12)" stroke="rgba(220,190,155,0.28)" stroke-width="0.6"/>
+          <path d="M186,70 L212,68 L218,78 L214,88 L198,90 L184,82 Z" fill="rgba(220,190,155,0.12)" stroke="rgba(220,190,155,0.28)" stroke-width="0.6"/>
+          <circle cx="197" cy="44" r="5" fill="none" stroke="rgba(192,57,43,0.3)" stroke-width="1"/>
+          <circle cx="197" cy="44" r="3" fill="rgba(192,57,43,0.85)"/>
+          <circle cx="139" cy="27" r="5" fill="none" stroke="rgba(192,57,43,0.3)" stroke-width="1"/>
+          <circle cx="139" cy="27" r="3" fill="rgba(192,57,43,0.85)"/>
+          <circle cx="147" cy="38" r="4" fill="none" stroke="rgba(196,146,64,0.3)" stroke-width="1"/>
+          <circle cx="147" cy="38" r="2.5" fill="rgba(196,146,64,0.9)"/>
+          <circle cx="201" cy="34" r="4" fill="none" stroke="rgba(196,146,64,0.3)" stroke-width="1"/>
+          <circle cx="201" cy="34" r="2.5" fill="rgba(196,146,64,0.9)"/>
+          <circle cx="118" cy="51" r="4" fill="none" stroke="rgba(196,146,64,0.3)" stroke-width="1"/>
+          <circle cx="118" cy="51" r="2.5" fill="rgba(196,146,64,0.9)"/>
+          <text x="228" y="114" font-family="monospace" font-size="5" fill="rgba(220,190,155,0.2)" text-anchor="end">MERCATOR // TDD</text>
+        </svg>
+      </div>
+
+      <div class="right-panel">
+        <div class="right-panel-title">Active Flashpoints</div>
+        <div class="flashpoint"><div class="fp-dot red-dot"></div><div class="fp-body"><div class="fp-name">Luzon Strait</div><div class="fp-detail">PLAN naval exercise // Day 3</div></div><div class="fp-region">EA</div></div>
+        <div class="flashpoint"><div class="fp-dot red-dot"></div><div class="fp-body"><div class="fp-name">Zaporizhzhia Front</div><div class="fp-detail">Artillery exchange reported</div></div><div class="fp-region">RE</div></div>
+        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">Strait of Hormuz</div><div class="fp-detail">IRGC vessel shadowing</div></div><div class="fp-region">ME</div></div>
+        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">Mali–Niger Border</div><div class="fp-detail">AES troop movements</div></div><div class="fp-region">AF</div></div>
+      </div>
+
+      <div class="right-panel">
+        <div class="right-panel-title">Today's Dispatch <span>Sent</span></div>
+        <div class="status-row"><span class="status-key">East Asia</span><span class="status-val green">✓ 08:00</span></div>
+        <div class="status-row"><span class="status-key">Russia & Eurasia</span><span class="status-val declassify-link">declassify</span></div>
+        <div class="status-row"><span class="status-key">Middle East</span><span class="status-val declassify-link">declassify</span></div>
+        <div class="status-row"><span class="status-key">Europe</span><span class="status-val declassify-link">declassify</span></div>
+        <div class="status-row"><span class="status-key">Africa</span><span class="status-val declassify-link">declassify</span></div>
+        <div class="status-row"><span class="status-key">South Asia</span><span class="status-val declassify-link">declassify</span></div>
+        <div class="status-row"><span class="status-key">SE Asia</span><span class="status-val declassify-link">declassify</span></div>
+        <div class="status-row"><span class="status-key">Latin America</span><span class="status-val declassify-link">declassify</span></div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+<script>
+  // Enigma cipher engine — slow, deliberate scramble
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZΔΨΩΞΛΘΦΣΠ░▒';
+  const SPEED = 120; // atmospheric but readable
+
+  function animateCipher(el) {
+    const original = el.getAttribute('data-original') || el.textContent;
+    el.setAttribute('data-original', original);
+
+    function frame() {
+      let result = '';
+      for (let i = 0; i < original.length; i++) {
+        const ch = original[i];
+        if (ch === ' ' || ch === '&' || ch === '–' || ch === '—' || ch === '●') {
+          result += ch;
+        } else {
+          result += CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+      }
+      el.textContent = result;
+      setTimeout(frame, SPEED + Math.random() * 80);
+    }
+    frame();
+  }
+
+  // Only animate Active Theaters cipher elements
+  document.querySelectorAll('[data-cipher="true"]').forEach(el => {
+    animateCipher(el);
+  });
+
+  // ── TIER SELECTION ──
+  let activeTier = null; // 'single' or 'full'
+  let selectedDesk = 'East Asia';
+
+  function selectTier(tier) {
+    activeTier = tier;
+    const cardSingle = document.getElementById('tier-card-single');
+    const cardFull   = document.getElementById('tier-card-full');
+    const submitBtn  = document.getElementById('gate-submit-btn');
+
+    cardSingle.classList.remove('tier-active-sel');
+    cardFull.classList.remove('tier-active-sel');
+
+    if (tier === 'single') {
+      cardSingle.classList.add('tier-active-sel');
+      submitBtn.textContent = `Claim ${selectedDesk} Desk →`;
+    } else {
+      cardFull.classList.add('tier-active-sel');
+      submitBtn.textContent = 'Declassify All 8 Desks →';
+    }
+  }
+
+  // ── DESK SELECTION ──
+  document.querySelectorAll('.desk-selectable').forEach(row => {
+    row.addEventListener('click', () => {
+      // Deselect all locked desks
+      document.querySelectorAll('.desk-selectable').forEach(r => {
+        r.classList.remove('active');
+        r.querySelector('.select-hint').textContent = 'Preview';
+        r.querySelector('.nav-item-label').style.color = 'rgba(220,190,155,0.55)';
+      });
+
+      // Select clicked desk
+      row.classList.add('active');
+      row.querySelector('.select-hint').textContent = 'Preview ✓';
+      row.querySelector('.select-hint').style.color = '#7ab88a';
+      row.querySelector('.select-hint').style.borderColor = 'rgba(122,184,138,0.4)';
+      row.querySelector('.nav-item-label').style.color = 'rgba(220,190,155,0.9)';
+      selectedDesk = row.getAttribute('data-desk');
+
+      // Update access panel text
+      const panelText = document.getElementById('access-panel-text');
+      if (panelText) panelText.innerHTML = `<strong>${selectedDesk}</strong> queued. Claim this desk — or declassify all 8.`;
+
+      // Update single desk tier chip label
+      const chip = document.getElementById('tier-single-selected');
+      if (chip) chip.textContent = selectedDesk + ' ✓';
+
+      // Update submit button if tier already selected
+      if (activeTier === 'single') {
+        const submitBtn = document.getElementById('gate-submit-btn');
+        if (submitBtn) submitBtn.textContent = `Claim ${selectedDesk} Desk →`;
+      }
+
+      // Auto-highlight single desk tier card
+      if (!activeTier) selectTier('single');
+    });
+  });
+
+  // ── AUTO-DATE ──
+  (function() {
+    const now = new Date();
+    const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    const monthsFull = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const dd = String(now.getDate()).padStart(2, '0');
+    const mon = months[now.getMonth()];
+    const monFull = monthsFull[now.getMonth()];
+    const yyyy = now.getFullYear();
+
+    // Topbar date
+    const topbar = document.getElementById('topbar-date');
+    if (topbar) topbar.textContent = `${dd} ${mon} ${yyyy} // 08:00 WET`;
+
+    // Cable metadata date
+    const cable = document.getElementById('cable-date');
+    if (cable) cable.textContent = `${dd} ${monFull} ${yyyy}`;
+
+    // Cable number (day of year)
+    const start = new Date(yyyy, 0, 0);
+    const dayOfYear = String(Math.floor((now - start) / 86400000)).padStart(3, '0');
+    const cableNum = document.querySelector('.dispatch-cable-num');
+    if (cableNum) cableNum.textContent = `Cable No. EA-${yyyy}-${dayOfYear}`;
+  })();
+</script>
+</body>
+</html>

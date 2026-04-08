@@ -163,6 +163,8 @@
     .desk-selectable { cursor: pointer; }
     .desk-selectable:hover .nav-item-label { color: rgba(220,190,155,0.85) !important; }
     .desk-selectable:hover .select-hint { color: rgba(219,184,138,0.7); border-color: rgba(219,184,138,0.3); }
+    .desk-badge { font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(122,184,138,0.9); border: 1px solid rgba(122,184,138,0.3); padding: 2px 6px; border-radius: 2px; margin-left: auto; font-family: 'IBM Plex Mono', monospace; }
+    .nav-item { display: flex; align-items: center; }
     .desk-selectable.active { background: rgba(122,184,138,0.08); margin: 0 -20px; padding: 8px 20px; border-left: 2px solid rgba(122,184,138,0.4); }
 
     /* ── ACCESS PANEL in sidebar ── */
@@ -519,7 +521,7 @@
     }
 
     /* ── RIGHT SIDEBAR ── */
-    .sidebar-right { background: var(--brown2); overflow-y: auto; }
+    .sidebar-right { background: var(--brown2); overflow-y: auto; display: flex; flex-direction: column; }
     .right-panel { border-bottom: 1px solid rgba(255,255,255,0.07); padding: 18px; }
     .right-panel-title { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(220,190,155,0.5); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
     .right-panel-title span { font-size: 9px; color: #7ab88a; }
@@ -780,27 +782,35 @@
 
           <div class="nav-item active desk-selectable" data-desk="East Asia & Pacific">
             <span class="nav-item-label">East Asia &amp; Pacific</span>
+            <span class="desk-badge">Preview</span>
           </div>
           <div class="nav-item desk-selectable" data-desk="North America">
             <span class="nav-item-label">North America</span>
+            <span class="desk-badge">Preview</span>
           </div>
           <div class="nav-item desk-selectable" data-desk="Europe">
             <span class="nav-item-label">Europe</span>
+            <span class="desk-badge">Preview</span>
           </div>
           <div class="nav-item desk-selectable" data-desk="Russia & Eurasia">
             <span class="nav-item-label">Russia &amp; Eurasia</span>
+            <span class="desk-badge">Preview</span>
           </div>
           <div class="nav-item desk-selectable" data-desk="Southern Asia">
             <span class="nav-item-label">Southern Asia</span>
+            <span class="desk-badge">Preview</span>
           </div>
           <div class="nav-item desk-selectable" data-desk="Middle East">
             <span class="nav-item-label">Middle East</span>
+            <span class="desk-badge">Preview</span>
           </div>
           <div class="nav-item desk-selectable" data-desk="Sub-Saharan Africa">
             <span class="nav-item-label">Sub-Saharan Africa</span>
+            <span class="desk-badge">Preview</span>
           </div>
           <div class="nav-item desk-selectable" data-desk="Latin America">
             <span class="nav-item-label">Latin America</span>
+            <span class="desk-badge">Preview</span>
           </div>
         </div>
 
@@ -1057,8 +1067,10 @@
         <div class="status-row"><span class="status-key">Latin America</span><span class="status-val green">✓ 08:00</span></div>
       </div>
 
-      <!-- SUBSCRIBE PANEL -->
-      <div class="access-panel">
+      <div style="flex:1;"></div>
+
+      <!-- SUBSCRIBE PANEL — pinned to bottom -->
+      <div class="access-panel" style="margin-top:auto;">
         <div class="access-panel-title">// Subscribe</div>
         <p class="access-panel-text" id="access-panel-text">All 8 theaters. Free. Delivered every morning.</p>
         <input class="access-input" type="email" placeholder="your@email.com" id="sidebar-email"/>

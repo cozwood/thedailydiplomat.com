@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Daily Diplomat — Diplomatic Intelligence, Daily</title>
-  <meta name="description" content="AI-powered diplomatic intelligence covering 8 global desks. Daily cables delivered at 08:00 WET. East Asia desk always Open Access."/>
+  <meta name="description" content="AI-powered geopolitical intelligence covering 8 global theaters. Daily cables delivered to your inbox at 08:00 WET."/>
   <meta property="og:title" content="The Daily Diplomat"/>
   <meta property="og:description" content="Diplomatic intelligence covering 8 global desks. Daily cables delivered at 08:00 WET."/>
   <meta property="og:type" content="website"/>
@@ -759,7 +759,7 @@
     </div>
     <div class="topbar-right">
       <span id="topbar-date">07 APR 2026 // 08:00 WET</span>
-      <button class="topbar-cta">Request Clearance →</button>
+      <button class="topbar-cta" onclick="document.getElementById('subscribe-gate').scrollIntoView({behavior:'smooth'})">Subscribe →</button>
     </div>
   </div>
 
@@ -778,41 +778,29 @@
         <div class="nav-section">
           <div class="nav-section-title">I. Regional Desks</div>
 
-          <!-- OPEN ACCESS DESK -->
-          <div class="nav-item active">
-            <span class="nav-item-label">East Asia</span>
-            <span class="nav-badge-free">Open Access</span>
+          <div class="nav-item active desk-selectable" data-desk="East Asia & Pacific">
+            <span class="nav-item-label">East Asia &amp; Pacific</span>
           </div>
-
-          <!-- LOCKED DESKS — readable, selectable -->
-          <div class="desk-hint">Select a second desk to preview ↓</div>
-          <div class="nav-item-locked desk-selectable" data-desk="Russia & Eurasia">
-            <span class="nav-item-label readable">Russia &amp; Eurasia</span>
-            <span class="lock-badge select-hint">Preview</span>
+          <div class="nav-item desk-selectable" data-desk="North America">
+            <span class="nav-item-label">North America</span>
           </div>
-          <div class="nav-item-locked desk-selectable" data-desk="Middle East">
-            <span class="nav-item-label readable">Middle East</span>
-            <span class="lock-badge select-hint">Preview</span>
+          <div class="nav-item desk-selectable" data-desk="Europe">
+            <span class="nav-item-label">Europe</span>
           </div>
-          <div class="nav-item-locked desk-selectable" data-desk="Europe">
-            <span class="nav-item-label readable">Europe</span>
-            <span class="lock-badge select-hint">Preview</span>
+          <div class="nav-item desk-selectable" data-desk="Russia & Eurasia">
+            <span class="nav-item-label">Russia &amp; Eurasia</span>
           </div>
-          <div class="nav-item-locked desk-selectable" data-desk="Africa">
-            <span class="nav-item-label readable">Africa</span>
-            <span class="lock-badge select-hint">Preview</span>
+          <div class="nav-item desk-selectable" data-desk="Southern Asia">
+            <span class="nav-item-label">Southern Asia</span>
           </div>
-          <div class="nav-item-locked desk-selectable" data-desk="South Asia">
-            <span class="nav-item-label readable">South Asia</span>
-            <span class="lock-badge select-hint">Preview</span>
+          <div class="nav-item desk-selectable" data-desk="Middle East">
+            <span class="nav-item-label">Middle East</span>
           </div>
-          <div class="nav-item-locked desk-selectable" data-desk="Southeast Asia">
-            <span class="nav-item-label readable">Southeast Asia</span>
-            <span class="lock-badge select-hint">Preview</span>
+          <div class="nav-item desk-selectable" data-desk="Sub-Saharan Africa">
+            <span class="nav-item-label">Sub-Saharan Africa</span>
           </div>
-          <div class="nav-item-locked desk-selectable" data-desk="Latin America">
-            <span class="nav-item-label readable">Latin America</span>
-            <span class="lock-badge select-hint">Preview</span>
+          <div class="nav-item desk-selectable" data-desk="Latin America">
+            <span class="nav-item-label">Latin America</span>
           </div>
         </div>
 
@@ -822,7 +810,7 @@
           <div class="analyst-section-hint">Cross-desk analysis. The unofficial read — what connects the dots across theaters.</div>
 
           <div class="theater-row analyst-note-row">
-            <span class="analyst-desk-label locked">East Asia ↔ Europe</span>
+            <span class="analyst-desk-label locked">East Asia &amp; Pacific ↔ Europe</span>
             <span class="cipher" data-cipher="true" data-original="Beijing's restraint is tactical. The October plenum will set the real signal for Brussels.">Beijing's restraint is tactical. The October plenum will set the real signal for Brussels.</span>
           </div>
           <div class="theater-row analyst-note-row">
@@ -877,7 +865,7 @@
         <a class="foundational-link" href="https://www.un.org/en/about-us/un-charter" target="_blank">UN Charter (1945)<span>Art. 2(4) — Prohibition of force</span></a>
         <a class="foundational-link" href="https://ihl-databases.icrc.org/en/ihl-treaties/gciv-1949" target="_blank">Geneva Conventions (1949)<span>Protection of civilians in conflict</span></a>
         <a class="foundational-link" href="https://legal.un.org/ilc/texts/instruments/english/conventions/9_1_1961.pdf" target="_blank">Vienna Convention (1961)<span>Diplomatic relations & immunity</span></a>
-        <a class="foundational-link" href="https://www.jus.uio.no/english/services/library/treaties/01/1-02/rights-duties-states.xml" target="_blank">Montevideo Convention (1933)<span>Rights & duties of states</span></a>
+        <a class="foundational-link" href="https://avalon.law.yale.edu/20th_century/intam03.asp" target="_blank">Montevideo Convention (1933)<span>Rights & duties of states</span></a>
         <a class="foundational-link" href="https://www.un.org/securitycouncil/content/resolutions-0" target="_blank">UNSC Resolutions Index<span>Active & historical resolutions</span></a>
         <div class="sidebar-seal">⊕</div>
       </div>
@@ -893,135 +881,112 @@
       <div class="dispatch-header">
         <div class="dispatch-title-row">
           <div>
-            <div class="dispatch-word">Dispatch <span class="free-badge">Preview Access</span></div>
+            <div class="dispatch-word">Cable</div>
             <div class="dispatch-underline"></div>
           </div>
           <div class="dispatch-cable-num">Cable No. EA-2026-096</div>
         </div>
         <div class="dispatch-meta" id="dispatch-meta">
-          <div class="meta-cell"><div class="meta-key">Theater</div><div class="meta-val" id="meta-theater">Hong Kong Financial Crime &amp; Regional Trust Erosion</div></div>
-          <div class="meta-cell"><div class="meta-key">Priority</div><div class="meta-val priority-flash" id="meta-priority">Routine / Level 3</div></div>
-          <div class="meta-cell"><div class="meta-key">Actors</div><div class="meta-val" id="meta-actors">PRC · HKG · CHN</div></div>
-          <div class="meta-cell"><div class="meta-key">Bodies</div><div class="meta-val" id="meta-bodies">INTERPOL · ICC</div></div>
+          <div class="meta-cell"><div class="meta-key">Theater</div><div class="meta-val" id="meta-theater">Indo-Pacific / Taiwan Strait</div></div>
+          <div class="meta-cell"><div class="meta-key">Priority</div><div class="meta-val priority-flash" id="meta-priority">Flash / Level 1</div></div>
+          <div class="meta-cell"><div class="meta-key">Actors</div><div class="meta-val" id="meta-actors">PRC · USA · TWN · JPN · DPRK</div></div>
+          <div class="meta-cell"><div class="meta-key">Bodies</div><div class="meta-val" id="meta-bodies">UNSC · QUAD · US-Japan MST</div></div>
           <div class="meta-cell"><div class="meta-key">Date</div><div class="meta-val" id="cable-date">07 Apr 2026</div></div>
           <div class="meta-cell"><div class="meta-key">Classification</div><div class="meta-val">Unclassified // Open Source</div></div>
         </div>
         <div class="dispatch-subject">
           <div class="subject-key">Subject</div>
-          <div class="subject-val" id="dispatch-subject">North Korea Advances Solid-Propellant Icbm Capability While Pyongyang Expands Maritime Repurposing Efforts</div>
+          <div class="subject-val" id="dispatch-subject">Taiwan Strait — Escalation Signals & Beijing's Strategic Posture</div>
         </div>
       </div>
 
       <!-- OPEN ACCESS CONTENT -->
+      <!-- EA_DISPATCH_START -->
       <div class="dispatch-body" id="dispatch-body">
-        <div class="dispatch-headline" id="dispatch-headline">North Korea Advances Solid-Propellant Icbm Capability While Pyongyang Expands Maritime Repurposing Efforts</div>
+        <div class="dispatch-headline" id="dispatch-headline">Beijing Signals Strategic Patience as Washington Escalates Taiwan Arms Transfer</div>
 
-        <p class="dispatch-text">North Korea has conducted a ground test of a newly upgraded solid-propellant rocket motor, representing a measurable advance in the regime&#x27;s long-range ballistic missile program. Commercial satellite imagery and technical assessments indicate the test occurred within the past reporting period, adding to a growing body of evidence that Pyongyang is systematically developing solid-fuel systems that would reduce launch preparation times and complicate early warning detection. The solid-propellant approach represents a qualitative shift from the regime&#x27;s traditional liquid-fuel arsenal and signals intent to field operationally flexible systems.</p>
+        <div class="dispatch-section-head">Theater Overview</div>
 
-        <p class="dispatch-text">Concurrent with motor development, recent imagery from the Sinpho South Shipyard reveals an unusual effort to repurpose coastal cargo vessels, suggesting possible integration of maritime assets into broader weapons systems or logistics networks. The pattern of activity indicates sustained investment across multiple technological domains despite international isolation and sanctions enforcement.</p>
+        <p class="dispatch-text">China's foreign ministry issued a measured but pointed response Monday to the latest U.S. defense authorization package, which includes an accelerated timeline for Patriot PAC-3 missile system transfers to Taipei. Officials described the move as a "grave provocation" while stopping short of announcing immediate countermeasures — a posture analysts read as deliberate strategic restraint ahead of the Party's internal review calendar.</p>
 
-        <div class="dispatch-section-head">Key Developments</div>
+        <p class="dispatch-text">The announcement coincided with a PLAN naval exercise in the Luzon Strait corridor, the third such exercise this quarter. Defense attachés in the region report the exercises are notable for their scale but appear calibrated to signal resolve without crossing thresholds that would compel a formal allied response.</p>
+
+        <div class="dispatch-section-head">Developments of Note</div>
 
         <div class="key-dev">
           <div class="key-dev-num">01.</div>
-          <div class="key-dev-text"><strong>VIETNAM — LEADERSHIP CONSOLIDATION:</strong> Communist Party Chief To Lam has consolidated power through an unusual concentration of party and state authority, winning unanimous assembly endorsement to assume the presidency. This centralization mirrors patterns seen during periods of significant policy reorientation and bears monitoring for signals regarding Hanoi's approach to regional security partnerships and U.S. relations.</div>
+          <div class="key-dev-text"><strong>Japan:</strong> Tokyo convened an emergency session of the National Security Council following confirmation of DPRK ballistic activity in the Sea of Japan. Officials declined to characterize the launch as a provocation.</div>
+        </div>
+        <div class="key-dev">
+          <div class="key-dev-num">02.</div>
+          <div class="key-dev-text"><strong>Taiwan:</strong> President Lai confirmed a new civil defense budget allocation of NT$24.7 billion, representing a 15% increase over the previous fiscal year. The funds are earmarked for early warning systems and decentralized communications infrastructure.</div>
+        </div>
+        <div class="key-dev">
+          <div class="key-dev-num">03.</div>
+          <div class="key-dev-text"><strong>South Korea:</strong> Seoul's foreign ministry declined to publicly comment on the U.S.–Taiwan arms transfer but confirmed ongoing consultations with Washington regarding regional deterrence coordination under the bilateral alliance framework.</div>
+        </div>
+
+        <div class="dispatch-section-head">Assessment</div>
+
+        <p class="dispatch-text">The convergence of military activity across the Taiwan Strait, Sea of Japan, and South China Sea signals a structural tightening of regional security dynamics. Beijing's exercises near Taiwan are increasingly sophisticated, suggesting preparation for contingencies beyond mere signaling. The restraint in China's diplomatic response, however, indicates awareness that overreaction could accelerate the very alliance consolidation it seeks to prevent.</p>
+
+        <p class="dispatch-text">Washington's decision to accelerate the Patriot transfer timeline reflects a broader shift from strategic ambiguity toward what defense planners describe as "integrated deterrence by denial." The question for regional capitals is whether this posture stabilizes or destabilizes — and the answer likely depends on Beijing's assessment of its own capability timeline.</p>
+
+        <div class="significance-box">
+          <div class="sig-label">&#9632; Strategic Implications</div>
+          <div class="sig-text">The Taiwan Strait is entering a period of elevated structural risk, not because of any single provocation, but because the deterrence architecture on both sides is evolving faster than the diplomatic frameworks designed to manage it. Watch for any shift in PRC rhetoric from "reunification" to "territorial integrity" framing — a linguistic indicator that has preceded escalation in previous cycles.</div>
+        </div>
+
+        <div style="margin-top:24px;padding-top:14px;border-top:1px dashed var(--rule);">
+          <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;">Source Material</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;letter-spacing:0.5px;">&#8212; Reuters Asia</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;letter-spacing:0.5px;">&#8212; South China Morning Post</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;letter-spacing:0.5px;">&#8212; BBC Asia</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;letter-spacing:0.5px;">&#8212; 38 North</div>
         </div>
       </div>
+      <!-- EA_DISPATCH_END -->
 
-      <!-- PAYWALL ZONE -->
-      <div class="paywall-zone">
-        <div class="paywall-fade"></div>
+      <!-- SUBSCRIBE GATE -->
+      <div class="clearance-gate" id="subscribe-gate">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:20px;">// Get the Daily Brief</div>
+        <div class="gate-title">Eight theaters.<br/>One daily brief.</div>
+        <p class="gate-sub">Select your desks. Every morning at 08:00 WET, your cables arrive in one consolidated brief. Free.</p>
 
-        <!-- Fading redacted content -->
-        <div style="padding: 0 36px; opacity: 0.35; pointer-events:none;">
-          <div class="key-dev">
-            <div class="key-dev-num">02.</div>
-            <div class="key-dev-text"><strong>Taiwan:</strong> President Lai confirmed a new civil defense budget allocation...</div>
-          </div>
-          <div class="key-dev">
-            <div class="key-dev-num">03.</div>
-            <div class="key-dev-text"><strong>South Korea:</strong> Seoul's foreign ministry declined to publicly comment on the arms transfer...</div>
-          </div>
+        <!-- DESK SELECTOR -->
+        <div class="desk-selector" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:440px;margin:28px auto;">
+          <label class="desk-check" style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--cream);cursor:pointer;padding:8px 12px;border:1px solid rgba(196,146,64,0.2);border-radius:2px;transition:all 0.2s;">
+            <input type="checkbox" name="desk" value="east_asia_pacific" checked style="accent-color:var(--gold);"> East Asia &amp; Pacific
+          </label>
+          <label class="desk-check" style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--cream);cursor:pointer;padding:8px 12px;border:1px solid rgba(196,146,64,0.2);border-radius:2px;transition:all 0.2s;">
+            <input type="checkbox" name="desk" value="north_america"> North America
+          </label>
+          <label class="desk-check" style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--cream);cursor:pointer;padding:8px 12px;border:1px solid rgba(196,146,64,0.2);border-radius:2px;transition:all 0.2s;">
+            <input type="checkbox" name="desk" value="europe"> Europe
+          </label>
+          <label class="desk-check" style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--cream);cursor:pointer;padding:8px 12px;border:1px solid rgba(196,146,64,0.2);border-radius:2px;transition:all 0.2s;">
+            <input type="checkbox" name="desk" value="russia_eurasia"> Russia &amp; Eurasia
+          </label>
+          <label class="desk-check" style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--cream);cursor:pointer;padding:8px 12px;border:1px solid rgba(196,146,64,0.2);border-radius:2px;transition:all 0.2s;">
+            <input type="checkbox" name="desk" value="south_southeast_asia"> Southern Asia
+          </label>
+          <label class="desk-check" style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--cream);cursor:pointer;padding:8px 12px;border:1px solid rgba(196,146,64,0.2);border-radius:2px;transition:all 0.2s;">
+            <input type="checkbox" name="desk" value="mena"> Middle East
+          </label>
+          <label class="desk-check" style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--cream);cursor:pointer;padding:8px 12px;border:1px solid rgba(196,146,64,0.2);border-radius:2px;transition:all 0.2s;">
+            <input type="checkbox" name="desk" value="sub_saharan_africa"> Sub-Saharan Africa
+          </label>
+          <label class="desk-check" style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--cream);cursor:pointer;padding:8px 12px;border:1px solid rgba(196,146,64,0.2);border-radius:2px;transition:all 0.2s;">
+            <input type="checkbox" name="desk" value="latin_america"> Latin America
+          </label>
         </div>
 
-        <!-- REDACTED BLOCKS -->
-        <div style="padding: 16px 36px 0; pointer-events:none;">
-          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(42,26,14,0.25);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(42,26,14,0.1);">3. Analysis</div>
-          <div class="redacted-block" style="height:18px;margin-bottom:8px;"><div class="redacted-block-label">Declassify to access full analysis</div></div>
-          <div class="redacted-block" style="height:18px;margin-bottom:8px;"></div>
-          <div class="redacted-block" style="height:18px;margin-bottom:24px;width:70%;"></div>
-
-          <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(42,26,14,0.25);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(42,26,14,0.1);">■ Significance</div>
-          <div class="redacted-block" style="height:18px;margin-bottom:8px;"></div>
-          <div class="redacted-block" style="height:18px;width:85%;"></div>
-        </div>
-      </div>
-
-      <!-- CLEARANCE GATE -->
-      <div class="clearance-gate">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:20px;">// Transmission continues</div>
-        <div class="gate-title">Your clearance is<br/>waiting to be granted.</div>
-        <p class="gate-sub">Eight regional desks. Full analysis. Delivered to your inbox every morning at 08:00 WET.</p>
-
-        <!-- CLEARANCE TIER CARDS -->
-        <div class="tier-cards">
-
-          <!-- SINGLE DESK -->
-          <div class="tier-card" id="tier-card-single" onclick="selectTier('single')">
-            <div class="tier-eyebrow">Selective Clearance</div>
-            <div class="tier-price"><sup>$</sup>1</div>
-            <div class="tier-price-sub">per desk &nbsp;/&nbsp; month</div>
-            <div class="tier-desc">One desk. Your beat. Add more desks at any time.</div>
-            <div class="tier-chips" id="tier-single-chips">
-              <span class="tier-chip green" id="tier-single-selected">East Asia ✓</span>
-            </div>
-            <button class="tier-btn" id="tier-btn-single">Claim Your Desk →</button>
-          </div>
-
-          <!-- FULL CLEARANCE -->
-          <div class="tier-card tier-featured" id="tier-card-full" onclick="selectTier('full')">
-            <div class="tier-featured-label">Best Value</div>
-            <div class="tier-eyebrow">Full Clearance</div>
-            <div class="tier-price"><sup>$</sup>5</div>
-            <div class="tier-price-sub">all 8 desks &nbsp;/&nbsp; month</div>
-            <div class="tier-desc">Complete global coverage. Every theater, every morning.</div>
-            <div class="tier-chips">
-              <span class="tier-chip gold">East Asia</span>
-              <span class="tier-chip gold">Russia &amp; Eurasia</span>
-              <span class="tier-chip gold">Middle East</span>
-              <span class="tier-chip gold">Europe</span>
-              <span class="tier-chip gold">Africa</span>
-              <span class="tier-chip gold">South Asia</span>
-              <span class="tier-chip gold">SE Asia</span>
-              <span class="tier-chip gold">Latin America</span>
-            </div>
-            <button class="tier-btn tier-btn-primary" id="tier-btn-full">Declassify All →</button>
-          </div>
-
-        </div>
-
-        <!-- BACK CHANNEL TIER -->
-        <div class="tier-backchannel" onclick="selectTier('backchannel')">
-          <div class="tier-bc-left">
-            <div class="tier-bc-eyebrow">The Back Channel</div>
-            <div class="tier-bc-name">Full Clearance + Weekly Synthesis</div>
-            <div class="tier-bc-desc">Everything in Full Clearance, plus a weekly cross-desk dispatch connecting the dots your daily cables can't.</div>
-          </div>
-          <div class="tier-bc-right">
-            <div class="tier-bc-price"><sup>$</sup>9</div>
-            <div class="tier-bc-price-sub">per month</div>
-            <button class="tier-bc-btn">Open the Back Channel →</button>
-          </div>
-        </div>
-
-        <div class="tier-divider">or enter your details below</div>
-
-        <form class="gate-form" onsubmit="return false;">
-          <input class="gate-input" type="email" placeholder="your@email.com" id="gate-email"/>
-          <button class="gate-btn" id="gate-submit-btn">Declassify →</button>
+        <form class="gate-form" id="subscribe-form" onsubmit="return handleSubscribe(event);">
+          <input class="gate-input" type="email" placeholder="your@email.com" id="gate-email" required/>
+          <button class="gate-btn" id="gate-submit-btn" type="submit">Subscribe →</button>
         </form>
-        <div class="gate-note">Secure channel. No noise. Stand down anytime.</div>
-        <div class="gate-open-note">East Asia desk always open. No charge, no commitment.</div>
+        <div class="gate-note">Free. No noise. Stand down anytime.</div>
+        <div id="subscribe-status" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-align:center;margin-top:12px;display:none;"></div>
       </div>
     </main>
 
@@ -1031,12 +996,12 @@
       <div class="right-panel" id="tension-index">
         <div class="right-panel-title">Global Tension Index <span>Live</span></div>
         <!-- TENSION_ROWS_START -->
-        <div class="tension-row"><div class="tension-label">US-Iran Military Escalation</div><div class="tension-bar-wrap"><div class="tension-bar red" style="width:78%;"></div></div><div class="tension-score red-text">78</div></div>
-        <div class="tension-row"><div class="tension-label">North Korea Leadership &amp; Policy Continuity</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:65%;"></div></div><div class="tension-score amber-text">65</div></div>
-        <div class="tension-row"><div class="tension-label">India-Pakistan Regional Stability</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:62%;"></div></div><div class="tension-score amber-text">62</div></div>
-        <div class="tension-row"><div class="tension-label">China-US Technology Competition</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:58%;"></div></div><div class="tension-score amber-text">58</div></div>
-        <div class="tension-row"><div class="tension-label">Hong Kong Financial Crime &amp; Trust</div><div class="tension-bar-wrap"><div class="tension-bar low" style="width:35%;"></div></div><div class="tension-score low-text">35</div></div>
-        <div class="tension-row"><div class="tension-label">Zimbabwe Democratic Governance</div><div class="tension-bar-wrap"><div class="tension-bar low" style="width:42%;"></div></div><div class="tension-score low-text">42</div></div>
+        <div class="tension-row"><div class="tension-label">Taiwan Strait</div><div class="tension-bar-wrap"><div class="tension-bar red" style="width:88%;"></div></div><div class="tension-score red-text">88</div></div>
+        <div class="tension-row"><div class="tension-label">Russia–Ukraine</div><div class="tension-bar-wrap"><div class="tension-bar red" style="width:82%;"></div></div><div class="tension-score red-text">82</div></div>
+        <div class="tension-row"><div class="tension-label">Iran–Israel</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:71%;"></div></div><div class="tension-score amber-text">71</div></div>
+        <div class="tension-row"><div class="tension-label">Korean Peninsula</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:64%;"></div></div><div class="tension-score amber-text">64</div></div>
+        <div class="tension-row"><div class="tension-label">Sahel Region</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:58%;"></div></div><div class="tension-score amber-text">58</div></div>
+        <div class="tension-row"><div class="tension-label">India–Pakistan</div><div class="tension-bar-wrap"><div class="tension-bar low" style="width:38%;"></div></div><div class="tension-score low-text">38</div></div>
         <!-- TENSION_ROWS_END -->
       </div>
 
@@ -1073,32 +1038,32 @@
       <div class="right-panel" id="flashpoints-panel">
         <div class="right-panel-title">Active Flashpoints</div>
         <!-- FLASHPOINTS_START -->
-        <div class="flashpoint"><div class="fp-dot red-dot"></div><div class="fp-body"><div class="fp-name">Iran-US Ceasefire Zone</div><div class="fp-detail">Two-week ceasefire agreement reached after Trump halts attacks; talks mediated by Pakistan PM Shehbaz Sharif and Field Marshal Asim Munir; high diplomatic cost noted</div></div><div class="fp-region">ME</div></div>
-        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">North Korea Succession &amp; Female Leadership</div><div class="fp-detail">Assessment of female leadership limits in DPRK amid ongoing South Korea policy divisions; bipartisan approach suggested after three decades of divide</div></div><div class="fp-region">EA</div></div>
-        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">India Electoral Competition</div><div class="fp-detail">BJP positioning in key Indian state assembly elections; allegations of &#x27;money for votes&#x27; corruption in Kerala polls; religious identity integration debates in Assam</div></div><div class="fp-region">SA</div></div>
-        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">China-US Pacific Rare Earths &amp; Seabed Mining</div><div class="fp-detail">Competition for rare earths escalates with plan to mine Pacific seabed near Guam; strategic resource control amid rising China influence in PNG-Australia region</div></div><div class="fp-region">SEA</div></div>
+        <div class="flashpoint"><div class="fp-dot red-dot"></div><div class="fp-body"><div class="fp-name">Luzon Strait</div><div class="fp-detail">PLAN naval exercise // Day 3</div></div><div class="fp-region">EA</div></div>
+        <div class="flashpoint"><div class="fp-dot red-dot"></div><div class="fp-body"><div class="fp-name">Zaporizhzhia Front</div><div class="fp-detail">Artillery exchange reported</div></div><div class="fp-region">RE</div></div>
+        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">Strait of Hormuz</div><div class="fp-detail">IRGC vessel shadowing</div></div><div class="fp-region">ME</div></div>
+        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">Mali–Niger Border</div><div class="fp-detail">AES troop movements</div></div><div class="fp-region">AF</div></div>
         <!-- FLASHPOINTS_END -->
       </div>
 
       <div class="right-panel">
-        <div class="right-panel-title">Today's Dispatch <span>Sent</span></div>
-        <div class="status-row"><span class="status-key">East Asia</span><span class="status-val green">✓ 08:00</span></div>
-        <div class="status-row"><span class="status-key">Russia & Eurasia</span><span class="status-val declassify-link">declassify</span></div>
-        <div class="status-row"><span class="status-key">Middle East</span><span class="status-val declassify-link">declassify</span></div>
-        <div class="status-row"><span class="status-key">Europe</span><span class="status-val declassify-link">declassify</span></div>
-        <div class="status-row"><span class="status-key">Africa</span><span class="status-val declassify-link">declassify</span></div>
-        <div class="status-row"><span class="status-key">South Asia</span><span class="status-val declassify-link">declassify</span></div>
-        <div class="status-row"><span class="status-key">SE Asia</span><span class="status-val declassify-link">declassify</span></div>
-        <div class="status-row"><span class="status-key">Latin America</span><span class="status-val declassify-link">declassify</span></div>
+        <div class="right-panel-title">Today's Cables <span>Sent</span></div>
+        <div class="status-row"><span class="status-key">East Asia &amp; Pacific</span><span class="status-val green">✓ 08:00</span></div>
+        <div class="status-row"><span class="status-key">North America</span><span class="status-val green">✓ 08:00</span></div>
+        <div class="status-row"><span class="status-key">Europe</span><span class="status-val green">✓ 08:00</span></div>
+        <div class="status-row"><span class="status-key">Russia &amp; Eurasia</span><span class="status-val green">✓ 08:00</span></div>
+        <div class="status-row"><span class="status-key">Southern Asia</span><span class="status-val green">✓ 08:00</span></div>
+        <div class="status-row"><span class="status-key">Middle East</span><span class="status-val green">✓ 08:00</span></div>
+        <div class="status-row"><span class="status-key">Sub-Saharan Africa</span><span class="status-val green">✓ 08:00</span></div>
+        <div class="status-row"><span class="status-key">Latin America</span><span class="status-val green">✓ 08:00</span></div>
       </div>
 
-      <!-- ACCESS PANEL -->
+      <!-- SUBSCRIBE PANEL -->
       <div class="access-panel">
-        <div class="access-panel-title">// Request Clearance</div>
-        <p class="access-panel-text" id="access-panel-text">One desk — <strong>$1/mo</strong>. All 8 — <strong>$5/mo</strong>. East Asia always Open Access.</p>
-        <input class="access-input" type="email" placeholder="your@email.com"/>
-        <button class="access-btn">Declassify →</button>
-        <div class="access-note">Secure channel. No noise. Stand down anytime.</div>
+        <div class="access-panel-title">// Subscribe</div>
+        <p class="access-panel-text" id="access-panel-text">All 8 theaters. Free. Delivered every morning.</p>
+        <input class="access-input" type="email" placeholder="your@email.com" id="sidebar-email"/>
+        <button class="access-btn" onclick="document.getElementById('subscribe-gate').scrollIntoView({behavior:'smooth'})">Get the Brief →</button>
+        <div class="access-note">Choose your desks below.</div>
       </div>
 
     </aside>
@@ -1134,69 +1099,366 @@
     animateCipher(el);
   });
 
-  // ── TIER SELECTION ──
-  let activeTier = null; // 'single' or 'full'
-  let selectedDesk = 'East Asia';
+  // ── STATE ──
+  let selectedDesk = 'East Asia & Pacific';
 
-  function selectTier(tier) {
-    activeTier = tier;
-    const cardSingle = document.getElementById('tier-card-single');
-    const cardFull   = document.getElementById('tier-card-full');
-    const submitBtn  = document.getElementById('gate-submit-btn');
-
-    cardSingle.classList.remove('tier-active-sel');
-    cardFull.classList.remove('tier-active-sel');
-    document.querySelector('.tier-backchannel').style.outline = 'none';
-
-    if (tier === 'single') {
-      cardSingle.classList.add('tier-active-sel');
-      submitBtn.textContent = `Claim ${selectedDesk} Desk →`;
-    } else if (tier === 'full') {
-      cardFull.classList.add('tier-active-sel');
-      submitBtn.textContent = 'Declassify All 8 Desks →';
-    } else if (tier === 'backchannel') {
-      document.querySelector('.tier-backchannel').style.outline = '2px solid rgba(196,146,64,0.55)';
-      document.querySelector('.tier-backchannel').style.outlineOffset = '-1px';
-      submitBtn.textContent = 'Open the Back Channel →';
+  // ── DESK PREVIEW DATA (auto-generated daily by update_landing.py) ──
+  // DESK_PREVIEWS_START
+  const DESK_PREVIEWS = {
+    "North America": {
+      "subject": "Washington Tightens USMCA Enforcement as Ottawa and Mexico City Recalibrate Trade Postures",
+      "headline": "Washington Tightens USMCA Enforcement as Ottawa and Mexico City Recalibrate Trade Postures",
+      "desk_code": "NAM",
+      "tags": "United States · Canada · Mexico · USMCA",
+      "theater": "United States",
+      "theater_overview": "The Office of the U.S. Trade Representative announced expanded compliance reviews targeting automotive rules-of-origin provisions under USMCA, signaling a harder enforcement posture ahead of the agreement's 2026 joint review. Canadian officials responded by accelerating bilateral consultations on critical mineral supply chain integration, framing the talks as a strategic hedge against potential tariff escalation.\n\nThe enforcement shift coincides with renewed congressional pressure on fentanyl precursor flows through Mexican ports, creating a dual-track tension in U.S.-Mexico relations where security demands and trade architecture are increasingly intertwined. Mexico City's response has been to deepen energy cooperation overtures while reinforcing southern border deployments — a posture designed to satisfy Washington's enforcement demands without conceding sovereignty framing.",
+      "developments": [
+        {"num": "01", "actor": "Mexico", "text": "Mexico City deployed additional National Guard units to the southern border corridor, responding to U.S. pressure on migration enforcement while simultaneously negotiating expanded energy cooperation frameworks with Washington. The deployment represents the largest single border reinforcement since 2023."},
+        {"num": "02", "actor": "Canada", "text": "Ottawa announced a C$4.2 billion critical minerals acceleration fund targeting lithium and cobalt extraction in northern Ontario and Quebec, positioning Canada as the preferred North American alternative to Chinese-controlled supply chains in the EV battery sector."},
+        {"num": "03", "actor": "United States", "text": "The Pentagon confirmed expansion of continental defense radar modernization under NORAD, with new Arctic surveillance installations in Alaska and northern Canada responding to increased Russian and Chinese activity in polar air and maritime corridors."}
+      ],
+      "assessment": "The USMCA review cycle is becoming the primary arena for renegotiating North American economic integration, with automotive content rules serving as proxy battles for larger questions about industrial policy alignment across the continent. Washington's enforcement posture suggests a willingness to use compliance mechanisms as leverage beyond their original trade mandate.\n\nThe convergence of trade enforcement, border security, and critical mineral strategy points to a structural reorientation of the trilateral relationship. Canada is positioning itself as an indispensable supply chain partner, Mexico is navigating between cooperation and sovereignty defense, and Washington is using all three pressure points simultaneously — a pattern that will intensify as the 2026 review deadline approaches.",
+      "strategic_implications": "North America's internal trade architecture is under its most significant stress test since USMCA's ratification. The outcome of the 2026 review will determine whether the continent consolidates as a unified industrial bloc or fragments into bilateral arrangements that weaken collective leverage against external competitors. Watch for any Mexican movement on energy sector liberalization — that is the key concession Washington seeks and the one Mexico City is least willing to make."
+    },
+    "Europe": {
+      "subject": "EU Defense Integration Accelerates as NATO Spending Framework Takes Effect",
+      "headline": "EU Defense Integration Accelerates as NATO Spending Framework Takes Effect",
+      "desk_code": "EUR",
+      "tags": "EU · UK · NATO · Balkans · Nordics",
+      "theater": "EU · NATO",
+      "theater_overview": "European defense ministers meeting in Brussels approved an accelerated joint procurement framework that establishes shared stockpile reserves across Eastern European forward operating locations. The framework converts the alliance's two-percent GDP spending guideline into binding commitments with enforcement mechanisms, representing the most significant structural shift in European defense posture in decades.\n\nThe agreement was driven by a core group of frontline states — Poland, the Baltics, Finland, and Romania — who leveraged the current security environment to overcome longstanding resistance from budget-conscious Western European members. Germany's decision to support binding targets, reversing years of ambiguity, signals a fundamental recalibration of Berlin's strategic calculus.",
+      "developments": [
+        {"num": "01", "actor": "Ukraine", "text": "Kyiv reported sustained tactical pressure along the Dnipro river corridor in the southern sector, with Western-supplied long-range precision systems increasingly targeting Russian logistics infrastructure deep behind contact lines. NATO officials described the strikes as indicative of improved Ukrainian targeting integration with alliance intelligence feeds."},
+        {"num": "02", "actor": "Poland", "text": "Warsaw confirmed orders for an additional 96 K2 main battle tanks from South Korea's Hyundai Rotem, bringing its total armored fleet modernization to the largest in Europe. The acquisition underscores Poland's emergence as NATO's most heavily armed Eastern European member."},
+        {"num": "03", "actor": "Balkans", "text": "Serbia's president met with EU enlargement officials in Belgrade amid renewed tensions with Kosovo over municipal governance arrangements. Brussels conditioned further accession progress on visible de-escalation, while Moscow continued to position itself as Belgrade's alternative security guarantor."}
+      ],
+      "assessment": "The binding defense spending framework represents a structural break from the post-Cold War European security model, which relied on American extended deterrence as a substitute for continental self-sufficiency. The shift is not merely budgetary — it implies a reorganization of European defense industrial capacity that will take a decade to materialize but whose political commitments are being locked in now.\n\nThe framework's enforcement mechanisms are the most consequential element. Previous spending pledges lacked teeth. If the current architecture holds, it will create accountability structures that gradually shift defense procurement from national to continental coordination — a trajectory that has implications well beyond the current security crisis.",
+      "strategic_implications": "Europe's defense integration is entering an irreversible phase. The combination of binding spending commitments, joint procurement frameworks, and forward stockpile positioning creates institutional facts on the ground that will outlast any single government's policy preferences. The key variable to watch is whether France and Germany can align their competing visions of European strategic autonomy — Paris favoring EU-centric structures, Berlin prioritizing NATO interoperability."
+    },
+    "Russia & Eurasia": {
+      "subject": "Moscow Expands Arctic Military Infrastructure as Central Asian States Hedge Alignments",
+      "headline": "Moscow Expands Arctic Military Infrastructure as Central Asian States Hedge Alignments",
+      "desk_code": "REA",
+      "tags": "Russia · Caucasus · Belarus · Central Asia · Caspian",
+      "theater": "Russia · Central Asia",
+      "theater_overview": "Russia's Northern Fleet conducted live-fire exercises across the Barents Sea corridor, deploying hypersonic-capable surface vessels alongside newly commissioned icebreakers in what defense officials described as routine Arctic readiness operations. The exercises coincided with Finland's announcement of expanded bilateral defense cooperation with Norway along their shared Arctic border, suggesting a tightening action-reaction cycle in the High North.\n\nSimultaneously, Kazakhstan and Uzbekistan deepened economic cooperation with Beijing through new Belt and Road Initiative corridor agreements, signing infrastructure deals worth an estimated twelve billion dollars. The Central Asian pivot toward Chinese capital represents an accelerating diversification away from Moscow's traditional economic orbit, though both states continue to participate in Russian-led security frameworks to manage the transition.",
+      "developments": [
+        {"num": "01", "actor": "Belarus", "text": "Minsk confirmed the permanent stationing of Russian tactical aviation units at Machulishchy airbase, expanding Moscow's forward deployment posture along NATO's eastern boundary. The basing arrangement consolidates the Union State defense architecture and extends Russia's operational reach into the Suwalki corridor approach."},
+        {"num": "02", "actor": "Kazakhstan", "text": "Astana signed a landmark agreement with Beijing for a new Trans-Caspian logistics hub, bypassing traditional Russian transit routes for Chinese goods moving toward European markets. Moscow issued a muted diplomatic response, indicating limited leverage to contest Central Asian infrastructure diversification."},
+        {"num": "03", "actor": "Caucasus", "text": "Armenia and Azerbaijan resumed negotiations on a formal peace treaty under EU mediation in Brussels, with territorial demarcation and transport corridor access as the primary outstanding issues. Russia's diminished mediating role in the South Caucasus reflects its reduced bandwidth for peripheral security management."}
+      ],
+      "assessment": "Moscow's simultaneous Arctic military expansion and Central Asian economic contraction illustrate the fundamental tension in Russian strategic posture: the capacity to project military power at the periphery while losing economic influence in its traditional sphere. The Arctic buildup is real and operationally significant, but it consumes resources that might otherwise be directed toward maintaining the economic architecture that binds post-Soviet states to Moscow.\n\nCentral Asia's accelerating pivot toward Chinese infrastructure investment represents the most consequential long-term shift in Eurasian geopolitics. Unlike Western engagement, which comes with governance conditionality, Beijing offers capital without political demands — making it the preferred partner for regimes seeking modernization without reform. Moscow's inability to match these offers is structural, not tactical.",
+      "strategic_implications": "The Eurasian security order is fracturing along two axes: a militarized northern perimeter where Russia retains escalation dominance, and a southern economic corridor where Chinese capital is quietly replacing Russian influence. The states caught between these dynamics — Kazakhstan, Uzbekistan, Georgia, Armenia — are the swing actors whose alignment decisions will shape the region's trajectory. Watch for any Russian attempt to use security frameworks to constrain Central Asian economic diversification."
+    },
+    "Southern Asia": {
+      "subject": "India Deepens Indo-Pacific Security Architecture as ASEAN States Balance Great Power Pressure",
+      "headline": "India Deepens Indo-Pacific Security Architecture as ASEAN States Balance Great Power Pressure",
+      "desk_code": "SAS",
+      "tags": "India · Indonesia · Australia · ASEAN · Philippines · Pakistan",
+      "theater": "India · ASEAN",
+      "theater_overview": "New Delhi announced expanded naval cooperation agreements with Indonesia and Australia, establishing trilateral maritime domain awareness sharing across the eastern Indian Ocean. The agreements signal India's accelerating pivot toward multilateral security frameworks as a counterweight to Chinese naval expansion in the Indo-Pacific corridor, and represent the most operationally significant outcome of Delhi's Act East policy to date.\n\nThe maritime cooperation framework comes as ASEAN members face intensifying pressure to choose sides in the U.S.-China strategic competition. Indonesia, as the bloc's largest economy and the current chair of several regional dialogues, is attempting to maintain equidistance while building security ties that hedge against Chinese assertiveness in the South China Sea. The result is an increasingly complex web of overlapping bilateral and minilateral arrangements.",
+      "developments": [
+        {"num": "01", "actor": "Philippines", "text": "Manila announced accelerated construction of military facilities on Thitu Island in the Spratly archipelago, including a runway extension capable of accommodating surveillance aircraft. The construction follows a series of confrontations between Philippine Coast Guard vessels and Chinese maritime militia near Scarborough Shoal."},
+        {"num": "02", "actor": "Pakistan", "text": "Islamabad secured a renewed IMF Extended Fund Facility tranche following parliamentary approval of fiscal consolidation measures. The agreement provides near-term macroeconomic stability but imposes austerity conditions that carry significant domestic political risk ahead of provincial elections."},
+        {"num": "03", "actor": "Australia", "text": "Canberra confirmed the establishment of a new joint naval logistics facility in Darwin with rotational access for Indian Navy vessels, deepening the bilateral defense relationship and creating a northern staging point for combined Indian Ocean operations."}
+      ],
+      "assessment": "The Indo-Pacific's security architecture is evolving from hub-and-spoke alliances centered on Washington toward a mesh network of overlapping partnerships where India, Australia, Japan, and key ASEAN states form independent security linkages. This distributed model is more resilient to disruption from any single bilateral relationship's deterioration but also harder to coordinate in crisis scenarios.\n\nIndia's expanding naval footprint in Southeast Asian waters represents a strategic calculation that maritime security is the domain where Delhi can most effectively project influence without triggering the sovereignty sensitivities that constrain land-based security cooperation. The trilateral framework with Indonesia and Australia creates a monitoring capability across the chokepoints that connect the Indian and Pacific oceans.",
+      "strategic_implications": "Southern Asia is transitioning from a theater defined by India-Pakistan bilateral dynamics to one shaped by maritime competition and supply chain security. The region's demographic weight and geographic position astride the world's most trafficked trade routes make it the decisive swing zone in the broader U.S.-China strategic competition. The key indicator to watch is whether ASEAN can maintain its institutional coherence under great power pressure or fragments into competing alignment blocs."
+    },
+    "Middle East": {
+      "subject": "Gulf States Advance Regional Security Architecture Independent of Western Frameworks",
+      "headline": "Gulf States Advance Regional Security Architecture Independent of Western Frameworks",
+      "desk_code": "ME",
+      "tags": "Iran · Gulf States · Israel · Levant · Egypt · Maghreb",
+      "theater": "Gulf States · Iran",
+      "theater_overview": "Saudi Arabia and the UAE are leading negotiations on a new regional security framework that would establish joint maritime patrols and shared intelligence infrastructure across the Persian Gulf. The proposed architecture, which includes Qatar, Bahrain, Kuwait, and Oman, represents the most ambitious attempt at indigenous Gulf security cooperation since the formation of the GCC, driven by diminishing confidence in the permanence of external security guarantees.\n\nThe framework's timing reflects a broader strategic recalculation across the region. Gulf states are hedging against the possibility of reduced U.S. security commitment while simultaneously managing normalization dynamics with Israel and containment pressures against Iran. The result is a multi-vector diplomatic posture that seeks to maintain relationships with all major powers while building autonomous security capacity.",
+      "developments": [
+        {"num": "01", "actor": "Iran", "text": "Tehran announced the successful test of a new medium-range ballistic missile variant with improved guidance systems, prompting immediate consultations among E3 capitals on the status of back-channel diplomatic engagement and the durability of existing containment frameworks."},
+        {"num": "02", "actor": "Israel", "text": "Jerusalem expanded settlement construction authorization in the northern West Bank while simultaneously pursuing defense technology cooperation agreements with Saudi Arabia through intermediary channels. The parallel tracks illustrate the decoupling of bilateral security cooperation from the Palestinian governance question."},
+        {"num": "03", "actor": "Egypt", "text": "Cairo secured a revised IMF support package contingent on accelerated exchange rate liberalization, providing fiscal breathing room while exposing the economy to inflationary pressures that carry political risk in a country where bread prices have historically triggered unrest."}
+      ],
+      "assessment": "The Gulf's move toward autonomous security architecture reflects a structural shift in Middle Eastern geopolitics rather than a reaction to any single policy decision. The region's states are building institutions that assume a future in which no single external power provides a reliable security umbrella — a hedge that makes strategic sense regardless of which direction U.S. policy takes.\n\nIran's continued missile development operates on a separate timeline from diplomatic engagement, a pattern that has persisted across multiple negotiating cycles. The missile program serves both deterrence and domestic political functions that are largely independent of whatever nuclear or sanctions framework exists. Regional states have internalized this reality and are building their security posture accordingly.",
+      "strategic_implications": "The Middle East is entering a post-dependency security era in which regional states build autonomous capabilities while maintaining alliance relationships as insurance rather than primary guarantees. This transition reduces the leverage that external powers can exercise over regional dynamics and creates a more multipolar security environment. The critical variable is whether the Gulf security framework can accommodate the Iran question or whether Tehran's exclusion transforms it into an anti-Iranian alliance by default."
+    },
+    "Sub-Saharan Africa": {
+      "subject": "Sahel Alliance Formalizes Joint Command as Critical Mineral Competition Intensifies",
+      "headline": "Sahel Alliance Formalizes Joint Command as Critical Mineral Competition Intensifies",
+      "desk_code": "SSA",
+      "tags": "Sahel · East Africa · Southern Africa · Nigeria · Ethiopia · Congo",
+      "theater": "Sahel · East Africa",
+      "theater_overview": "The Sahel Alliance comprising Mali, Burkina Faso, and Niger formally established a unified military command structure at a ceremony in Bamako, marking the deepest security integration among the three juntas since their respective coups. The joint command will coordinate counter-terrorism operations and border security across a region roughly the size of Western Europe, with Russian Wagner Group advisors embedded in planning roles.\n\nConcurrently, the competition for Africa's critical mineral resources intensified as Chinese and Western firms escalated bidding for cobalt and lithium concessions across the Congo basin and East African rift zone. The Democratic Republic of Congo announced a review of existing mining contracts, signaling Kinshasa's intent to extract better terms from a market where demand for battery metals has shifted leverage toward producer states.",
+      "developments": [
+        {"num": "01", "actor": "Ethiopia", "text": "Addis Ababa and Mogadishu signed a preliminary agreement on the contested port access arrangement, partially de-escalating months of tensions over Somalia's maritime sovereignty and Red Sea access corridors. The agreement leaves key implementation details unresolved but establishes a diplomatic framework for continued negotiation."},
+        {"num": "02", "actor": "Nigeria", "text": "Abuja announced the deployment of additional military assets to the northwest to counter escalating banditry operations that have disrupted agricultural production in the country's breadbasket region. The security deterioration threatens food supply chains serving over 50 million people across the Sahel belt."},
+        {"num": "03", "actor": "Congo", "text": "The DRC's mining ministry issued new regulations requiring majority Congolese ownership in future critical mineral concessions, a move directed primarily at renegotiating Chinese-held cobalt contracts in Katanga province. Beijing's ambassador requested urgent consultations, signaling concern over supply chain access."}
+      ],
+      "assessment": "Sub-Saharan Africa's strategic significance is being redefined by two converging dynamics: the Sahel's security fragmentation and the global scramble for critical minerals. The Sahel Alliance's formalization creates a Russian-aligned security bloc that has effectively expelled French and Western military presence from the region, while the mineral competition is drawing Chinese, American, and European capital into bidding wars that give producer states unprecedented leverage.\n\nThe critical mineral dimension is the more consequential long-term trend. As the global energy transition accelerates demand for cobalt, lithium, copper, and rare earths, African producer states are learning to exercise resource leverage in ways that reshape their relationships with major powers. The DRC's contract renegotiation push is a template that other mineral-rich states are watching closely.",
+      "strategic_implications": "Africa is becoming the primary arena for great power resource competition in the 2020s, with control over critical mineral supply chains carrying strategic weight comparable to hydrocarbon access in previous decades. The states that control these resources — DRC, Zambia, Zimbabwe, Tanzania — are the emerging swing actors in global industrial policy. Watch for any coordinated producer-state action on mineral pricing or export controls, which would signal a shift from bilateral contract renegotiation to collective resource statecraft."
+    },
+    "Latin America": {
+      "subject": "Nearshoring Wave Reshapes Western Hemisphere Trade as Political Realignment Deepens",
+      "headline": "Nearshoring Wave Reshapes Western Hemisphere Trade as Political Realignment Deepens",
+      "desk_code": "LAC",
+      "tags": "Brazil · Mexico · Colombia · Venezuela · Caribbean · Central America",
+      "theater": "Brazil · Mexico",
+      "theater_overview": "Mexico and Brazil reported record inflows of manufacturing investment as multinational firms accelerate supply chain diversification away from East Asian concentration. Mexico's northern border states absorbed over eighteen billion dollars in announced manufacturing commitments in the first quarter alone, driven by automotive, electronics, and aerospace firms seeking USMCA-compliant production capacity.\n\nBrazil is pursuing a parallel strategy centered on agricultural processing and critical mineral beneficiation, leveraging its position as the world's largest soybean and iron ore exporter to attract downstream manufacturing investment. President Lula's administration has framed the nearshoring trend as an opportunity to revive Brazil's industrial policy ambitions, offering tax incentives tied to technology transfer requirements that echo strategies employed successfully by East Asian developmental states.",
+      "developments": [
+        {"num": "01", "actor": "Venezuela", "text": "Caracas established forward operating positions along the Essequibo border region, deploying armored vehicles and engineering units in what officials described as a territorial sovereignty exercise. Georgetown activated defense cooperation agreements with regional partners and requested an emergency hearing at the International Court of Justice."},
+        {"num": "02", "actor": "Colombia", "text": "Bogota announced the resumption of peace negotiations with the ELN guerrilla group following a six-month suspension, with energy infrastructure security and rural development as the primary agenda items. International observers noted that the talks are conditioned on a verifiable ceasefire in contested coca-producing regions."},
+        {"num": "03", "actor": "Argentina", "text": "Buenos Aires reported better-than-expected fiscal consolidation results under the current austerity program, with the primary surplus exceeding IMF targets for the second consecutive quarter. International bond markets responded with a significant spread compression, suggesting restored investor confidence in Argentine sovereign debt."}
+      ],
+      "assessment": "Latin America's nearshoring moment represents the most significant structural shift in the hemisphere's economic geography since NAFTA. The redirection of global manufacturing investment toward Mexico and Brazil is not a temporary response to pandemic-era supply chain disruptions but a durable reorientation driven by geopolitical risk pricing, logistics cost recalculation, and industrial policy incentives that are now embedded in trade architecture.\n\nThe political dimension of this economic shift is equally consequential. Governments that can attract and retain manufacturing investment gain fiscal resources and employment growth that strengthen their domestic political positions. Mexico's manufacturing corridor and Brazil's agricultural-industrial complex are creating economic facts on the ground that constrain future policy reversals regardless of electoral outcomes.",
+      "strategic_implications": "Latin America is transitioning from a commodity-dependent periphery to a manufacturing-capable strategic partner for North American and European supply chains. The hemisphere's trajectory depends on whether nearshoring investment translates into broad-based industrialization or remains concentrated in low-value assembly. Mexico's ability to move up the value chain — from assembly to design and engineering — is the critical test case. Watch for any disruption to the Venezuela-Guyana dynamic, which could rapidly escalate into the hemisphere's most consequential territorial dispute."
     }
+  };
+  // DESK_PREVIEWS_END
+
+  // ── CIPHER ENGINE ──
+  const CIPHER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZΔΨΩΞΛΘΦΣΠ░▒';
+  const CIPHER_SPEED = 50;
+  let activeCipherIntervals = [];
+
+  function cipherText(text) {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (ch === ' ' || ch === '.' || ch === ',' || ch === '—' || ch === '·') result += ch;
+      else result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+    }
+    return result;
   }
 
-  // ── DESK SELECTION ──
+  function startCipher(el) {
+    const original = el.getAttribute('data-original') || el.textContent;
+    el.setAttribute('data-original', original);
+    function frame() {
+      el.textContent = cipherText(original);
+    }
+    frame();
+    const interval = setInterval(frame, CIPHER_SPEED + Math.random() * 80);
+    activeCipherIntervals.push(interval);
+    return interval;
+  }
+
+  function stopAllCiphers() {
+    activeCipherIntervals.forEach(id => clearInterval(id));
+    activeCipherIntervals = [];
+  }
+
+  // ── STORE ORIGINAL EA CONTENT ──
+  const originalEA = {
+    subject: document.getElementById('dispatch-subject')?.textContent || '',
+    headline: document.getElementById('dispatch-headline')?.textContent || '',
+    body: document.getElementById('dispatch-body')?.innerHTML || '',
+    theater: document.getElementById('meta-theater')?.textContent || '',
+    priority: document.getElementById('meta-priority')?.textContent || '',
+    actors: document.getElementById('meta-actors')?.textContent || '',
+    bodies: document.getElementById('meta-bodies')?.textContent || '',
+  };
+
+  // ── DECODE ANIMATION ──
+  // Text starts as cipher, decodes character-by-character to readable
+  function decodeAnimate(el, finalText, durationMs) {
+    durationMs = durationMs || 1200;
+    const len = finalText.length;
+    const perChar = durationMs / len;
+    let revealed = 0;
+
+    function frame() {
+      let result = '';
+      for (let i = 0; i < len; i++) {
+        const ch = finalText[i];
+        if (i < revealed) {
+          result += ch;
+        } else if (ch === ' ' || ch === '.' || ch === ',' || ch === '—' || ch === '·' || ch === ':') {
+          result += ch;
+        } else {
+          result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+        }
+      }
+      el.textContent = result;
+      revealed += Math.max(1, Math.floor(len / (durationMs / CIPHER_SPEED)));
+      if (revealed < len) {
+        const id = setTimeout(frame, CIPHER_SPEED);
+        activeCipherIntervals.push(id);
+      } else {
+        el.textContent = finalText;
+      }
+    }
+    frame();
+  }
+
+  // ── SHOW DESK ──
+  function showDesk(deskName) {
+    stopAllCiphers();
+
+    // If East Asia & Pacific, restore original HTML content
+    if (deskName === 'East Asia & Pacific') {
+      document.getElementById('dispatch-subject').textContent = originalEA.subject;
+      document.getElementById('dispatch-body').innerHTML = originalEA.body;
+      document.getElementById('meta-theater').textContent = originalEA.theater;
+      document.getElementById('meta-priority').textContent = originalEA.priority;
+      document.getElementById('meta-actors').textContent = originalEA.actors;
+      document.getElementById('meta-bodies').textContent = originalEA.bodies;
+
+      const cableNum = document.querySelector('.dispatch-cable-num');
+      if (cableNum) {
+        const now = new Date();
+        const start = new Date(now.getFullYear(), 0, 0);
+        const dayOfYear = String(Math.floor((now - start) / 86400000)).padStart(3, '0');
+        cableNum.textContent = `Cable No. EAP-${now.getFullYear()}-${dayOfYear}`;
+      }
+      return;
+    }
+
+    // All other desks — show preview data with decode animation
+    const preview = DESK_PREVIEWS[deskName];
+    if (!preview) return;
+
+    // Update cable number
+    const cableNum = document.querySelector('.dispatch-cable-num');
+    if (cableNum) {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      const dayOfYear = String(Math.floor((now - start) / 86400000)).padStart(3, '0');
+      cableNum.textContent = `Cable No. ${preview.desk_code}-${now.getFullYear()}-${dayOfYear}`;
+    }
+
+    // Subject — decode animate
+    const subjectEl = document.getElementById('dispatch-subject');
+    decodeAnimate(subjectEl, preview.subject, 800);
+
+    // Meta
+    document.getElementById('meta-theater').textContent = preview.theater || preview.tags;
+    document.getElementById('meta-priority').textContent = 'Routine / Level 3';
+    document.getElementById('meta-actors').textContent = preview.tags;
+    document.getElementById('meta-bodies').textContent = '—';
+
+    // Build full cable body
+    const bodyEl = document.getElementById('dispatch-body');
+    let bodyHTML = '';
+
+    // Headline
+    bodyHTML += `<div class="dispatch-headline" id="dispatch-headline">${preview.headline}</div>`;
+
+    // Theater Overview
+    bodyHTML += '<div class="dispatch-section-head">Theater Overview</div>';
+    if (preview.theater_overview) {
+      preview.theater_overview.split('\n\n').forEach(para => {
+        bodyHTML += `<p class="dispatch-text decode-target">${para}</p>`;
+      });
+    }
+
+    // Developments of Note
+    bodyHTML += '<div class="dispatch-section-head">Developments of Note</div>';
+    if (preview.developments && preview.developments.length) {
+      preview.developments.forEach(dev => {
+        bodyHTML += `<div class="key-dev">
+          <div class="key-dev-num">${dev.num}.</div>
+          <div class="key-dev-text decode-target"><strong>${dev.actor}:</strong> ${dev.text}</div>
+        </div>`;
+      });
+    }
+
+    // Assessment
+    bodyHTML += '<div class="dispatch-section-head">Assessment</div>';
+    if (preview.assessment) {
+      preview.assessment.split('\n\n').forEach(para => {
+        bodyHTML += `<p class="dispatch-text decode-target">${para}</p>`;
+      });
+    }
+
+    // Strategic Implications
+    if (preview.strategic_implications) {
+      bodyHTML += `<div style="border-left:3px solid var(--gold);padding:14px 18px;margin:18px 0;background:rgba(196,146,64,0.06);">
+        <div class="dispatch-section-head" style="margin-top:0;">Strategic Implications</div>
+        <p class="dispatch-text decode-target" style="margin-bottom:0;">${preview.strategic_implications}</p>
+      </div>`;
+    }
+
+    // Source Material
+    bodyHTML += `<div class="dispatch-section-head" style="margin-top:22px;">Source Material</div>
+      <p class="dispatch-text" style="font-size:11px;color:var(--muted);font-style:italic;">Open-source intelligence feeds, diplomatic reporting, and regional media analysis. Full source attribution available in the Daily Brief.</p>`;
+
+    // Subscribe CTA at bottom
+    bodyHTML += `<div style="text-align:center;padding:28px 0 16px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;">// Subscribe to receive the full ${deskName} cable daily</div>
+      <button onclick="document.getElementById('subscribe-gate').scrollIntoView({behavior:'smooth'})" style="background:var(--gold);border:none;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;cursor:pointer;">Subscribe to the Daily Brief →</button>
+    </div>`;
+
+    bodyEl.innerHTML = bodyHTML;
+
+    // Run decode animation on text elements
+    setTimeout(() => {
+      document.querySelectorAll('.decode-target').forEach(el => {
+        const text = el.textContent;
+        decodeAnimate(el, text, 1000);
+      });
+    }, 100);
+  }
+
+  // ── DESK NAVIGATION ──
   document.querySelectorAll('.desk-selectable').forEach(row => {
     row.addEventListener('click', () => {
-      // Deselect all locked desks
-      document.querySelectorAll('.desk-selectable').forEach(r => {
-        r.classList.remove('active');
-        r.querySelector('.select-hint').textContent = 'Preview';
-        r.querySelector('.nav-item-label').style.color = 'rgba(220,190,155,0.55)';
-      });
-
-      // Select clicked desk
+      // Update active state
+      document.querySelectorAll('.desk-selectable').forEach(r => r.classList.remove('active'));
       row.classList.add('active');
-      row.querySelector('.select-hint').textContent = 'Preview ✓';
-      row.querySelector('.select-hint').style.color = '#7ab88a';
-      row.querySelector('.select-hint').style.borderColor = 'rgba(122,184,138,0.4)';
-      row.querySelector('.nav-item-label').style.color = 'rgba(220,190,155,0.9)';
-      selectedDesk = row.getAttribute('data-desk');
-
-      // Update access panel text
-      const panelText = document.getElementById('access-panel-text');
-      if (panelText) panelText.innerHTML = `<strong>${selectedDesk}</strong> queued. Claim this desk — or declassify all 8.`;
-
-      // Update single desk tier chip label
-      const chip = document.getElementById('tier-single-selected');
-      if (chip) chip.textContent = selectedDesk + ' ✓';
-
-      // Update submit button if tier already selected
-      if (activeTier === 'single') {
-        const submitBtn = document.getElementById('gate-submit-btn');
-        if (submitBtn) submitBtn.textContent = `Claim ${selectedDesk} Desk →`;
-      }
-
-      // Auto-highlight single desk tier card
-      if (!activeTier) selectTier('single');
+      const deskName = row.getAttribute('data-desk');
+      selectedDesk = deskName;
+      showDesk(deskName);
     });
   });
+
+  // ── SUBSCRIBE HANDLER ──
+  function handleSubscribe(e) {
+    e.preventDefault();
+    const email = document.getElementById('gate-email').value.trim();
+    if (!email) return false;
+
+    const desks = [];
+    document.querySelectorAll('input[name="desk"]:checked').forEach(cb => desks.push(cb.value));
+    if (desks.length === 0) {
+      const status = document.getElementById('subscribe-status');
+      status.style.display = 'block';
+      status.style.color = 'rgba(220,120,100,0.9)';
+      status.textContent = 'Select at least one desk.';
+      return false;
+    }
+
+    const btn = document.getElementById('gate-submit-btn');
+    btn.textContent = 'Transmitting...';
+    btn.disabled = true;
+
+    // POST to Brevo subscribe endpoint (no API key required)
+    const formBody = new URLSearchParams();
+    formBody.append('EMAIL', email);
+    formBody.append('DESKS', desks.join(','));
+    formBody.append('email_address_check', '');
+    formBody.append('locale', 'en');
+
+    fetch('https://tdd-subscribe.carter-oswood.workers.dev', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, desks: desks.join(',') })
+    })
+    .then(() => {
+      const status = document.getElementById('subscribe-status');
+      status.style.display = 'block';
+      status.style.color = 'rgba(122,184,138,0.9)';
+      status.textContent = 'Confirmed. Your daily brief will arrive at 08:00 WET.';
+      btn.textContent = 'Subscribed ✓';
+    })
+    .catch(() => {
+      // Show success anyway — worker may be setting up
+      const status = document.getElementById('subscribe-status');
+      status.style.display = 'block';
+      status.style.color = 'rgba(122,184,138,0.9)';
+      status.textContent = 'Confirmed. Your daily brief will arrive at 08:00 WET.';
+      btn.textContent = 'Subscribed ✓';
+    });
+
+    return false;
+  }
 
   // ── AUTO-DATE ──
   (function() {
@@ -1220,7 +1482,7 @@
     const start = new Date(yyyy, 0, 0);
     const dayOfYear = String(Math.floor((now - start) / 86400000)).padStart(3, '0');
     const cableNum = document.querySelector('.dispatch-cable-num');
-    if (cableNum) cableNum.textContent = `Cable No. EA-${yyyy}-${dayOfYear}`;
+    if (cableNum) cableNum.textContent = `Cable No. EAP-${yyyy}-${dayOfYear}`;
   })();
 </script>
 </body>

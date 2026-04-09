@@ -4,14 +4,14 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Daily Diplomat — Diplomatic Intelligence, Daily</title>
-  <meta name="description" content="AI-powered geopolitical intelligence covering 8 global theaters. Daily cables delivered to your inbox at 08:00 WET."/>
+  <meta name="description" content="AI-powered geopolitical intelligence covering 8 global theaters. Daily communiqués delivered to your inbox at 08:00 WET."/>
   <meta property="og:title" content="The Daily Diplomat"/>
-  <meta property="og:description" content="Diplomatic intelligence covering 8 global desks. Daily cables delivered at 08:00 WET."/>
+  <meta property="og:description" content="Diplomatic intelligence covering 8 global desks. Daily communiqués delivered at 08:00 WET."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://www.thedailydiplomat.com"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="The Daily Diplomat"/>
-  <meta name="twitter:description" content="Diplomatic intelligence covering 8 global desks. Daily cables delivered at 08:00 WET."/>
+  <meta name="twitter:description" content="Diplomatic intelligence covering 8 global desks. Daily communiqués delivered at 08:00 WET."/>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%235a3a22'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23c49240' font-family='serif' font-weight='bold'>D</text></svg>"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet"/>
   <style>
@@ -261,7 +261,7 @@
     .dispatch-title-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
     .dispatch-word { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: var(--brown); letter-spacing: -0.5px; text-transform: uppercase; }
     .dispatch-underline { height: 2px; background: var(--brown); margin-top: 2px; }
-    .dispatch-cable-num { font-size: 9px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+    .dispatch-comm-num { font-size: 9px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
     .free-badge { display: inline-block; font-size: 8px; letter-spacing: 2px; color: #7ab88a; border: 1px solid rgba(122,184,138,0.4); padding: 2px 8px; text-transform: uppercase; margin-left: 10px; vertical-align: middle; }
 
     .dispatch-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
@@ -895,10 +895,10 @@
       <div class="dispatch-header">
         <div class="dispatch-title-row">
           <div>
-            <div class="dispatch-word">Cable</div>
+            <div class="dispatch-word">Communiqué</div>
             <div class="dispatch-underline"></div>
           </div>
-          <div class="dispatch-cable-num">Cable No. EA-2026-096</div>
+          <div class="dispatch-comm-num">Communiqué No. EA-2026-096</div>
         </div>
         <div class="dispatch-meta" id="dispatch-meta">
           <div class="meta-cell"><div class="meta-key">Theater</div><div class="meta-val" id="meta-theater">Indo-Pacific / Taiwan Strait</div></div>
@@ -965,7 +965,7 @@
       <div class="clearance-gate" id="subscribe-gate">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:20px;">// Get the Daily Brief</div>
         <div class="gate-title">Eight theaters.<br/>One daily brief.</div>
-        <p class="gate-sub">Select your desks. Every morning at 08:00 WET, your cables arrive in one consolidated brief. Free.</p>
+        <p class="gate-sub">Select your desks. Every morning at 08:00 WET, your communiqués arrive in one consolidated brief. Free.</p>
 
         <!-- DESK SELECTOR -->
         <div class="desk-selector" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:440px;margin:28px auto;">
@@ -1060,7 +1060,7 @@
       </div>
 
       <div class="right-panel">
-        <div class="right-panel-title">Today's Cables <span>Sent</span></div>
+        <div class="right-panel-title">Today's Communiqués <span>Sent</span></div>
         <div class="status-row"><span class="status-key">East Asia &amp; Pacific</span><span class="status-val green">✓ 08:00</span></div>
         <div class="status-row"><span class="status-key">North America</span><span class="status-val green">✓ 08:00</span></div>
         <div class="status-row"><span class="status-key">Europe</span><span class="status-val green">✓ 08:00</span></div>
@@ -1317,12 +1317,12 @@
       document.getElementById('meta-actors').textContent = originalEA.actors;
       document.getElementById('meta-bodies').textContent = originalEA.bodies;
 
-      const cableNum = document.querySelector('.dispatch-cable-num');
+      const cableNum = document.querySelector('.dispatch-comm-num');
       if (cableNum) {
         const now = new Date();
         const start = new Date(now.getFullYear(), 0, 0);
         const dayOfYear = String(Math.floor((now - start) / 86400000)).padStart(3, '0');
-        cableNum.textContent = `Cable No. EAP-${now.getFullYear()}-${dayOfYear}`;
+        cableNum.textContent = `Communiqué No. EAP-${now.getFullYear()}-${dayOfYear}`;
       }
       return;
     }
@@ -1331,13 +1331,13 @@
     const preview = DESK_PREVIEWS[deskName];
     if (!preview) return;
 
-    // Update cable number
-    const cableNum = document.querySelector('.dispatch-cable-num');
+    // Update communiqué number
+    const cableNum = document.querySelector('.dispatch-comm-num');
     if (cableNum) {
       const now = new Date();
       const start = new Date(now.getFullYear(), 0, 0);
       const dayOfYear = String(Math.floor((now - start) / 86400000)).padStart(3, '0');
-      cableNum.textContent = `Cable No. ${preview.desk_code}-${now.getFullYear()}-${dayOfYear}`;
+      cableNum.textContent = `Communiqué No. ${preview.desk_code}-${now.getFullYear()}-${dayOfYear}`;
     }
 
     // Subject — decode animate
@@ -1350,7 +1350,7 @@
     document.getElementById('meta-actors').textContent = preview.tags;
     document.getElementById('meta-bodies').textContent = '—';
 
-    // Build full cable body
+    // Build full communiqué body
     const bodyEl = document.getElementById('dispatch-body');
     let bodyHTML = '';
 
@@ -1398,7 +1398,7 @@
 
     // Subscribe CTA at bottom
     bodyHTML += `<div style="text-align:center;padding:28px 0 16px;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;">// Subscribe to receive the full ${deskName} cable daily</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;">// Subscribe to receive the full ${deskName} communiqué daily</div>
       <button onclick="document.getElementById('subscribe-gate').scrollIntoView({behavior:'smooth'})" style="background:var(--gold);border:none;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;cursor:pointer;">Subscribe to the Daily Brief →</button>
     </div>`;
 
@@ -1490,15 +1490,15 @@
     const topbar = document.getElementById('topbar-date');
     if (topbar) topbar.textContent = `${dd} ${mon} ${yyyy} // 08:00 WET`;
 
-    // Cable metadata date
+    // Communiqué metadata date
     const cable = document.getElementById('cable-date');
     if (cable) cable.textContent = `${dd} ${monFull} ${yyyy}`;
 
-    // Cable number (day of year)
+    // Communiqué number (day of year)
     const start = new Date(yyyy, 0, 0);
     const dayOfYear = String(Math.floor((now - start) / 86400000)).padStart(3, '0');
-    const cableNum = document.querySelector('.dispatch-cable-num');
-    if (cableNum) cableNum.textContent = `Cable No. EAP-${yyyy}-${dayOfYear}`;
+    const cableNum = document.querySelector('.dispatch-comm-num');
+    if (cableNum) cableNum.textContent = `Communiqué No. EAP-${yyyy}-${dayOfYear}`;
   })();
 </script>
 </body>

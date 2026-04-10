@@ -1234,7 +1234,7 @@
     let lastSwap = 0;
     function frame(ts) {
       if (!running) return;
-      if (ts - lastSwap > 120) {
+      if (ts - lastSwap > 360) {
         lastSwap = ts;
         let result = '';
         for (let i = 0; i < original.length; i++) {
@@ -1272,7 +1272,7 @@
   // ── DECODE ANIMATION ──
   // Simple left-to-right reveal
   function decodeAnimate(el, finalText, durationMs) {
-    durationMs = durationMs || 1600;
+    durationMs = durationMs || 4000;
     const len = finalText.length;
     const SKIP = new Set([' ', '.', ',', '—', '·', ':', ';', '(', ')', '"', "'", '\n']);
     const startTime = performance.now();
@@ -1280,7 +1280,9 @@
 
     function frame(ts) {
       if (!running) return;
-      const progress = Math.min((ts - startTime) / durationMs, 1);
+      const linear = Math.min((ts - startTime) / durationMs, 1);
+      // easeOutCubic — fast start, gentle landing
+      const progress = 1 - Math.pow(1 - linear, 3);
       const revealed = Math.floor(progress * len);
 
       let result = '';
@@ -1310,7 +1312,7 @@
     if (deskName === 'East Asia & Pacific') {
       // Subject — decode animate
       const subjectEl = document.getElementById('dispatch-subject');
-      decodeAnimate(subjectEl, originalEA.subject, 800);
+      decodeAnimate(subjectEl, originalEA.subject, 2000);
 
       // Body — restore HTML then decode animate text elements
       document.getElementById('dispatch-body').innerHTML = originalEA.body;
@@ -1331,12 +1333,12 @@
 
       // Decode animate the headline and body text
       const headline = document.getElementById('dispatch-headline');
-      if (headline) decodeAnimate(headline, headline.textContent, 1000);
+      if (headline) decodeAnimate(headline, headline.textContent, 2500);
       document.querySelectorAll('#dispatch-body .dispatch-text').forEach(el => {
-        decodeAnimate(el, el.textContent, 1000);
+        decodeAnimate(el, el.textContent, 2500);
       });
       document.querySelectorAll('#dispatch-body .key-dev-text').forEach(el => {
-        decodeAnimate(el, el.textContent, 800);
+        decodeAnimate(el, el.textContent, 2000);
       });
       return;
     }
@@ -1370,7 +1372,7 @@
 
     // Subject — decode animate
     const subjectEl = document.getElementById('dispatch-subject');
-    decodeAnimate(subjectEl, preview.subject, 800);
+    decodeAnimate(subjectEl, preview.subject, 2000);
 
     // Meta
     document.getElementById('meta-theater').textContent = preview.theater || preview.tags;
@@ -1436,7 +1438,7 @@
     setTimeout(() => {
       document.querySelectorAll('.decode-target').forEach(el => {
         const text = el.textContent;
-        decodeAnimate(el, text, 1000);
+        decodeAnimate(el, text, 2500);
       });
     }, 100);
   }
@@ -1493,14 +1495,14 @@
   if (!window.location.hash || !window.location.hash.startsWith('#desk-')) {
     // Only animate if we're showing the default EA desk (no hash override)
     const headline = document.getElementById('dispatch-headline');
-    if (headline) decodeAnimate(headline, headline.textContent, 1200);
+    if (headline) decodeAnimate(headline, headline.textContent, 3000);
     const subjectEl = document.getElementById('dispatch-subject');
     if (subjectEl) decodeAnimate(subjectEl, subjectEl.textContent, 800);
     document.querySelectorAll('#dispatch-body .dispatch-text').forEach(el => {
-      decodeAnimate(el, el.textContent, 1400);
+      decodeAnimate(el, el.textContent, 3500);
     });
     document.querySelectorAll('#dispatch-body .key-dev-text').forEach(el => {
-      decodeAnimate(el, el.textContent, 1000);
+      decodeAnimate(el, el.textContent, 2500);
     });
   }
 

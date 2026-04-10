@@ -264,12 +264,12 @@
     .dispatch-comm-num { font-size: 9px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
     .free-badge { display: inline-block; font-size: 8px; letter-spacing: 2px; color: #7ab88a; border: 1px solid rgba(122,184,138,0.4); padding: 2px 8px; text-transform: uppercase; margin-left: 10px; vertical-align: middle; }
 
-    .dispatch-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
-    .meta-cell { padding: 8px 0; border-bottom: 1px solid var(--rule); }
-    .meta-cell:nth-child(odd) { border-right: 1px solid var(--rule); padding-right: 20px; }
-    .meta-cell:nth-child(even) { padding-left: 20px; }
-    .meta-key { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-    .meta-val { font-size: 11px; color: var(--ink); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
+    .dispatch-meta { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 8px 0; }
+    .meta-cell { display: inline-flex; align-items: baseline; gap: 5px; padding: 0; }
+    .meta-cell::after { content: '·'; color: var(--muted); margin: 0 10px; font-size: 10px; }
+    .meta-cell:last-child::after { display: none; }
+    .meta-key { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .meta-val { font-size: 10px; color: var(--ink); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
     .priority-flash { color: var(--red); font-weight: 600; }
 
     .dispatch-subject { padding: 16px 0; border-bottom: 1px solid var(--rule); }
@@ -762,9 +762,8 @@
       .dispatch-body { padding: 20px 20px 0; }
       .dispatch-title-row { flex-direction: column; gap: 4px; }
       .dispatch-word { font-size: 20px; }
-      .dispatch-meta { grid-template-columns: 1fr; }
-      .meta-cell:nth-child(odd) { border-right: none; padding-right: 0; }
-      .meta-cell:nth-child(even) { padding-left: 0; }
+      .dispatch-meta { gap: 4px 0; }
+      .meta-cell::after { margin: 0 6px; }
       .dispatch-headline { font-size: clamp(20px, 5vw, 28px); }
       .dispatch-text { font-size: 14px; line-height: 1.75; }
       .dispatch-subject { padding: 12px 0; }

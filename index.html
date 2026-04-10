@@ -743,6 +743,76 @@
     .bc-thread-desks {
       font-size: 8px; letter-spacing: 1px; color: rgba(196,146,64,0.45); text-transform: uppercase;
     }
+    /* ── MOBILE ── */
+    @media (max-width: 1024px) {
+      .columns { grid-template-columns: 1fr; }
+      .sidebar-left, .sidebar-right { display: none; }
+      .center { border-right: none; }
+    }
+
+    @media (max-width: 768px) {
+      /* Topbar — show only bureau name + CTA */
+      .topbar { padding: 10px 16px; flex-wrap: wrap; gap: 8px; justify-content: center; }
+      .topbar-left { display: none; }
+      .topbar-right { gap: 10px; width: 100%; justify-content: space-between; }
+      .topbar-right #topbar-date { display: none; }
+
+      /* Dispatch */
+      .dispatch-header { padding: 12px 20px 0; }
+      .dispatch-body { padding: 20px 20px 0; }
+      .dispatch-title-row { flex-direction: column; gap: 4px; }
+      .dispatch-word { font-size: 20px; }
+      .dispatch-meta { grid-template-columns: 1fr; }
+      .meta-cell:nth-child(odd) { border-right: none; padding-right: 0; }
+      .meta-cell:nth-child(even) { padding-left: 0; }
+      .dispatch-headline { font-size: clamp(20px, 5vw, 28px); }
+      .dispatch-text { font-size: 14px; line-height: 1.75; }
+      .dispatch-subject { padding: 12px 0; }
+
+      /* Key developments */
+      .key-dev { flex-direction: column; gap: 6px; }
+      .key-dev-num { width: auto; }
+
+      /* Paywall / Gate */
+      .paywall-zone { margin: 0 -20px; padding: 0 20px; }
+      .clearance-gate { padding: 28px 20px 36px; }
+      .gate-title { font-size: 22px; }
+      .gate-sub { font-size: 13px; max-width: 100%; }
+      .gate-form { flex-direction: column; max-width: 100%; }
+      .gate-input { border-right: 1px solid var(--rule); }
+      .gate-btn { width: 100%; padding: 14px; }
+      .gate-desks { gap: 4px; }
+
+      /* Tier cards */
+      .tier-cards { grid-template-columns: 1fr; max-width: 100%; }
+      .tier-backchannel { grid-template-columns: 1fr; text-align: left; }
+      .tier-bc-right { text-align: left; display: flex; align-items: center; gap: 16px; }
+
+      /* Back Channel preview */
+      .backchannel-preview { margin: 0 -20px; padding: 28px 20px 0; }
+      .backchannel-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .backchannel-title { font-size: 18px; }
+      .backchannel-connections { gap: 6px; }
+
+      /* Significance box */
+      .significance-box { padding: 14px 16px; }
+
+      /* Desk selector grid */
+      .desk-selector { grid-template-columns: 1fr !important; max-width: 100% !important; margin: 20px auto !important; }
+    }
+
+    @media (max-width: 480px) {
+      .topbar-left { flex-wrap: wrap; }
+      .dispatch-word { font-size: 18px; }
+      .dispatch-headline { font-size: 20px; }
+      .dispatch-text { font-size: 13px; }
+      .gate-title { font-size: 18px; }
+      .tier-price { font-size: 24px; }
+      .backchannel-title { font-size: 16px; }
+      .tier-bc-name { font-size: 16px; }
+      .tier-bc-price { font-size: 22px; }
+    }
+
   </style>
 </head>
 <body>

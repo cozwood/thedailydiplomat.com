@@ -1088,7 +1088,7 @@
 <script>
   // Enigma cipher engine — random scramble with exotic glyphs
   const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZΔΨΩΞΛΘΦΣΠαβγδεζηθλμξπρστφψω░▒▓█▄▀■□▪▫●◆◇◈⬡⬢∎∴∵⊕⊗⊞⊠⟐⟑⧫⬣⬥⬧◻◼';
-  const SPEED = 60;
+  const SPEED = 120;
 
   function animateCipher(el) {
     const original = el.getAttribute('data-original') || el.textContent;
@@ -1231,7 +1231,7 @@
 
   // ── CIPHER ENGINE ──
   const CIPHER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZΔΨΩΞΛΘΦΣΠαβγδεζηθλμξπρστφψω░▒▓█▄▀■□▪▫●◆◇◈⬡⬢∎∴∵⊕⊗⊞⊠⟐⟑⧫⬣⬥⬧◻◼';
-  const CIPHER_SPEED = 32;
+  const CIPHER_SPEED = 64;
   let activeCipherIntervals = [];
 
   function startCipher(el) {

@@ -1092,21 +1092,32 @@
   function animateCipher(el) {
     const original = el.getAttribute('data-original') || el.textContent;
     el.setAttribute('data-original', original);
-    let lastSwap = 0;
+    // Each character gets its own swap timer so they change independently
+    const glyphs = [];
+    for (let i = 0; i < original.length; i++) {
+      const ch = original[i];
+      const isFixed = (ch === ' ' || ch === '&' || ch === '–' || ch === '—' || ch === '●');
+      glyphs.push({
+        ch: isFixed ? ch : CHARS[Math.floor(Math.random() * CHARS.length)],
+        fixed: isFixed,
+        next: Math.random() * 200 // stagger initial timings
+      });
+    }
 
     function frame(ts) {
-      // Swap glyphs every ~80ms — steady pulse, not frantic
-      if (ts - lastSwap > 80) {
-        lastSwap = ts;
-        let result = '';
-        for (let i = 0; i < original.length; i++) {
-          const ch = original[i];
-          if (ch === ' ' || ch === '&' || ch === '–' || ch === '—' || ch === '●') {
-            result += ch;
-          } else {
-            result += CHARS[Math.floor(Math.random() * CHARS.length)];
-          }
+      let changed = false;
+      for (let i = 0; i < glyphs.length; i++) {
+        const g = glyphs[i];
+        if (g.fixed) continue;
+        if (ts > g.next) {
+          g.ch = CHARS[Math.floor(Math.random() * CHARS.length)];
+          g.next = ts + 80 + Math.random() * 160; // each char on its own 80-240ms cycle
+          changed = true;
         }
+      }
+      if (changed) {
+        let result = '';
+        for (let i = 0; i < glyphs.length; i++) result += glyphs[i].ch;
         el.textContent = result;
       }
       requestAnimationFrame(frame);
@@ -1241,20 +1252,31 @@
     const original = el.getAttribute('data-original') || el.textContent;
     el.setAttribute('data-original', original);
     let running = true;
-    let lastSwap = 0;
+    const glyphs = [];
+    for (let i = 0; i < original.length; i++) {
+      const ch = original[i];
+      const isFixed = (ch === ' ' || ch === '.' || ch === ',' || ch === '—' || ch === '·');
+      glyphs.push({
+        ch: isFixed ? ch : CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)],
+        fixed: isFixed,
+        next: Math.random() * 200
+      });
+    }
     function frame(ts) {
       if (!running) return;
-      if (ts - lastSwap > 60) {
-        lastSwap = ts;
-        let result = '';
-        for (let i = 0; i < original.length; i++) {
-          const ch = original[i];
-          if (ch === ' ' || ch === '.' || ch === ',' || ch === '—' || ch === '·') {
-            result += ch;
-          } else {
-            result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
-          }
+      let changed = false;
+      for (let i = 0; i < glyphs.length; i++) {
+        const g = glyphs[i];
+        if (g.fixed) continue;
+        if (ts > g.next) {
+          g.ch = CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+          g.next = ts + 80 + Math.random() * 160;
+          changed = true;
         }
+      }
+      if (changed) {
+        let result = '';
+        for (let i = 0; i < glyphs.length; i++) result += glyphs[i].ch;
         el.textContent = result;
       }
       requestAnimationFrame(frame);
@@ -1298,18 +1320,18 @@
       const progress = Math.min(elapsed / durationMs, 1);
       // easeOutQuad for smooth deceleration
       const eased = 1 - (1 - progress) * (1 - progress);
-      const waveFront = eased * (len + 14);
+      const waveFront = eased * (len + 20);
 
       let result = '';
       let allDone = true;
       for (let i = 0; i < len; i++) {
         if (settled[i]) { result += finalText[i]; continue; }
         const dist = waveFront - i;
-        if (dist > 10) {
+        if (dist > 16) {
           settled[i] = true;
           result += finalText[i];
         } else if (dist > 0) {
-          if (Math.random() < (dist / 10) * 0.3) {
+          if (Math.random() < (dist / 16) * 0.25) {
             settled[i] = true;
             result += finalText[i];
           } else {

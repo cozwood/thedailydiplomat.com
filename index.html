@@ -1086,28 +1086,32 @@
   </div>
 </div>
 <script>
-  // Enigma cipher engine — random scramble with exotic glyphs
+  // Enigma cipher engine — smooth scramble with exotic glyphs
   const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZΔΨΩΞΛΘΦΣΠαβγδεζηθλμξπρστφψω░▒▓█▄▀■□▪▫●◆◇◈⬡⬢∎∴∵⊕⊗⊞⊠⟐⟑⧫⬣⬥⬧◻◼';
-  const SPEED = 120;
 
   function animateCipher(el) {
     const original = el.getAttribute('data-original') || el.textContent;
     el.setAttribute('data-original', original);
+    let lastSwap = 0;
 
-    function frame() {
-      let result = '';
-      for (let i = 0; i < original.length; i++) {
-        const ch = original[i];
-        if (ch === ' ' || ch === '&' || ch === '–' || ch === '—' || ch === '●') {
-          result += ch;
-        } else {
-          result += CHARS[Math.floor(Math.random() * CHARS.length)];
+    function frame(ts) {
+      // Swap glyphs every ~80ms — steady pulse, not frantic
+      if (ts - lastSwap > 80) {
+        lastSwap = ts;
+        let result = '';
+        for (let i = 0; i < original.length; i++) {
+          const ch = original[i];
+          if (ch === ' ' || ch === '&' || ch === '–' || ch === '—' || ch === '●') {
+            result += ch;
+          } else {
+            result += CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
         }
+        el.textContent = result;
       }
-      el.textContent = result;
-      setTimeout(frame, SPEED);
+      requestAnimationFrame(frame);
     }
-    frame();
+    requestAnimationFrame(frame);
   }
 
   // Only animate Active Theaters cipher elements
@@ -1231,33 +1235,37 @@
 
   // ── CIPHER ENGINE ──
   const CIPHER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZΔΨΩΞΛΘΦΣΠαβγδεζηθλμξπρστφψω░▒▓█▄▀■□▪▫●◆◇◈⬡⬢∎∴∵⊕⊗⊞⊠⟐⟑⧫⬣⬥⬧◻◼';
-  const CIPHER_SPEED = 64;
-  let activeCipherIntervals = [];
+  let activeCipherStops = [];
 
   function startCipher(el) {
     const original = el.getAttribute('data-original') || el.textContent;
     el.setAttribute('data-original', original);
-    function frame() {
-      let result = '';
-      for (let i = 0; i < original.length; i++) {
-        const ch = original[i];
-        if (ch === ' ' || ch === '.' || ch === ',' || ch === '—' || ch === '·') {
-          result += ch;
-        } else {
-          result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+    let running = true;
+    let lastSwap = 0;
+    function frame(ts) {
+      if (!running) return;
+      if (ts - lastSwap > 60) {
+        lastSwap = ts;
+        let result = '';
+        for (let i = 0; i < original.length; i++) {
+          const ch = original[i];
+          if (ch === ' ' || ch === '.' || ch === ',' || ch === '—' || ch === '·') {
+            result += ch;
+          } else {
+            result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+          }
         }
+        el.textContent = result;
       }
-      el.textContent = result;
+      requestAnimationFrame(frame);
     }
-    frame();
-    const interval = setInterval(frame, CIPHER_SPEED);
-    activeCipherIntervals.push(interval);
-    return interval;
+    requestAnimationFrame(frame);
+    activeCipherStops.push(() => { running = false; });
   }
 
   function stopAllCiphers() {
-    activeCipherIntervals.forEach(id => clearInterval(id));
-    activeCipherIntervals = [];
+    activeCipherStops.forEach(stop => stop());
+    activeCipherStops = [];
   }
 
   // ── STORE ORIGINAL EA CONTENT ──
@@ -1272,34 +1280,56 @@
   };
 
   // ── DECODE ANIMATION ──
-  // Random scramble then decode left-to-right
+  // Smooth wave decode — characters settle probabilistically left-to-right
   function decodeAnimate(el, finalText, durationMs) {
     durationMs = durationMs || 1200;
     const len = finalText.length;
-    let revealed = 0;
+    const settled = new Array(len).fill(false);
+    const SKIP = new Set([' ', '.', ',', '—', '·', ':', ';', '(', ')', '"', "'", '\n']);
+    for (let i = 0; i < len; i++) {
+      if (SKIP.has(finalText[i])) settled[i] = true;
+    }
+    const startTime = performance.now();
+    let running = true;
 
-    function frame() {
+    function frame(ts) {
+      if (!running) return;
+      const elapsed = ts - startTime;
+      const progress = Math.min(elapsed / durationMs, 1);
+      // easeOutQuad for smooth deceleration
+      const eased = 1 - (1 - progress) * (1 - progress);
+      const waveFront = eased * (len + 14);
+
       let result = '';
+      let allDone = true;
       for (let i = 0; i < len; i++) {
-        const ch = finalText[i];
-        if (i < revealed) {
-          result += ch;
-        } else if (ch === ' ' || ch === '.' || ch === ',' || ch === '—' || ch === '·' || ch === ':') {
-          result += ch;
+        if (settled[i]) { result += finalText[i]; continue; }
+        const dist = waveFront - i;
+        if (dist > 10) {
+          settled[i] = true;
+          result += finalText[i];
+        } else if (dist > 0) {
+          if (Math.random() < (dist / 10) * 0.3) {
+            settled[i] = true;
+            result += finalText[i];
+          } else {
+            result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+            allDone = false;
+          }
         } else {
           result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+          allDone = false;
         }
       }
       el.textContent = result;
-      revealed += Math.max(1, Math.floor(len / (durationMs / CIPHER_SPEED)));
-      if (revealed < len) {
-        const id = setTimeout(frame, CIPHER_SPEED);
-        activeCipherIntervals.push(id);
-      } else {
+      if (allDone || progress >= 1) {
         el.textContent = finalText;
+      } else {
+        requestAnimationFrame(frame);
       }
     }
-    frame();
+    activeCipherStops.push(() => { running = false; });
+    requestAnimationFrame(frame);
   }
 
   // ── SHOW DESK ──

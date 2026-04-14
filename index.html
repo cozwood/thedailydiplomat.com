@@ -29,7 +29,9 @@
   <meta name="twitter:description" content="Intelligence-grade geopolitical briefings across 8 global theaters. Delivered daily at 08:00 WET."/>
   <meta name="twitter:image" content="https://www.thedailydiplomat.com/favicon-512x512.png"/>
 
-  <!-- Favicon — full set to override cached Weebly icons -->
+  <!-- Favicon — inline SVG guarantees the tab icon always works -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%235a3a22'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23c49240' font-family='Georgia,serif' font-weight='bold'%3EDD%3C/text%3E%3C/svg%3E"/>
+  <!-- External files for Google, Apple, social sharing -->
   <link rel="icon" href="favicon.ico" sizes="16x16 32x32"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
@@ -1133,27 +1135,58 @@
   </div>
 </div>
 <script>
-  // Enigma cipher engine — static scramble (renders once on load, no animation)
+  // Enigma cipher engine — slow drift, 1 character shifts at a time
   const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZΔΨΩΞΛΘΦΣΠαβγδεζηθλμξπρστφψω░▒▓█▄▀■□▪▫●◆◇◈⬡⬢∎∴∵⊕⊗⊞⊠⟐⟑⧫⬣⬥⬧◻◼';
+  const SKIP = new Set([' ', '&', '–', '—', '●']);
 
-  function scrambleCipher(el) {
+  function driftCipher(el) {
+    const original = el.getAttribute('data-original') || el.textContent;
+    el.setAttribute('data-original', original);
+
+    // Build initial scrambled array
+    const chars = [];
+    for (let i = 0; i < original.length; i++) {
+      chars.push(SKIP.has(original[i]) ? original[i] : CHARS[Math.floor(Math.random() * CHARS.length)]);
+    }
+    el.textContent = chars.join('');
+
+    // Collect swappable indices (non-space, non-punctuation)
+    const indices = [];
+    for (let i = 0; i < original.length; i++) {
+      if (!SKIP.has(original[i])) indices.push(i);
+    }
+    if (!indices.length) return;
+
+    // Swap one random character every 400-800ms
+    function tick() {
+      const idx = indices[Math.floor(Math.random() * indices.length)];
+      chars[idx] = CHARS[Math.floor(Math.random() * CHARS.length)];
+      el.textContent = chars.join('');
+      setTimeout(tick, 400 + Math.random() * 400);
+    }
+    setTimeout(tick, 400 + Math.random() * 400);
+  }
+
+  // Only animate when cipher elements are visible (no repaints while scrolled away)
+  const cipherObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target._driftStarted) {
+        e.target._driftStarted = true;
+        driftCipher(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('[data-cipher="true"]').forEach(el => {
+    // Scramble immediately so text is never readable
     const original = el.getAttribute('data-original') || el.textContent;
     el.setAttribute('data-original', original);
     let result = '';
     for (let i = 0; i < original.length; i++) {
-      const ch = original[i];
-      if (ch === ' ' || ch === '&' || ch === '–' || ch === '—' || ch === '●') {
-        result += ch;
-      } else {
-        result += CHARS[Math.floor(Math.random() * CHARS.length)];
-      }
+      result += SKIP.has(original[i]) ? original[i] : CHARS[Math.floor(Math.random() * CHARS.length)];
     }
     el.textContent = result;
-  }
-
-  // Scramble cipher elements once on load — no continuous animation
-  document.querySelectorAll('[data-cipher="true"]').forEach(el => {
-    scrambleCipher(el);
+    cipherObserver.observe(el);
   });
 
   // ── STATE ──

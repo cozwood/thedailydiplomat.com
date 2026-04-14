@@ -264,12 +264,12 @@
     .dispatch-comm-num { font-size: 9px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
     .free-badge { display: inline-block; font-size: 8px; letter-spacing: 2px; color: #7ab88a; border: 1px solid rgba(122,184,138,0.4); padding: 2px 8px; text-transform: uppercase; margin-left: 10px; vertical-align: middle; }
 
-    .dispatch-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
-    .meta-cell { padding: 8px 0; border-bottom: 1px solid var(--rule); }
-    .meta-cell:nth-child(odd) { border-right: 1px solid var(--rule); padding-right: 20px; }
-    .meta-cell:nth-child(even) { padding-left: 20px; }
-    .meta-key { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-    .meta-val { font-size: 11px; color: var(--ink); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
+    .dispatch-meta { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 8px 0; }
+    .meta-cell { display: inline-flex; align-items: baseline; gap: 5px; padding: 0; }
+    .meta-cell::after { content: '·'; color: var(--muted); margin: 0 10px; font-size: 10px; }
+    .meta-cell:last-child::after { display: none; }
+    .meta-key { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .meta-val { font-size: 10px; color: var(--ink); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
     .priority-flash { color: var(--red); font-weight: 600; }
 
     .dispatch-subject { padding: 16px 0; border-bottom: 1px solid var(--rule); }
@@ -743,6 +743,75 @@
     .bc-thread-desks {
       font-size: 8px; letter-spacing: 1px; color: rgba(196,146,64,0.45); text-transform: uppercase;
     }
+    /* ── MOBILE ── */
+    @media (max-width: 1024px) {
+      .columns { grid-template-columns: 1fr; }
+      .sidebar-left, .sidebar-right { display: none; }
+      .center { border-right: none; }
+    }
+
+    @media (max-width: 768px) {
+      /* Topbar — show only bureau name + CTA */
+      .topbar { padding: 10px 16px; flex-wrap: wrap; gap: 8px; justify-content: center; }
+      .topbar-left { display: none; }
+      .topbar-right { gap: 10px; width: 100%; justify-content: space-between; }
+      .topbar-right #topbar-date { display: none; }
+
+      /* Dispatch */
+      .dispatch-header { padding: 12px 20px 0; }
+      .dispatch-body { padding: 20px 20px 0; }
+      .dispatch-title-row { flex-direction: column; gap: 4px; }
+      .dispatch-word { font-size: 20px; }
+      .dispatch-meta { gap: 4px 0; }
+      .meta-cell::after { margin: 0 6px; }
+      .dispatch-headline { font-size: clamp(20px, 5vw, 28px); }
+      .dispatch-text { font-size: 14px; line-height: 1.75; }
+      .dispatch-subject { padding: 12px 0; }
+
+      /* Key developments */
+      .key-dev { flex-direction: column; gap: 6px; }
+      .key-dev-num { width: auto; }
+
+      /* Paywall / Gate */
+      .paywall-zone { margin: 0 -20px; padding: 0 20px; }
+      .clearance-gate { padding: 28px 20px 36px; }
+      .gate-title { font-size: 22px; }
+      .gate-sub { font-size: 13px; max-width: 100%; }
+      .gate-form { flex-direction: column; max-width: 100%; }
+      .gate-input { border-right: 1px solid var(--rule); }
+      .gate-btn { width: 100%; padding: 14px; }
+      .gate-desks { gap: 4px; }
+
+      /* Tier cards */
+      .tier-cards { grid-template-columns: 1fr; max-width: 100%; }
+      .tier-backchannel { grid-template-columns: 1fr; text-align: left; }
+      .tier-bc-right { text-align: left; display: flex; align-items: center; gap: 16px; }
+
+      /* Back Channel preview */
+      .backchannel-preview { margin: 0 -20px; padding: 28px 20px 0; }
+      .backchannel-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .backchannel-title { font-size: 18px; }
+      .backchannel-connections { gap: 6px; }
+
+      /* Significance box */
+      .significance-box { padding: 14px 16px; }
+
+      /* Desk selector grid */
+      .desk-selector { grid-template-columns: 1fr !important; max-width: 100% !important; margin: 20px auto !important; }
+    }
+
+    @media (max-width: 480px) {
+      .topbar-left { flex-wrap: wrap; }
+      .dispatch-word { font-size: 18px; }
+      .dispatch-headline { font-size: 20px; }
+      .dispatch-text { font-size: 13px; }
+      .gate-title { font-size: 18px; }
+      .tier-price { font-size: 24px; }
+      .backchannel-title { font-size: 16px; }
+      .tier-bc-name { font-size: 16px; }
+      .tier-bc-price { font-size: 22px; }
+    }
+
   </style>
 </head>
 <body>
@@ -814,9 +883,19 @@
           </div>
         </div>
 
+        <!-- FOUNDATIONAL TEXTS -->
+        <div class="nav-section">
+          <div class="nav-section-title">II. Foundational Texts</div>
+          <a class="foundational-link" href="https://www.un.org/en/about-us/un-charter" target="_blank">UN Charter (1945)<span>Art. 2(4) — Prohibition of force</span></a>
+          <a class="foundational-link" href="https://ihl-databases.icrc.org/en/ihl-treaties/gciv-1949" target="_blank">Geneva Conventions (1949)<span>Protection of civilians in conflict</span></a>
+          <a class="foundational-link" href="https://legal.un.org/ilc/texts/instruments/english/conventions/9_1_1961.pdf" target="_blank">Vienna Convention (1961)<span>Diplomatic relations & immunity</span></a>
+          <a class="foundational-link" href="https://avalon.law.yale.edu/20th_century/intam03.asp" target="_blank">Montevideo Convention (1933)<span>Rights & duties of states</span></a>
+          <a class="foundational-link" href="https://www.un.org/securitycouncil/content/resolutions-0" target="_blank">UNSC Resolutions Index<span>Active & historical resolutions</span></a>
+        </div>
+
         <!-- THE BACK CHANNEL -->
         <div class="nav-section">
-          <div class="nav-section-title">II. The Back Channel</div>
+          <div class="nav-section-title">III. The Back Channel</div>
           <div class="analyst-section-hint">Cross-desk analysis. The unofficial read — what connects the dots across theaters.</div>
 
           <div class="theater-row analyst-note-row">
@@ -836,16 +915,6 @@
             <span class="cipher" data-cipher="true" data-original="New Delhi and Brasilia are building a corridor that bypasses every Western checkpoint.">New Delhi and Brasilia are building a corridor that bypasses every Western checkpoint.</span>
           </div>
           <div class="analyst-more">Open the Back Channel to decode</div>
-        </div>
-
-        <!-- FOUNDATIONAL TEXTS -->
-        <div class="nav-section">
-          <div class="nav-section-title">III. Foundational Texts</div>
-          <a class="foundational-link" href="https://www.un.org/en/about-us/un-charter" target="_blank">UN Charter (1945)<span>Art. 2(4) — Prohibition of force</span></a>
-          <a class="foundational-link" href="https://ihl-databases.icrc.org/en/ihl-treaties/gciv-1949" target="_blank">Geneva Conventions (1949)<span>Protection of civilians in conflict</span></a>
-          <a class="foundational-link" href="https://legal.un.org/ilc/texts/instruments/english/conventions/9_1_1961.pdf" target="_blank">Vienna Convention (1961)<span>Diplomatic relations & immunity</span></a>
-          <a class="foundational-link" href="https://avalon.law.yale.edu/20th_century/intam03.asp" target="_blank">Montevideo Convention (1933)<span>Rights & duties of states</span></a>
-          <a class="foundational-link" href="https://www.un.org/securitycouncil/content/resolutions-0" target="_blank">UNSC Resolutions Index<span>Active & historical resolutions</span></a>
         </div>
 
         <!-- BUREAU NETWORK -->
@@ -901,33 +970,62 @@
           <div class="dispatch-comm-num">Communiqué No. EA-2026-096</div>
         </div>
         <div class="dispatch-meta" id="dispatch-meta">
-          <div class="meta-cell"><div class="meta-key">Theater</div><div class="meta-val" id="meta-theater">South China Sea and Philippine-China maritime disputes</div></div>
-          <div class="meta-cell"><div class="meta-key">Priority</div><div class="meta-val priority-flash" id="meta-priority">Routine / Level 2</div></div>
-          <div class="meta-cell"><div class="meta-key">Actors</div><div class="meta-val" id="meta-actors">PRC · PHL · USA</div></div>
-          <div class="meta-cell"><div class="meta-key">Bodies</div><div class="meta-val" id="meta-bodies">UNCLOS · ASEAN · QUAD</div></div>
+          <div class="meta-cell"><div class="meta-key">Theater</div><div class="meta-val" id="meta-theater">Indo-Pacific / Taiwan Strait</div></div>
+          <div class="meta-cell"><div class="meta-key">Priority</div><div class="meta-val priority-flash" id="meta-priority">Flash / Level 1</div></div>
+          <div class="meta-cell"><div class="meta-key">Actors</div><div class="meta-val" id="meta-actors">PRC · USA · TWN · JPN · DPRK</div></div>
+          <div class="meta-cell"><div class="meta-key">Bodies</div><div class="meta-val" id="meta-bodies">UNSC · QUAD · US-Japan MST</div></div>
           <div class="meta-cell"><div class="meta-key">Date</div><div class="meta-val" id="cable-date">07 Apr 2026</div></div>
           <div class="meta-cell"><div class="meta-key">Classification</div><div class="meta-val">Unclassified // Open Source</div></div>
         </div>
         <div class="dispatch-subject">
           <div class="subject-key">Subject</div>
-          <div class="subject-val" id="dispatch-subject">Beijing Consolidates Ai Governance Narrative While Washington Accelerates Archipelago Defense Architecture In Contested Waters</div>
+          <div class="subject-val" id="dispatch-subject">Taiwan Strait — Escalation Signals & Beijing's Strategic Posture</div>
         </div>
       </div>
 
       <!-- OPEN ACCESS CONTENT -->
       <!-- EA_DISPATCH_START -->
       <div class="dispatch-body" id="dispatch-body">
-        <div class="dispatch-headline" id="dispatch-headline">Beijing Consolidates Ai Governance Narrative While Washington Accelerates Archipelago Defense Architecture In Contested Waters</div>
+        <div class="dispatch-headline" id="dispatch-headline">Beijing Signals Strategic Patience as Washington Escalates Taiwan Arms Transfer</div>
 
-        <p class="dispatch-text">China is positioning itself as the legitimate voice in global artificial intelligence governance, claiming leadership on regulatory frameworks at a moment when Western capitals remain fractured on tech policy. Simultaneously, the United States and its Pacific alliance network—Japan, Philippines, Australia—are executing a coordinated defense densification strategy across the South China Sea and adjacent waters, combining forward logistics, joint combat training, and resource security measures. These parallel developments represent competing visions of institutional order: Beijing&#x27;s claim to techno-diplomatic leadership versus Washington&#x27;s reliance on alliance depth and military interoperability. The theater is defined by semiconductor chokepoints, critical mineral competition, maritime sovereignty disputes, and the infrastructure underpinning great power technological dominance.</p>
+        <div class="dispatch-section-head">Theater Overview</div>
 
-        <p class="dispatch-text">The convergence of these trends signals accelerating decoupling in both the digital and physical domains. China&#x27;s AI conference assertion of &quot;common ignorance&quot; as justification for Beijing-led governance reflects a soft-power play to establish norms before Western coalitions coalesce. Concurrently, U.S.-allied maritime posture is hardening—fuel depots, expanded combat drills, treaty frameworks—suggesting Washington is moving from deterrence-by-denial toward deterrence-through-presence. India&#x27;s strategic hedging (strengthening Russia ties amid U.S. sanctions uncertainty) and Indonesia&#x27;s disinformation crackdown reveal how secondary powers navigate these competing pulls.</p>
+        <p class="dispatch-text">China's foreign ministry issued a measured but pointed response Monday to the latest U.S. defense authorization package, which includes an accelerated timeline for Patriot PAC-3 missile system transfers to Taipei. Officials described the move as a "grave provocation" while stopping short of announcing immediate countermeasures — a posture analysts read as deliberate strategic restraint ahead of the Party's internal review calendar.</p>
+
+        <p class="dispatch-text">The announcement coincided with a PLAN naval exercise in the Luzon Strait corridor, the third such exercise this quarter. Defense attachés in the region report the exercises are notable for their scale but appear calibrated to signal resolve without crossing thresholds that would compel a formal allied response.</p>
 
         <div class="dispatch-section-head">Developments of Note</div>
 
         <div class="key-dev">
           <div class="key-dev-num">01.</div>
-          <div class="key-dev-text"><strong>CHINA—AI GOVERNANCE POSITIONING:</strong> Beijing is framing itself as the convening power on artificial intelligence regulation, leveraging a narrative that global actors operate in "common ignorance" to justify Chinese-led standard-setting. This represents institutional capture through soft authority rather than coercive means and pre-empts Western regulatory coalitions from establishing AI norms aligned with liberal trade and technology transfer principles.</div>
+          <div class="key-dev-text"><strong>Japan:</strong> Tokyo convened an emergency session of the National Security Council following confirmation of DPRK ballistic activity in the Sea of Japan. Officials declined to characterize the launch as a provocation.</div>
+        </div>
+        <div class="key-dev">
+          <div class="key-dev-num">02.</div>
+          <div class="key-dev-text"><strong>Taiwan:</strong> President Lai confirmed a new civil defense budget allocation of NT$24.7 billion, representing a 15% increase over the previous fiscal year. The funds are earmarked for early warning systems and decentralized communications infrastructure.</div>
+        </div>
+        <div class="key-dev">
+          <div class="key-dev-num">03.</div>
+          <div class="key-dev-text"><strong>South Korea:</strong> Seoul's foreign ministry declined to publicly comment on the U.S.–Taiwan arms transfer but confirmed ongoing consultations with Washington regarding regional deterrence coordination under the bilateral alliance framework.</div>
+        </div>
+
+        <div class="dispatch-section-head">Assessment</div>
+
+        <p class="dispatch-text">The convergence of military activity across the Taiwan Strait, Sea of Japan, and South China Sea signals a structural tightening of regional security dynamics. Beijing's exercises near Taiwan are increasingly sophisticated, suggesting preparation for contingencies beyond mere signaling. The restraint in China's diplomatic response, however, indicates awareness that overreaction could accelerate the very alliance consolidation it seeks to prevent.</p>
+
+        <p class="dispatch-text">Washington's decision to accelerate the Patriot transfer timeline reflects a broader shift from strategic ambiguity toward what defense planners describe as "integrated deterrence by denial." The question for regional capitals is whether this posture stabilizes or destabilizes — and the answer likely depends on Beijing's assessment of its own capability timeline.</p>
+
+        <div class="significance-box">
+          <div class="sig-label">&#9632; Strategic Implications</div>
+          <div class="sig-text">The Taiwan Strait is entering a period of elevated structural risk, not because of any single provocation, but because the deterrence architecture on both sides is evolving faster than the diplomatic frameworks designed to manage it. Watch for any shift in PRC rhetoric from "reunification" to "territorial integrity" framing — a linguistic indicator that has preceded escalation in previous cycles.</div>
+        </div>
+
+        <div style="margin-top:24px;padding-top:14px;border-top:1px dashed var(--rule);">
+          <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;">Source Material</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;letter-spacing:0.5px;">&#8212; Reuters Asia</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;letter-spacing:0.5px;">&#8212; South China Morning Post</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;letter-spacing:0.5px;">&#8212; BBC Asia</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);line-height:1.8;letter-spacing:0.5px;">&#8212; 38 North</div>
         </div>
       </div>
       <!-- EA_DISPATCH_END -->
@@ -981,12 +1079,12 @@
       <div class="right-panel" id="tension-index">
         <div class="right-panel-title">Global Tension Index <span>Live</span></div>
         <!-- TENSION_ROWS_START -->
-        <div class="tension-row"><div class="tension-label">US-Iran Naval Blockade</div><div class="tension-bar-wrap"><div class="tension-bar red" style="width:82%;"></div></div><div class="tension-score red-text">82</div></div>
-        <div class="tension-row"><div class="tension-label">US-Iran Diplomatic Breakdown</div><div class="tension-bar-wrap"><div class="tension-bar red" style="width:78%;"></div></div><div class="tension-score red-text">78</div></div>
-        <div class="tension-row"><div class="tension-label">Hungary Political Realignment</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:68%;"></div></div><div class="tension-score amber-text">68</div></div>
-        <div class="tension-row"><div class="tension-label">Philippines-China Oil Exploration</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:55%;"></div></div><div class="tension-score amber-text">55</div></div>
-        <div class="tension-row"><div class="tension-label">Myanmar Civil War Spillover</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:52%;"></div></div><div class="tension-score amber-text">52</div></div>
-        <div class="tension-row"><div class="tension-label">Pakistan Internal Security</div><div class="tension-bar-wrap"><div class="tension-bar low" style="width:38%;"></div></div><div class="tension-score low-text">38</div></div>
+        <div class="tension-row"><div class="tension-label">Taiwan Strait</div><div class="tension-bar-wrap"><div class="tension-bar red" style="width:88%;"></div></div><div class="tension-score red-text">88</div></div>
+        <div class="tension-row"><div class="tension-label">Russia–Ukraine</div><div class="tension-bar-wrap"><div class="tension-bar red" style="width:82%;"></div></div><div class="tension-score red-text">82</div></div>
+        <div class="tension-row"><div class="tension-label">Iran–Israel</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:71%;"></div></div><div class="tension-score amber-text">71</div></div>
+        <div class="tension-row"><div class="tension-label">Korean Peninsula</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:64%;"></div></div><div class="tension-score amber-text">64</div></div>
+        <div class="tension-row"><div class="tension-label">Sahel Region</div><div class="tension-bar-wrap"><div class="tension-bar amber" style="width:58%;"></div></div><div class="tension-score amber-text">58</div></div>
+        <div class="tension-row"><div class="tension-label">India–Pakistan</div><div class="tension-bar-wrap"><div class="tension-bar low" style="width:38%;"></div></div><div class="tension-score low-text">38</div></div>
         <!-- TENSION_ROWS_END -->
       </div>
 
@@ -1023,10 +1121,10 @@
       <div class="right-panel" id="flashpoints-panel">
         <div class="right-panel-title">Active Flashpoints</div>
         <!-- FLASHPOINTS_START -->
-        <div class="flashpoint"><div class="fp-dot red-dot"></div><div class="fp-body"><div class="fp-name">Strait of Hormuz</div><div class="fp-detail">US threatens blockade of Iranian ports following failed peace talks in Islamabad // Strategic chokepoint for global oil trade</div></div><div class="fp-region">ME</div></div>
-        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">Budapest, Hungary</div><div class="fp-detail">Viktor Orbán&#x27;s governing coalition swept from power by opposition led by Péter Magyar // Major NATO member realignment toward EU integration</div></div><div class="fp-region">EUR</div></div>
-        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">South China Sea / Philippine EEZ</div><div class="fp-detail">Philippines asserts constitutional limits on joint oil exploration agreements with China // Ongoing sovereignty and resource disputes</div></div><div class="fp-region">EAP</div></div>
-        <div class="flashpoint"><div class="fp-dot red-dot"></div><div class="fp-body"><div class="fp-name">Myanmar-India Border</div><div class="fp-detail">Three Indian nationals killed in ongoing Myanmar civil war // Cross-border spillover of internal conflict</div></div><div class="fp-region">SAS</div></div>
+        <div class="flashpoint"><div class="fp-dot red-dot"></div><div class="fp-body"><div class="fp-name">Luzon Strait</div><div class="fp-detail">PLAN naval exercise // Day 3</div></div><div class="fp-region">EA</div></div>
+        <div class="flashpoint"><div class="fp-dot red-dot"></div><div class="fp-body"><div class="fp-name">Zaporizhzhia Front</div><div class="fp-detail">Artillery exchange reported</div></div><div class="fp-region">RE</div></div>
+        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">Strait of Hormuz</div><div class="fp-detail">IRGC vessel shadowing</div></div><div class="fp-region">ME</div></div>
+        <div class="flashpoint"><div class="fp-dot amber-dot"></div><div class="fp-body"><div class="fp-name">Mali–Niger Border</div><div class="fp-detail">AES troop movements</div></div><div class="fp-region">AF</div></div>
         <!-- FLASHPOINTS_END -->
       </div>
 
@@ -1057,33 +1155,27 @@
   </div>
 </div>
 <script>
-  // Enigma cipher engine — random scramble with exotic glyphs
+  // Enigma cipher engine — smooth scramble with exotic glyphs
   const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZΔΨΩΞΛΘΦΣΠαβγδεζηθλμξπρστφψω░▒▓█▄▀■□▪▫●◆◇◈⬡⬢∎∴∵⊕⊗⊞⊠⟐⟑⧫⬣⬥⬧◻◼';
-  const SPEED = 30;
 
-  function animateCipher(el) {
+  function staticCipher(el) {
     const original = el.getAttribute('data-original') || el.textContent;
     el.setAttribute('data-original', original);
-
-    function frame() {
-      let result = '';
-      for (let i = 0; i < original.length; i++) {
-        const ch = original[i];
-        if (ch === ' ' || ch === '&' || ch === '–' || ch === '—' || ch === '●') {
-          result += ch;
-        } else {
-          result += CHARS[Math.floor(Math.random() * CHARS.length)];
-        }
+    let result = '';
+    for (let i = 0; i < original.length; i++) {
+      const ch = original[i];
+      if (ch === ' ' || ch === '&' || ch === '–' || ch === '—' || ch === '●') {
+        result += ch;
+      } else {
+        result += CHARS[Math.floor(Math.random() * CHARS.length)];
       }
-      el.textContent = result;
-      setTimeout(frame, SPEED);
     }
-    frame();
+    el.textContent = result;
   }
 
-  // Only animate Active Theaters cipher elements
+  // Back Channel cipher — static, no animation
   document.querySelectorAll('[data-cipher="true"]').forEach(el => {
-    animateCipher(el);
+    staticCipher(el);
   });
 
   // ── STATE ──
@@ -1092,254 +1184,147 @@
   // ── DESK PREVIEW DATA (auto-generated daily by update_landing.py) ──
   // DESK_PREVIEWS_START
   const DESK_PREVIEWS = {
-  "North America": {
-    "subject": "US Imposes Hormuz Blockade Following Failed Iran Negotiations, Escalating Maritime Control Competition And Testing Alliance Cohesion",
-    "headline": "US Imposes Hormuz Blockade Following Failed Iran Negotiations, Escalating Maritime Control Competition And Testing Alliance Cohesion",
-    "desk_code": "NAM",
-    "tags": "United States · Canada · Mexico · USMCA",
-    "theater": "United States",
-    "theater_overview": "The United States has declared a naval blockade of the Strait of Hormuz effective immediately following the collapse of 21-hour peace negotiations with Iran in Islamabad. US Central Command will enforce restrictions on all vessel traffic transiting the waterway and interdict vessels that have paid Iranian passage tolls—a move Tehran characterizes as maritime piracy and a breach of ceasefire terms. This represents a direct contest over control of one of the world's most economically critical chokepoints, through which approximately 30 percent of global seaborne petroleum trade passes. The blockade signals Washington's shift from diplomatic off-ramps to coercive economic statecraft and military enforcement, fundamentally altering shipping risk calculus for all trading partners.\n\nConcurrent developments indicate a broader realignment within the US-led alliance system. NATO members are accelerating autonomous defense capability development in response to Trump administration messaging volatility and unpredictability. Canadian political dynamics show stabilization around Prime Minister Carney's Liberal government, while Latin American institutional stress—particularly Peru's electoral chaos—creates regional governance vacuum. These second-order effects suggest the North American bloc faces simultaneous pressure from maritime competition with Iran, alliance fragmentation within Atlantic structures, and downstream instability in the Western Hemisphere.",
-    "developments": [
-      {
-        "num": "01",
-        "actor": "US-Iran Maritime Escalation",
-        "text": "The blockade announcement follows failed talks brokered by Pakistan, with the US explicitly declaring enforcement against all flag states and Iranian-transiting vessels. Iran's military response—labeling the action piracy—signals Tehran will contest the blockade diplomatically and potentially through asymmetric maritime action, creating risk of unintended escalation in a confined waterway with global energy consequences."
-      },
-      {
-        "num": "02",
-        "actor": "NATO Autonomization Trajectory",
-        "text": "Trump's inconsistent messaging on alliance commitments is accelerating European strategic decoupling, with partners adopting \"cautious self-reliance\" postures and investing in independent interoperability frameworks. This weakens the North Atlantic security anchor by introducing parallel command structures and reducing integrated deterrence credibility against peer competitors."
-      },
-      {
-        "num": "03",
-        "actor": "United States",
-        "text": "Canadian Political Consolidation: Carney's Liberal majority in three by-elections solidifies control and removes near-term domestic political uncertainty around Canada's role in continental defense and economic bloc alignment during heightened US-Iran tensions."
-      }
-    ],
-    "assessment": "The Hormuz blockade represents a fundamental shift from containment to active maritime denial—a unilateral assertion of control over international waters that tests the UN Convention on the Law of the Sea and international maritime norms. By declaring enforcement \"impartially against vessels of all nations,\" Washington is attempting to redefine the Strait as a contested domain rather than a globally-managed chokepoint. This carries immediate economic costs: shipping insurance premiums will spike, crude prices will shift, and trading partners (particularly those with Iran exposure like China and India) will recalculate routing and procurement strategies. The blockade locks the US into a sustained enforcement commitment, creating opportunity costs in force posture and fiscal resources.\n\nSimultaneously, the failed Islamabad talks and Trump's escalatory rhetoric have fractured the transatlantic alliance's cohesion precisely when Russia and China are testing NATO boundaries in Europe and the Pacific. European defense investments will prioritize independent capability rather than NATO integration, fragmenting interoperability at a moment when unified deterrence is most valuable. The blockade also increases Canada's exposure to maritime supply chain disruption, complicating continental economic coordination and potentially forcing Ottawa toward autonomous energy security strategies that compete with US interests.",
-    "strategic_implications": "The Hormuz blockade signals a return to explicit great-power competition over global chokepoints and a willingness to enforce unilateral control through military means, abandoning the post-Cold War consensus on open sea lanes and rules-based commerce. This move will accelerate European autonomous defense investment, weaken NATO's integrated command, and create sustained economic friction across the US-led trading system. For the North American theater specifically, it locks Washington into an extended Middle East commitment that drains resources from continental security priorities while generating commodity price volatility that destabilizes Canada-US energy integration."
-  },
-  "Europe": {
-    "subject": "Hungarian Government Transition From Orbán Creates Realignment Opportunity For EU Institutional Recovery And NATO Western Flank Cohesion",
-    "headline": "Hungarian Government Transition From Orbán Creates Realignment Opportunity For EU Institutional Recovery And NATO Western Flank Cohesion",
-    "desk_code": "EUR",
-    "tags": "EU · UK · NATO · Balkans · Nordics",
-    "theater": "EU",
-    "theater_overview": "Viktor Orbán's 16-year control of Hungary has ended following electoral defeat to Péter Magyar, an opposition figure and former Fidesz insider, marking the first comprehensive leadership transition in Central Europe's most strategically sensitive veto player within EU and NATO structures. Magyar's landslide victory signals exhaustion among the Hungarian electorate with Orbán's competitive authoritarian model and removes the single most disruptive actor in EU decision-making processes—a state that has systematically blocked sanctions packages, rule-of-law conditionality mechanisms, and NATO-coordinated defense initiatives. The transition occurs as the EU faces concurrent pressures on energy infrastructure, digital regulation, and China strategy, where Hungary's previous obstructionism created institutional friction and delayed collective responses to systemic threats.\n\nMagyar inherits a state structurally integrated into NATO and the EU but institutionally weakened by Orbán-era erosion of judicial independence and media pluralism. The new government's composition and policy direction remain undefined, but the electoral mandate reflects citizen preference for alignment with Western institutional norms rather than continued strategic autonomy experiments. This realignment directly affects the bloc's capacity to execute unified responses on energy transition, technology governance, and eastern deterrence posture.",
-    "developments": [
-      {
-        "num": "01",
-        "actor": "Hungary/Magyar Government",
-        "text": "The replacement of Orbán with Magyar removes the EU's most consistent blocking minority on sanctions, rule-of-law enforcement, and defense coordination. Magyar's insider status within Fidesz suggests he retains institutional knowledge of levers of power but faces pressure to demonstrate procedural commitment to EU governance standards, particularly on judicial reform and media freedom—conditions the Commission has leveraged as prerequisites for full budget disbursement and structural fund access."
-      },
-      {
-        "num": "02",
-        "actor": "EU",
-        "text": "EU Energy Infrastructure Governance: Member states continue blocking expanded grid-funding mechanisms at Commission level, fragmenting the bloc's capacity to integrate renewable transition infrastructure and reduce Russian energy dependency. Hungarian obstruction of coordinated grid investment has now become politically unsustainable under Magyar, potentially unlocking infrastructure investment decisions that Orbán delayed for leverage in bilateral negotiations with Moscow."
-      },
-      {
-        "num": "03",
-        "actor": "France Digital Regulation Model",
-        "text": "Paris has notified the Commission of child social media restrictions, initiating EU compatibility review. This represents continued member-state experimentation with digital governance outside the bloc's harmonized framework, creating regulatory fragmentation that weakens collective leverage over Big Tech platforms and complicates data sovereignty enforcement."
-      }
-    ],
-    "assessment": "The Magyar transition materially strengthens the EU's institutional decision-making capacity by removing the actor most willing to weaponize veto authority for geopolitical leverage outside bloc structures. Orbán's relationship with Moscow and selective alignment with Trump administration policies created ambiguity about Hungarian commitment to collective defense during NATO's eastern deterrence buildup. Magyar's electoral mandate—driven by voter exhaustion rather than ideological realignment—suggests pragmatic reorientation toward EU institutional participation rather than principled rejection of rules-based governance. The bloc should expect faster resolution on grid infrastructure, sanctions coordination, and rule-of-law conditionality, though Magyar faces domestic pressure to preserve autonomy narrative and may leverage judicial reform demands for budget concessions.\n\nConcurrent developments in France and Spain digital-energy strategy reveal the underlying pattern: individual member states continue pursuing bilateral advantage over unified institutional response. The grid-funding blockade persists despite Budapest's political transition, indicating structural incentive problems within EU decision architecture beyond any single veto player. Watch for Magyar's judicial independence appointments and media regulatory choices—these will signal whether the transition represents genuine institutional reversion or merely personnel rotation within a sustained competitive authoritarian framework.",
-    "strategic_implications": "Hungary's leadership change removes NATO's internal alignment liability on eastern front cohesion and restores EU capacity for coordinated sanctions and defense investment without sustained obstruction from a member with divided strategic loyalties. This strengthens the bloc's deterrence signaling toward Russia while enabling faster execution of energy transition infrastructure critical to reducing Moscow's leverage. However, parallel fragmentation on digital governance and China strategy indicates the bloc's structural challenge persists independent of individual member-state preference: the EU lacks institutional mechanisms to enforce unified economic statecraft against asymmetric pressure from major competitors."
-  },
-  "Russia & Eurasia": {
-    "subject": "Moscow Exploits Iran-U.s. Negotiation Collapse And Hungarian Political Realignment To Expand Diplomatic Leverage Across Middle East And Central Europe Simultaneously",
-    "headline": "Moscow Exploits Iran-U.s. Negotiation Collapse And Hungarian Political Realignment To Expand Diplomatic Leverage Across Middle East And Central Europe Simultaneously",
-    "desk_code": "REA",
-    "tags": "Russia · Caucasus · Belarus · Central Asia · Caspian",
-    "theater": "Russia",
-    "theater_overview": "The strategic landscape across Moscow's zones of influence is shifting rapidly as the Kremlin capitalizes on two major openings: the failure of Iran-U.S. negotiations over Middle East conflict resolution, and the unexpected ouster of Viktor Orbán as Hungary's prime minister in favor of center-right challenger Péter Magyar. These developments expose fractures in the Western-led order—the collapse of diplomacy on Iran signaling deepened U.S.-Tehran estrangement, and the Hungarian election suggesting erosion of Orbán's pro-Russian orientation that had anchored a critical NATO member's equivocation on Moscow's isolation. Simultaneously, the expiration of Washington's waiver on Russian oil exports is tightening energy markets and forcing Asian consumers to lobby the U.S., creating competitive pressure on American sanctions enforcement. Moscow perceives these as opportunities to reposition itself as a mediator, energy provider, and diplomatic counterweight to Washington.\n\nThe confluence of these developments reveals a theater where Moscow's principal competitors—the United States and European Union—face simultaneous constraints: diplomatic setbacks in the Middle East, internal alliance management problems in Europe, and pressure from energy-dependent third parties. Moscow's response has been calibrated and swift, deploying both material inducements (nuclear fuel management with Iran) and diplomatic positioning (readiness to facilitate peace talks) to fill perceived vacuums.",
-    "developments": [
-      {
-        "num": "01",
-        "actor": "Iran Nuclear Engagement",
-        "text": "The Kremlin has renewed its offer to manage Iran's highly enriched uranium stockpile following the collapse of Iran-U.S. negotiations. This positions Moscow as both a technical intermediary and a diplomatic bridge, allowing the Kremlin to establish operational influence over sensitive Iranian nuclear infrastructure while signaling to Tehran that Russia—unlike the United States—remains a reliable partner when negotiations fail. The move strengthens Moscow's leverage over both Iranian decision-making and potential future nuclear agreements."
-      },
-      {
-        "num": "02",
-        "actor": "Hungarian Political Realignment",
-        "text": "Péter Magyar's landslide electoral victory displacing Orbán signals a potential shift in Central Europe's alignment dynamics. Magyar has explicitly rejected characterization as a Putin ally while indicating willingness to negotiate—a posture that preserves channels to Moscow while aligning Hungary more closely with EU institutional norms. This development threatens Moscow's ability to use Hungary as a veto player within NATO and EU decision-making, reducing a key tool for constraining Western coordination on sanctions and defense initiatives."
-      },
-      {
-        "num": "03",
-        "actor": "Russian Oil Sanctions Erosion",
-        "text": "The expiration of Washington's waiver on Russian oil imports, combined with Asian states' active lobbying for extension, demonstrates how third-country energy dependencies create fissures in sanctions regimes. Moscow benefits from this pressure on Washington and from the implicit validation that Asian economies prioritize energy security over secondary sanctions compliance, expanding opportunities for alternative export routes and pricing structures."
-      }
-    ],
-    "assessment": "Moscow is executing a coordinated strategy of opportunistic positioning rather than direct confrontation. The three developments—Iranian nuclear partnership, Hungarian political shift, and energy sanctions pressure—operate in parallel to reduce Western cohesion and expand Russian agency. The loss of Orbán as a reliable institutional ally within NATO is significant but partially offset by signals that Magyar may maintain pragmatic engagement with Moscow even while moving closer to Western institutional frameworks. The real strategic gain lies in Iran engagement, where Moscow converts diplomatic failure between Washington and Tehran into operational proximity to Iranian nuclear decision-making.\n\nThe second-order effects warrant close monitoring. If the U.S. fails to extend the Russian oil waiver, Asian demand will seek alternative suppliers (including Moscow), tightening global oil markets and strengthening Moscow's negotiating position with energy-dependent states. Conversely, if Washington capitulates to Asian pressure and extends the waiver, the signal undermines sanctions efficacy and invites further third-party defection. Magyar's government faces immediate pressure to define its Russia policy—premature alignment with Brussels risks domestic nationalist backlash, while too much pragmatism toward Moscow invites Western isolation. Moscow's mediation offer on Iran is likely intended to fail (preserving the negotiation crisis that benefits Russian influence) rather than succeed.",
-    "strategic_implications": "Moscow is systematically widening the aperture for its great-power competition with the West by converting American and European strategic setbacks into opportunities for diplomatic expansion and alliance management. The loss of Hungary as a reliable Moscow asset is serious but contained by simultaneous gains in Iranian nuclear influence and energy markets. The critical variable is whether Washington maintains sanctions discipline or fragments under third-country pressure—fragmentation accelerates Russian repositioning as the reliable partner for energy-dependent states outside the Western orbit."
-  },
-  "East Asia & Pacific": {
-    "subject": "Beijing Consolidates Ai Governance Narrative While Washington Accelerates Archipelago Defense Architecture In Contested Waters",
-    "headline": "Beijing Consolidates Ai Governance Narrative While Washington Accelerates Archipelago Defense Architecture In Contested Waters",
-    "desk_code": "EAP",
-    "tags": "China · Japan · Korea · Taiwan · DPRK · Pacific Islands",
-    "theater": "China",
-    "theater_overview": "China is positioning itself as the legitimate voice in global artificial intelligence governance, claiming leadership on regulatory frameworks at a moment when Western capitals remain fractured on tech policy. Simultaneously, the United States and its Pacific alliance network—Japan, Philippines, Australia—are executing a coordinated defense densification strategy across the South China Sea and adjacent waters, combining forward logistics, joint combat training, and resource security measures. These parallel developments represent competing visions of institutional order: Beijing's claim to techno-diplomatic leadership versus Washington's reliance on alliance depth and military interoperability. The theater is defined by semiconductor chokepoints, critical mineral competition, maritime sovereignty disputes, and the infrastructure underpinning great power technological dominance.\n\nThe convergence of these trends signals accelerating decoupling in both the digital and physical domains. China's AI conference assertion of \"common ignorance\" as justification for Beijing-led governance reflects a soft-power play to establish norms before Western coalitions coalesce. Concurrently, U.S.-allied maritime posture is hardening—fuel depots, expanded combat drills, treaty frameworks—suggesting Washington is moving from deterrence-by-denial toward deterrence-through-presence. India's strategic hedging (strengthening Russia ties amid U.S. sanctions uncertainty) and Indonesia's disinformation crackdown reveal how secondary powers navigate these competing pulls.",
-    "developments": [
-      {
-        "num": "01",
-        "actor": "CHINA—AI GOVERNANCE POSITIONING",
-        "text": "Beijing is framing itself as the convening power on artificial intelligence regulation, leveraging a narrative that global actors operate in \"common ignorance\" to justify Chinese-led standard-setting. This represents institutional capture through soft authority rather than coercive means and pre-empts Western regulatory coalitions from establishing AI norms aligned with liberal trade and technology transfer principles."
-      },
-      {
-        "num": "02",
-        "actor": "China",
-        "text": "PHILIPPINES—SOUTH CHINA SEA ASYMMETRY: The Philippines is conditioning joint oil exploration with China on constitutional compliance while simultaneously hosting U.S. fuel depots and expanding combat interoperability with Japan through enlarged Balikatan drills. This triple-binding strategy—maintaining legal constraints on Beijing, accepting Washington logistics, and deepening Tokyo coordination—reveals how middle powers are weaponizing institutional frameworks to manage great power competition without formal alliance commitment."
-      },
-      {
-        "num": "03",
-        "actor": "China",
-        "text": "UNITED STATES—FORWARD LOGISTICS NETWORK: Washington is establishing fuel infrastructure in the Philippines and deepening operational integration with Japan's combat role, signaling a shift from periodic freedom-of-navigation operations toward sustained forward presence. This reduces logistical friction for extended operations and signals a commitment architecture that China cannot easily intimidate through coercive diplomacy alone."
-      }
-    ],
-    "assessment": "Beijing's AI governance messaging is a long-term institutional play designed to establish precedent before Western consensus crystallizes—capturing normative authority without military coercion. However, this soft-power advantage faces a countervailing U.S. strategy of alliance densification: concrete forward logistics, expanded joint training, and treaty commitments that are harder for Beijing to erode through economic pressure alone. The Philippines' constitutional framework and Japan's combat role expansion demonstrate that middle powers can maintain strategic flexibility while embedding themselves deeper in security architectures. The critical vulnerability for this U.S. approach is Indian hedging—if New Delhi tilts substantially toward Russia amid sanctions uncertainty, the Indo-Pacific architecture loses a critical node for containing Chinese influence in the Indian Ocean.\n\nThe rare earth and seabed mining competition signals that technological dominance is becoming inseparable from raw material access. China's processing advantage is durable, but Washington's willingness to pursue environmental and jurisdictional risks suggests resource security is now elevated to strategic priority. Watch for: (1) whether the Pukpuk model spreads to other Pacific microstates, creating a contested archipelago of defense agreements; (2) whether India's sanctions waiver renewal occurs without conditions that deepen Russia ties; (3) whether Philippines constitutional constraints actually limit Beijing's oil exploration ambitions or become ceremonial theater.",
-    "strategic_implications": "The theater is transitioning from competition over regional influence to competition over institutional legitimacy and logistical permanence. China's AI governance claim and U.S. alliance architecturalization represent competing visions of order—one techno-diplomatic, one security-integrated. If U.S. forward logistics and combat interoperability succeed in creating irreversible alliance depth, Beijing's soft-power advantages become structurally constrained. Conversely, if India tilts materially toward Russia or Philippines constitutional frameworks become binding constraints, Washington's archipelago strategy loses coherence. The resolution of this competition will determine whether great power rivalry in the Indo-Pacific remains compartmentalized or becomes systemic."
-  },
-  "Southern Asia": {
-    "subject": "South And Southeast Asia Face Compounding Pressures On Democratic Institutions, Border Stability, And Energy Supply Chains As Major Powers Recalibrate Regional Alignments",
-    "headline": "South And Southeast Asia Face Compounding Pressures On Democratic Institutions, Border Stability, And Energy Supply Chains As Major Powers Recalibrate Regional Alignments",
-    "desk_code": "SAS",
-    "tags": "India · Indonesia · Australia · ASEAN · Philippines · Pakistan",
-    "theater": "India",
-    "theater_overview": "The Indo-Pacific swing states are experiencing simultaneous pressure across three distinct but interconnected domains: domestic institutional integrity, maritime/border security, and energy statecraft. India confronts credibility questions around electoral administration in a strategically sensitive border state while managing sanctions uncertainty that pushes it toward deepened Russia ties. Pakistan faces a resurgence of militant pressure in its northern territories even as it stabilizes macro-economically, signaling that security fragility persists despite fiscal progress. Southeast Asian states—the Philippines and Thailand particularly—navigate the intersection of great power competition (US-China positioning over South China Sea resources), internal democratic contestation (Indonesia's new disinformation apparatus), and economic vulnerability to supply chain disruption (Australia's freight crisis affecting regional trade flows).\n\nThe underlying structural tension is a widening gap between state capacity to manage territory and citizens' access to legitimate political voice. Authoritarian tools are expanding (Indonesia, Pakistan's border regions) while democratic guarantees are contracting (India's voter rolls, Philippines' constitutional constraints on oil deals).",
-    "developments": [
-      {
-        "num": "01",
-        "actor": "India",
-        "text": "India—Electoral Administration Crisis in West Bengal: Nine million voters dropped from rolls in a state bordering Bangladesh and China raise questions about the integrity of India's democratic machinery precisely when strategic competition over swing-state alignment is intensifying. The Supreme Court's intervention signals institutional friction between electoral management and electoral legitimacy that could undermine New Delhi's soft power claims in a region where democratic governance remains contested."
-      },
-      {
-        "num": "02",
-        "actor": "India",
-        "text": "US Sanctions Waiver Expiration on India: The lapsing of sanctions relief creates direct incentive for India-Russia energy cooperation, accelerating Moscow's grip over New Delhi's energy security posture. This shifts India's hedging calculus away from Western institutions at a moment when Washington seeks to consolidate Quad alignment against Beijing."
-      },
-      {
-        "num": "03",
-        "actor": "India",
-        "text": "Philippines Oil Exploration Constitutional Constraints: Manila's reassertion that joint South China Sea exploration must follow constitutional procedure signals resistance to Beijing's incrementalism while leaving space for future accommodation. The framing preserves tactical flexibility but acknowledges Beijing's persistent leverage over resource access—a core vulnerability for a middle power dependent on energy imports."
-      }
-    ],
-    "assessment": "The region enters a period of institutional stress where the formal architecture of democracy, state capacity, and alliance management are all fraying simultaneously. India's voter-roll anomalies, Pakistan's inability to pacify its north despite IMF compliance, Indonesia's weaponization of disinformation law, and the Philippines' constitutional parsing of China deals all point to a common pattern: state actors are hardening control mechanisms at moments when their legitimacy or capacity is being questioned. The energy dimension—US sanctions pressure on India, Australian supply chain fragility, and Manila's resource dependencies—creates leverage points that external actors (Russia, China, Gulf producers) are actively exploiting.\n\nThe second-order effect is a cascade toward bilateral and minilateral arrangements that bypass institutional frameworks. India's pivot toward Russia as sanctions lapse, the Philippines' hesitant dance with Beijing over oil, and Indonesia's executive consolidation all reduce the friction costs of great power accommodation relative to democratic accountability. Watch whether the Supreme Court interventions in India (electoral rolls, activist detentions) signal institutional pushback or formalistic compliance with executive preferences. Monitor Pakistan's ability to restore security in Gilgit-Baltistan; failure there signals China's strategic hinterland remains unstable. Track whether Indonesia's disinformation law expands to target opposition political speech—a threshold indicator of authoritarian drift.",
-    "strategic_implications": "The Indo-Pacific's swing states are experiencing a compression of democratic space at precisely the moment when great power competition for their alignment is most acute. If institutional legitimacy continues to erode while security vulnerabilities persist, these states will gravitate toward bilateral patron arrangements (India-Russia energy ties, Philippines-China resource deals, Pakistan's China dependency) rather than institutional coalitions (Quad, ASEAN consensus mechanisms). This accelerates the fragmentation of the regional order and raises the likelihood that boundary disputes and resource competitions will be resolved through coercion rather than negotiated frameworks. Washington's Quad strategy assumes allied states can maintain sufficient democratic resilience to sustain strategic coordination; current trajectories suggest that assumption is weakening."
-  },
-  "Middle East": {
-    "subject": "US-Iran Diplomatic Engagement In Islamabad Signals Negotiation Track Opening Despite Fundamental Disagreements On Hormuz And Sanctions Architecture",
-    "headline": "US-Iran Diplomatic Engagement In Islamabad Signals Negotiation Track Opening Despite Fundamental Disagreements On Hormuz And Sanctions Architecture",
-    "desk_code": "ME",
-    "tags": "Iran · Gulf States · Israel · Levant · Egypt · Maghreb",
-    "theater": "Iran",
-    "theater_overview": "The United States and Iran have initiated direct talks in Islamabad, leveraging Pakistan's unique diplomatic positioning across Washington, Tehran, and Gulf capitals to establish a negotiation channel after years of escalating rhetoric and sanctions pressure. The 21-hour engagement represents the first substantive bilateral contact of its kind, occurring against a backdrop of heightened maritime tensions—the US is implementing restrictions on navigation through the Strait of Hormuz that Tehran characterizes as illegal blockade activity, while Israel maintains escalating pressure on Lebanese and Palestinian territory. This convergence reflects a theater-wide reassessment of conflict containment mechanisms at a moment when traditional mediators (Gulf states, European powers) have limited leverage.\n\nPakistan's role as convener reflects deeper shifts in regional power geometry. Neither Washington nor Tehran can afford sustained direct military confrontation given costs to global energy markets and regional stability, yet neither has sufficient coercive capacity to force capitulation. The selection of Islamabad—a state with credible relationships across all three poles (US alliance structures, Iranian strategic partnership, Gulf financial dependencies)—indicates both parties recognize the need for backchannel communication while maintaining public postures of non-engagement. Concurrent Israeli-Palestinian friction and Israel-Lebanon talks underscore how this negotiation track exists within a fragmented security environment where bilateral US-Iran talks alone cannot resolve systemic deterrence competitions.",
-    "developments": [
-      {
-        "num": "01",
-        "actor": "US-Iran Islamabad Channel",
-        "text": "The initiation of direct talks in Pakistan establishes a discrete diplomatic corridor outside UN or European frameworks, signaling both capitals view managed escalation as preferable to open confrontation. Pakistan's success where \"others couldn't\" derives from its simultaneous credibility with Washington's Gulf partners and Tehran's security establishment, creating a neutral venue where both sides can explore red-line positions without domestic political exposure."
-      },
-      {
-        "num": "02",
-        "actor": "Iran",
-        "text": "Hormuz Strait Confrontation Rhetoric: Iran's military characterization of US maritime restrictions as \"piracy\" represents escalation in legal framing rather than military posture, indicating Tehran is preparing narratives for potential international law claims and signaling allies (China, Russia) that Washington is violating international convention. This positioning precedes potential transit incidents that could trigger broader coalition responses."
-      },
-      {
-        "num": "03",
-        "actor": "Iran",
-        "text": "Information Operations Sophistication: Iran's deployment of \"highly sophisticated\" AI-generated video propaganda combined with US pressure on Planet Labs to restrict satellite imagery of Iranian territory reflects a coordinated defensive strategy—obscuring surveillance capability while amplifying messaging reach. This asymmetric information warfare suggests Tehran anticipates renewed sanctions or military pressure and is preemptively delegitimizing Western intelligence products."
-      }
-    ],
-    "assessment": "The Islamabad talks represent a floor, not a ceiling, on US-Iran accommodation. Twenty-one hours of engagement reflects sufficient mutual interest to prevent talks collapse, but insufficient agreement on core issues—sanctions architecture, nuclear constraints, Hormuz access, and proxy force presence in Syria-Iraq—to suggest imminent breakthrough. Both parties retain capacities for measured escalation (US maritime restrictions, Iranian naval maneuvers) that can signal seriousness without crossing into direct kinetic conflict. The real test arrives in subsequent sessions, where either side must show flexibility on sanctions sequencing or nuclear verification protocols to justify domestic political costs of negotiation.\n\nInformation operations and intelligence opacity are becoming negotiation variables themselves. Iran's AI propaganda and satellite restrictions signal an effort to reduce Western situational awareness before any military pressure campaign. This asymmetry—Iran controlling visibility of its territory while flooding information space with narratives—requires US intelligence adaptation and raises questions about whether conventional deterrence frameworks (forward positioning, threat signaling) function when one party can deny transparency. The parallel Israel-Lebanon track and Israeli-Palestinian friction create what game theorists call a \"commitment problem\": even if US-Iran talks progress, sub-regional actors retain independent escalation triggers that could derail broader accommodation.",
-    "strategic_implications": "This negotiation track signals the US is willing to engage Iran directly where multilateral or European-mediated approaches have failed, implying recognition that sanctions-only strategies produce stalemate rather than capitulation. However, the absence of agreement on fundamental issues—combined with Israeli operational independence, Iranian information warfare preparation, and European policy uncertainty—means the talks are likely to produce incremental agreements (prisoner exchanges, technical working groups) rather than sanctions relief or fundamental détente. The energy supply nexus remains vulnerable to any breakdown in talks or escalation in Hormuz access disputes, which explains why Pakistan's diplomatic role carries outsized strategic weight despite its limited military footprint."
-  },
-  "Sub-Saharan Africa": {
-    "subject": "Sub-Saharan Africa Faces Compounding Governance Crises And Institutional Fragility Amid Power Consolidation And Security Deterioration",
-    "headline": "Sub-Saharan Africa Faces Compounding Governance Crises And Institutional Fragility Amid Power Consolidation And Security Deterioration",
-    "desk_code": "SSA",
-    "tags": "Sahel · East Africa · Southern Africa · Nigeria · Ethiopia · Congo",
-    "theater": "Sahel",
-    "theater_overview": "Sub-Saharan Africa confronts overlapping systemic pressures that expose the weakness of state institutions across multiple critical domains. Security forces operate with limited accountability; electoral systems reflect authoritarian consolidation rather than competitive politics; and economic vulnerabilities—from agricultural disruption to energy infrastructure gaps—remain unaddressed by strengthened governance frameworks. The Vatican's renewed institutional focus on the continent signals recognition of Africa's demographic weight in global affairs, yet this soft-power positioning contrasts sharply with the region's inability to contain internal violence, civilian casualties, and state coercion.\n\nThe theater reflects a broader pattern: state capacity to project authority outpaces state commitment to constrain that authority through rule of law. Military institutions wield force with minimal oversight; electoral commissions operate as extensions of executive power; and informal networks (criminal enterprise, trafficking, insurgent movements) fill governance vacuums. These dynamics create cascading risks—legitimacy deficits that weaken state resilience, security operations that generate grievances, and institutional decay that invites external intervention.",
-    "developments": [
-      {
-        "num": "01",
-        "actor": "Sahel",
-        "text": "DJIBOUTI—EXECUTIVE CONSOLIDATION: President Ismail Omar Guelleh's 97.8% electoral victory in his sixth consecutive term reflects formal elimination of meaningful electoral competition. Opposition boycotts and near-unanimous margins signal the institutionalization of personalist rule rather than pluralist contestation. This outcome strengthens Guelleh's grip on a geopolitically critical chokepoint (Red Sea transit, U.S. and Chinese military presence) while eroding any internal restraint on executive authority."
-      },
-      {
-        "num": "02",
-        "actor": "Sahel",
-        "text": "NIGERIA—SECURITY FORCE ACCOUNTABILITY COLLAPSE: Reports of 100+ civilian deaths in a Nigerian Air Force airstrike, coupled with minimal official response or investigation commitment, reveal the absence of functional oversight mechanisms within the military chain of command. Amnesty International's public condemnation underscores the visibility of state violence and the weakness of domestic accountability structures. This dynamic fuels civilian grievance, recruitment pools for insurgent movements, and international pressure on Nigerian security relationships."
-      },
-      {
-        "num": "03",
-        "actor": "Sahel",
-        "text": "SOUTH AFRICA—ENERGY INFRASTRUCTURE VULNERABILITY: The proposed Thyspunt nuclear facility represents a delayed attempt to address chronic electricity deficits, yet environmental and heritage protection obstacles signal continued governance fragmentation. Energy sector stagnation undermines economic competitiveness and increases dependence on alternative power sources (coal, diesel imports), creating vulnerability to supply disruption and price volatility."
-      }
-    ],
-    "assessment": "The convergent pattern across these developments reflects a fundamental disjuncture: state apparatus (military, security, electoral machinery) operates with consolidated authority but minimal accountability, while parallel institutions (rule of law, parliamentary oversight, civil service meritocracy) atrophy. Guelleh's electoral dominance in Djibouti exemplifies executive consolidation in a strategically vital node; Nigeria's airstrike casualty pattern reveals the human cost of unaccountable military operations; and South Africa's energy delays expose the gridlock within state decision-making. These are not discrete crises but symptoms of a systemic governance deficit.\n\nWatch for second-order effects: escalating security force recruitment into insurgent networks (as in Nigeria); external powers (U.S., China, Russia) filling accountability vacuums with conditional military aid and training; and economic deterioration (energy shortages, agricultural losses, reduced regional trade) that compounds state legitimacy deficits. The Vatican's institutional presence will likely increase soft-power competition with secular and non-Christian actors but cannot substitute for functional state accountability mechanisms.",
-    "strategic_implications": "Sub-Saharan Africa's institutional fragility—characterized by executive consolidation without accountability—creates structural openings for rival power competition, non-state actor proliferation, and economic destabilization. Supply chain vulnerabilities (agricultural disruption, energy infrastructure gaps) will drive external powers to seek bilateral leverage over multilateral institution-building. The region remains a primary arena for great-power positioning, but state capacity to manage internal order will continue degrading absent domestic accountability reform and external pressure mechanisms."
-  },
-  "Latin America": {
-    "subject": "Argentina's Glacier Deregulation Signals Resource Extraction Prioritization Over Environmental Constraint In Commodity-Dependent Economy",
-    "headline": "Argentina's Glacier Deregulation Signals Resource Extraction Prioritization Over Environmental Constraint In Commodity-Dependent Economy",
-    "desk_code": "LAC",
-    "tags": "Brazil · Mexico · Colombia · Venezuela · Caribbean · Central America",
-    "theater": "Brazil",
-    "theater_overview": "Argentina faces mounting fiscal pressure and external debt obligations that are driving accelerated resource monetization across its territory. The passage of glacier protection rollback legislation reflects a structural choice by Buenos Aires to unlock mineral wealth—particularly lithium and other critical minerals—rather than maintain environmental safeguards that constrain provincial revenue streams. This move signals a shift in state priorities toward short-term commodity export expansion as a mechanism for managing macroeconomic instability and servicing external liabilities. Concurrently, the region exhibits recurring infrastructure vulnerability: Mexico's mining sector continues to operate with minimal safety redundancy (evidenced by the fourteen-day rescue operation), while Haiti's institutional collapse generates humanitarian crises that undermine regional stability narratives and attract non-state actors into governance vacuums.",
-    "developments": [
-      {
-        "num": "01",
-        "actor": "Brazil",
-        "text": "Argentina—Glacier Deregulation Framework: The passage of legislation permitting provincial governments to authorize mining projects in glacier-protected zones eliminates a federal veto mechanism and decentralizes extraction authority. This restructuring directly increases lithium and copper mining capacity in Andean provinces, accelerating capital inflows but creating water security risks in arid regions dependent on glacial runoff. The move reflects Buenos Aires' calculation that commodity export velocity outweighs hydrological externalities in a context of currency instability and International Monetary Fund conditionality."
-      },
-      {
-        "num": "02",
-        "actor": "Brazil",
-        "text": "Mexico—Mining Sector Resilience Gap: The fourteen-day entrapment and rescue of a gold miner in a flooded tunnel demonstrates persistent infrastructure deficiency in Mexico's extractive sector. State capacity to enforce safety standards remains limited, creating operational risk for both Mexican operators and foreign investors. This incident foreshadows potential production disruptions and liability cascades as climate-driven precipitation events increase tunnel flooding frequency."
-      },
-      {
-        "num": "03",
-        "actor": "Brazil",
-        "text": "Haiti—Institutional Breakdown and Humanitarian Crisis: The mass casualty event at a public gathering underscores Haiti's collapsed state monopoly on order and basic service provision. Such incidents accelerate irregular migration pressure toward the Caribbean and U.S. southern corridor, creating secondary regional destabilization. The absence of functional governance permits criminal networks and armed groups to expand territorial control, fragmenting Haiti's utility as a transit node and increasing U.S. border management burdens."
-      }
-    ],
-    "assessment": "Argentina's glacier deregulation represents a deliberate trade-off: liquidity and commodity export revenue in exchange for long-term water security vulnerability. The legislative move occurs within a narrowing fiscal window; Buenos Aires is extracting maximum resource value to service debt and stabilize the peso. However, this strategy contains systemic risk: glacier melt acceleration in the Andes will create cross-border water disputes with Chile and Bolivia within five to ten years, potentially destabilizing the region's lithium export duopoly just as global EV supply chains depend on it. Mexico's mining sector accident patterns indicate that cost-cutting and deferred maintenance are structural features, not anomalies—signaling that production reliability cannot be assured even as nearshoring momentum accelerates U.S. reliance on Mexican minerals and energy.\n\nHaiti's governance collapse is not isolated to that territory; it functions as a regional contagion vector, generating migration pressure, criminal network expansion, and humanitarian spillover that constrains economic activity across the Caribbean and Central America. The three developments together map a theater experiencing resource extraction acceleration paired with institutional fragmentation and environmental constraint onset.",
-    "strategic_implications": "The Latin American commodity corridor is entering a period of resource velocity maximization coupled with degrading governance and hydrological capacity. Argentina's deregulation choice will likely trigger similar provincial-level pushes across the region, fragmenting environmental standards and accelerating extraction timelines. This creates near-term export gains but medium-term supply chain fragility and transnational resource disputes. U.S. nearshoring strategies dependent on regional mineral and energy stability should anticipate increased volatility, regulatory reversals, and cross-border conflict over water resources within the next 3-5 years."
-  }
-};
+    "North America": {
+      "subject": "Washington Tightens USMCA Enforcement as Ottawa and Mexico City Recalibrate Trade Postures",
+      "headline": "Washington Tightens USMCA Enforcement as Ottawa and Mexico City Recalibrate Trade Postures",
+      "desk_code": "NAM",
+      "tags": "United States · Canada · Mexico · USMCA",
+      "theater": "United States",
+      "theater_overview": "The Office of the U.S. Trade Representative announced expanded compliance reviews targeting automotive rules-of-origin provisions under USMCA, signaling a harder enforcement posture ahead of the agreement's 2026 joint review. Canadian officials responded by accelerating bilateral consultations on critical mineral supply chain integration, framing the talks as a strategic hedge against potential tariff escalation.\n\nThe enforcement shift coincides with renewed congressional pressure on fentanyl precursor flows through Mexican ports, creating a dual-track tension in U.S.-Mexico relations where security demands and trade architecture are increasingly intertwined. Mexico City's response has been to deepen energy cooperation overtures while reinforcing southern border deployments — a posture designed to satisfy Washington's enforcement demands without conceding sovereignty framing.",
+      "developments": [
+        {"num": "01", "actor": "Mexico", "text": "Mexico City deployed additional National Guard units to the southern border corridor, responding to U.S. pressure on migration enforcement while simultaneously negotiating expanded energy cooperation frameworks with Washington. The deployment represents the largest single border reinforcement since 2023."},
+        {"num": "02", "actor": "Canada", "text": "Ottawa announced a C$4.2 billion critical minerals acceleration fund targeting lithium and cobalt extraction in northern Ontario and Quebec, positioning Canada as the preferred North American alternative to Chinese-controlled supply chains in the EV battery sector."},
+        {"num": "03", "actor": "United States", "text": "The Pentagon confirmed expansion of continental defense radar modernization under NORAD, with new Arctic surveillance installations in Alaska and northern Canada responding to increased Russian and Chinese activity in polar air and maritime corridors."}
+      ],
+      "assessment": "The USMCA review cycle is becoming the primary arena for renegotiating North American economic integration, with automotive content rules serving as proxy battles for larger questions about industrial policy alignment across the continent. Washington's enforcement posture suggests a willingness to use compliance mechanisms as leverage beyond their original trade mandate.\n\nThe convergence of trade enforcement, border security, and critical mineral strategy points to a structural reorientation of the trilateral relationship. Canada is positioning itself as an indispensable supply chain partner, Mexico is navigating between cooperation and sovereignty defense, and Washington is using all three pressure points simultaneously — a pattern that will intensify as the 2026 review deadline approaches.",
+      "strategic_implications": "North America's internal trade architecture is under its most significant stress test since USMCA's ratification. The outcome of the 2026 review will determine whether the continent consolidates as a unified industrial bloc or fragments into bilateral arrangements that weaken collective leverage against external competitors. Watch for any Mexican movement on energy sector liberalization — that is the key concession Washington seeks and the one Mexico City is least willing to make."
+    },
+    "Europe": {
+      "subject": "EU Defense Integration Accelerates as NATO Spending Framework Takes Effect",
+      "headline": "EU Defense Integration Accelerates as NATO Spending Framework Takes Effect",
+      "desk_code": "EUR",
+      "tags": "EU · UK · NATO · Balkans · Nordics",
+      "theater": "EU · NATO",
+      "theater_overview": "European defense ministers meeting in Brussels approved an accelerated joint procurement framework that establishes shared stockpile reserves across Eastern European forward operating locations. The framework converts the alliance's two-percent GDP spending guideline into binding commitments with enforcement mechanisms, representing the most significant structural shift in European defense posture in decades.\n\nThe agreement was driven by a core group of frontline states — Poland, the Baltics, Finland, and Romania — who leveraged the current security environment to overcome longstanding resistance from budget-conscious Western European members. Germany's decision to support binding targets, reversing years of ambiguity, signals a fundamental recalibration of Berlin's strategic calculus.",
+      "developments": [
+        {"num": "01", "actor": "Ukraine", "text": "Kyiv reported sustained tactical pressure along the Dnipro river corridor in the southern sector, with Western-supplied long-range precision systems increasingly targeting Russian logistics infrastructure deep behind contact lines. NATO officials described the strikes as indicative of improved Ukrainian targeting integration with alliance intelligence feeds."},
+        {"num": "02", "actor": "Poland", "text": "Warsaw confirmed orders for an additional 96 K2 main battle tanks from South Korea's Hyundai Rotem, bringing its total armored fleet modernization to the largest in Europe. The acquisition underscores Poland's emergence as NATO's most heavily armed Eastern European member."},
+        {"num": "03", "actor": "Balkans", "text": "Serbia's president met with EU enlargement officials in Belgrade amid renewed tensions with Kosovo over municipal governance arrangements. Brussels conditioned further accession progress on visible de-escalation, while Moscow continued to position itself as Belgrade's alternative security guarantor."}
+      ],
+      "assessment": "The binding defense spending framework represents a structural break from the post-Cold War European security model, which relied on American extended deterrence as a substitute for continental self-sufficiency. The shift is not merely budgetary — it implies a reorganization of European defense industrial capacity that will take a decade to materialize but whose political commitments are being locked in now.\n\nThe framework's enforcement mechanisms are the most consequential element. Previous spending pledges lacked teeth. If the current architecture holds, it will create accountability structures that gradually shift defense procurement from national to continental coordination — a trajectory that has implications well beyond the current security crisis.",
+      "strategic_implications": "Europe's defense integration is entering an irreversible phase. The combination of binding spending commitments, joint procurement frameworks, and forward stockpile positioning creates institutional facts on the ground that will outlast any single government's policy preferences. The key variable to watch is whether France and Germany can align their competing visions of European strategic autonomy — Paris favoring EU-centric structures, Berlin prioritizing NATO interoperability."
+    },
+    "Russia & Eurasia": {
+      "subject": "Moscow Expands Arctic Military Infrastructure as Central Asian States Hedge Alignments",
+      "headline": "Moscow Expands Arctic Military Infrastructure as Central Asian States Hedge Alignments",
+      "desk_code": "REA",
+      "tags": "Russia · Caucasus · Belarus · Central Asia · Caspian",
+      "theater": "Russia · Central Asia",
+      "theater_overview": "Russia's Northern Fleet conducted live-fire exercises across the Barents Sea corridor, deploying hypersonic-capable surface vessels alongside newly commissioned icebreakers in what defense officials described as routine Arctic readiness operations. The exercises coincided with Finland's announcement of expanded bilateral defense cooperation with Norway along their shared Arctic border, suggesting a tightening action-reaction cycle in the High North.\n\nSimultaneously, Kazakhstan and Uzbekistan deepened economic cooperation with Beijing through new Belt and Road Initiative corridor agreements, signing infrastructure deals worth an estimated twelve billion dollars. The Central Asian pivot toward Chinese capital represents an accelerating diversification away from Moscow's traditional economic orbit, though both states continue to participate in Russian-led security frameworks to manage the transition.",
+      "developments": [
+        {"num": "01", "actor": "Belarus", "text": "Minsk confirmed the permanent stationing of Russian tactical aviation units at Machulishchy airbase, expanding Moscow's forward deployment posture along NATO's eastern boundary. The basing arrangement consolidates the Union State defense architecture and extends Russia's operational reach into the Suwalki corridor approach."},
+        {"num": "02", "actor": "Kazakhstan", "text": "Astana signed a landmark agreement with Beijing for a new Trans-Caspian logistics hub, bypassing traditional Russian transit routes for Chinese goods moving toward European markets. Moscow issued a muted diplomatic response, indicating limited leverage to contest Central Asian infrastructure diversification."},
+        {"num": "03", "actor": "Caucasus", "text": "Armenia and Azerbaijan resumed negotiations on a formal peace treaty under EU mediation in Brussels, with territorial demarcation and transport corridor access as the primary outstanding issues. Russia's diminished mediating role in the South Caucasus reflects its reduced bandwidth for peripheral security management."}
+      ],
+      "assessment": "Moscow's simultaneous Arctic military expansion and Central Asian economic contraction illustrate the fundamental tension in Russian strategic posture: the capacity to project military power at the periphery while losing economic influence in its traditional sphere. The Arctic buildup is real and operationally significant, but it consumes resources that might otherwise be directed toward maintaining the economic architecture that binds post-Soviet states to Moscow.\n\nCentral Asia's accelerating pivot toward Chinese infrastructure investment represents the most consequential long-term shift in Eurasian geopolitics. Unlike Western engagement, which comes with governance conditionality, Beijing offers capital without political demands — making it the preferred partner for regimes seeking modernization without reform. Moscow's inability to match these offers is structural, not tactical.",
+      "strategic_implications": "The Eurasian security order is fracturing along two axes: a militarized northern perimeter where Russia retains escalation dominance, and a southern economic corridor where Chinese capital is quietly replacing Russian influence. The states caught between these dynamics — Kazakhstan, Uzbekistan, Georgia, Armenia — are the swing actors whose alignment decisions will shape the region's trajectory. Watch for any Russian attempt to use security frameworks to constrain Central Asian economic diversification."
+    },
+    "Southern Asia": {
+      "subject": "India Deepens Indo-Pacific Security Architecture as ASEAN States Balance Great Power Pressure",
+      "headline": "India Deepens Indo-Pacific Security Architecture as ASEAN States Balance Great Power Pressure",
+      "desk_code": "SAS",
+      "tags": "India · Indonesia · Australia · ASEAN · Philippines · Pakistan",
+      "theater": "India · ASEAN",
+      "theater_overview": "New Delhi announced expanded naval cooperation agreements with Indonesia and Australia, establishing trilateral maritime domain awareness sharing across the eastern Indian Ocean. The agreements signal India's accelerating pivot toward multilateral security frameworks as a counterweight to Chinese naval expansion in the Indo-Pacific corridor, and represent the most operationally significant outcome of Delhi's Act East policy to date.\n\nThe maritime cooperation framework comes as ASEAN members face intensifying pressure to choose sides in the U.S.-China strategic competition. Indonesia, as the bloc's largest economy and the current chair of several regional dialogues, is attempting to maintain equidistance while building security ties that hedge against Chinese assertiveness in the South China Sea. The result is an increasingly complex web of overlapping bilateral and minilateral arrangements.",
+      "developments": [
+        {"num": "01", "actor": "Philippines", "text": "Manila announced accelerated construction of military facilities on Thitu Island in the Spratly archipelago, including a runway extension capable of accommodating surveillance aircraft. The construction follows a series of confrontations between Philippine Coast Guard vessels and Chinese maritime militia near Scarborough Shoal."},
+        {"num": "02", "actor": "Pakistan", "text": "Islamabad secured a renewed IMF Extended Fund Facility tranche following parliamentary approval of fiscal consolidation measures. The agreement provides near-term macroeconomic stability but imposes austerity conditions that carry significant domestic political risk ahead of provincial elections."},
+        {"num": "03", "actor": "Australia", "text": "Canberra confirmed the establishment of a new joint naval logistics facility in Darwin with rotational access for Indian Navy vessels, deepening the bilateral defense relationship and creating a northern staging point for combined Indian Ocean operations."}
+      ],
+      "assessment": "The Indo-Pacific's security architecture is evolving from hub-and-spoke alliances centered on Washington toward a mesh network of overlapping partnerships where India, Australia, Japan, and key ASEAN states form independent security linkages. This distributed model is more resilient to disruption from any single bilateral relationship's deterioration but also harder to coordinate in crisis scenarios.\n\nIndia's expanding naval footprint in Southeast Asian waters represents a strategic calculation that maritime security is the domain where Delhi can most effectively project influence without triggering the sovereignty sensitivities that constrain land-based security cooperation. The trilateral framework with Indonesia and Australia creates a monitoring capability across the chokepoints that connect the Indian and Pacific oceans.",
+      "strategic_implications": "Southern Asia is transitioning from a theater defined by India-Pakistan bilateral dynamics to one shaped by maritime competition and supply chain security. The region's demographic weight and geographic position astride the world's most trafficked trade routes make it the decisive swing zone in the broader U.S.-China strategic competition. The key indicator to watch is whether ASEAN can maintain its institutional coherence under great power pressure or fragments into competing alignment blocs."
+    },
+    "Middle East": {
+      "subject": "Gulf States Advance Regional Security Architecture Independent of Western Frameworks",
+      "headline": "Gulf States Advance Regional Security Architecture Independent of Western Frameworks",
+      "desk_code": "ME",
+      "tags": "Iran · Gulf States · Israel · Levant · Egypt · Maghreb",
+      "theater": "Gulf States · Iran",
+      "theater_overview": "Saudi Arabia and the UAE are leading negotiations on a new regional security framework that would establish joint maritime patrols and shared intelligence infrastructure across the Persian Gulf. The proposed architecture, which includes Qatar, Bahrain, Kuwait, and Oman, represents the most ambitious attempt at indigenous Gulf security cooperation since the formation of the GCC, driven by diminishing confidence in the permanence of external security guarantees.\n\nThe framework's timing reflects a broader strategic recalculation across the region. Gulf states are hedging against the possibility of reduced U.S. security commitment while simultaneously managing normalization dynamics with Israel and containment pressures against Iran. The result is a multi-vector diplomatic posture that seeks to maintain relationships with all major powers while building autonomous security capacity.",
+      "developments": [
+        {"num": "01", "actor": "Iran", "text": "Tehran announced the successful test of a new medium-range ballistic missile variant with improved guidance systems, prompting immediate consultations among E3 capitals on the status of back-channel diplomatic engagement and the durability of existing containment frameworks."},
+        {"num": "02", "actor": "Israel", "text": "Jerusalem expanded settlement construction authorization in the northern West Bank while simultaneously pursuing defense technology cooperation agreements with Saudi Arabia through intermediary channels. The parallel tracks illustrate the decoupling of bilateral security cooperation from the Palestinian governance question."},
+        {"num": "03", "actor": "Egypt", "text": "Cairo secured a revised IMF support package contingent on accelerated exchange rate liberalization, providing fiscal breathing room while exposing the economy to inflationary pressures that carry political risk in a country where bread prices have historically triggered unrest."}
+      ],
+      "assessment": "The Gulf's move toward autonomous security architecture reflects a structural shift in Middle Eastern geopolitics rather than a reaction to any single policy decision. The region's states are building institutions that assume a future in which no single external power provides a reliable security umbrella — a hedge that makes strategic sense regardless of which direction U.S. policy takes.\n\nIran's continued missile development operates on a separate timeline from diplomatic engagement, a pattern that has persisted across multiple negotiating cycles. The missile program serves both deterrence and domestic political functions that are largely independent of whatever nuclear or sanctions framework exists. Regional states have internalized this reality and are building their security posture accordingly.",
+      "strategic_implications": "The Middle East is entering a post-dependency security era in which regional states build autonomous capabilities while maintaining alliance relationships as insurance rather than primary guarantees. This transition reduces the leverage that external powers can exercise over regional dynamics and creates a more multipolar security environment. The critical variable is whether the Gulf security framework can accommodate the Iran question or whether Tehran's exclusion transforms it into an anti-Iranian alliance by default."
+    },
+    "Sub-Saharan Africa": {
+      "subject": "Sahel Alliance Formalizes Joint Command as Critical Mineral Competition Intensifies",
+      "headline": "Sahel Alliance Formalizes Joint Command as Critical Mineral Competition Intensifies",
+      "desk_code": "SSA",
+      "tags": "Sahel · East Africa · Southern Africa · Nigeria · Ethiopia · Congo",
+      "theater": "Sahel · East Africa",
+      "theater_overview": "The Sahel Alliance comprising Mali, Burkina Faso, and Niger formally established a unified military command structure at a ceremony in Bamako, marking the deepest security integration among the three juntas since their respective coups. The joint command will coordinate counter-terrorism operations and border security across a region roughly the size of Western Europe, with Russian Wagner Group advisors embedded in planning roles.\n\nConcurrently, the competition for Africa's critical mineral resources intensified as Chinese and Western firms escalated bidding for cobalt and lithium concessions across the Congo basin and East African rift zone. The Democratic Republic of Congo announced a review of existing mining contracts, signaling Kinshasa's intent to extract better terms from a market where demand for battery metals has shifted leverage toward producer states.",
+      "developments": [
+        {"num": "01", "actor": "Ethiopia", "text": "Addis Ababa and Mogadishu signed a preliminary agreement on the contested port access arrangement, partially de-escalating months of tensions over Somalia's maritime sovereignty and Red Sea access corridors. The agreement leaves key implementation details unresolved but establishes a diplomatic framework for continued negotiation."},
+        {"num": "02", "actor": "Nigeria", "text": "Abuja announced the deployment of additional military assets to the northwest to counter escalating banditry operations that have disrupted agricultural production in the country's breadbasket region. The security deterioration threatens food supply chains serving over 50 million people across the Sahel belt."},
+        {"num": "03", "actor": "Congo", "text": "The DRC's mining ministry issued new regulations requiring majority Congolese ownership in future critical mineral concessions, a move directed primarily at renegotiating Chinese-held cobalt contracts in Katanga province. Beijing's ambassador requested urgent consultations, signaling concern over supply chain access."}
+      ],
+      "assessment": "Sub-Saharan Africa's strategic significance is being redefined by two converging dynamics: the Sahel's security fragmentation and the global scramble for critical minerals. The Sahel Alliance's formalization creates a Russian-aligned security bloc that has effectively expelled French and Western military presence from the region, while the mineral competition is drawing Chinese, American, and European capital into bidding wars that give producer states unprecedented leverage.\n\nThe critical mineral dimension is the more consequential long-term trend. As the global energy transition accelerates demand for cobalt, lithium, copper, and rare earths, African producer states are learning to exercise resource leverage in ways that reshape their relationships with major powers. The DRC's contract renegotiation push is a template that other mineral-rich states are watching closely.",
+      "strategic_implications": "Africa is becoming the primary arena for great power resource competition in the 2020s, with control over critical mineral supply chains carrying strategic weight comparable to hydrocarbon access in previous decades. The states that control these resources — DRC, Zambia, Zimbabwe, Tanzania — are the emerging swing actors in global industrial policy. Watch for any coordinated producer-state action on mineral pricing or export controls, which would signal a shift from bilateral contract renegotiation to collective resource statecraft."
+    },
+    "Latin America": {
+      "subject": "Nearshoring Wave Reshapes Western Hemisphere Trade as Political Realignment Deepens",
+      "headline": "Nearshoring Wave Reshapes Western Hemisphere Trade as Political Realignment Deepens",
+      "desk_code": "LAC",
+      "tags": "Brazil · Mexico · Colombia · Venezuela · Caribbean · Central America",
+      "theater": "Brazil · Mexico",
+      "theater_overview": "Mexico and Brazil reported record inflows of manufacturing investment as multinational firms accelerate supply chain diversification away from East Asian concentration. Mexico's northern border states absorbed over eighteen billion dollars in announced manufacturing commitments in the first quarter alone, driven by automotive, electronics, and aerospace firms seeking USMCA-compliant production capacity.\n\nBrazil is pursuing a parallel strategy centered on agricultural processing and critical mineral beneficiation, leveraging its position as the world's largest soybean and iron ore exporter to attract downstream manufacturing investment. President Lula's administration has framed the nearshoring trend as an opportunity to revive Brazil's industrial policy ambitions, offering tax incentives tied to technology transfer requirements that echo strategies employed successfully by East Asian developmental states.",
+      "developments": [
+        {"num": "01", "actor": "Venezuela", "text": "Caracas established forward operating positions along the Essequibo border region, deploying armored vehicles and engineering units in what officials described as a territorial sovereignty exercise. Georgetown activated defense cooperation agreements with regional partners and requested an emergency hearing at the International Court of Justice."},
+        {"num": "02", "actor": "Colombia", "text": "Bogota announced the resumption of peace negotiations with the ELN guerrilla group following a six-month suspension, with energy infrastructure security and rural development as the primary agenda items. International observers noted that the talks are conditioned on a verifiable ceasefire in contested coca-producing regions."},
+        {"num": "03", "actor": "Argentina", "text": "Buenos Aires reported better-than-expected fiscal consolidation results under the current austerity program, with the primary surplus exceeding IMF targets for the second consecutive quarter. International bond markets responded with a significant spread compression, suggesting restored investor confidence in Argentine sovereign debt."}
+      ],
+      "assessment": "Latin America's nearshoring moment represents the most significant structural shift in the hemisphere's economic geography since NAFTA. The redirection of global manufacturing investment toward Mexico and Brazil is not a temporary response to pandemic-era supply chain disruptions but a durable reorientation driven by geopolitical risk pricing, logistics cost recalculation, and industrial policy incentives that are now embedded in trade architecture.\n\nThe political dimension of this economic shift is equally consequential. Governments that can attract and retain manufacturing investment gain fiscal resources and employment growth that strengthen their domestic political positions. Mexico's manufacturing corridor and Brazil's agricultural-industrial complex are creating economic facts on the ground that constrain future policy reversals regardless of electoral outcomes.",
+      "strategic_implications": "Latin America is transitioning from a commodity-dependent periphery to a manufacturing-capable strategic partner for North American and European supply chains. The hemisphere's trajectory depends on whether nearshoring investment translates into broad-based industrialization or remains concentrated in low-value assembly. Mexico's ability to move up the value chain — from assembly to design and engineering — is the critical test case. Watch for any disruption to the Venezuela-Guyana dynamic, which could rapidly escalate into the hemisphere's most consequential territorial dispute."
+    }
+  };
   // DESK_PREVIEWS_END
 
   // ── CIPHER ENGINE ──
   const CIPHER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZΔΨΩΞΛΘΦΣΠαβγδεζηθλμξπρστφψω░▒▓█▄▀■□▪▫●◆◇◈⬡⬢∎∴∵⊕⊗⊞⊠⟐⟑⧫⬣⬥⬧◻◼';
-  const CIPHER_SPEED = 16;
-  let activeCipherIntervals = [];
+  let activeCipherStops = [];
 
   function startCipher(el) {
     const original = el.getAttribute('data-original') || el.textContent;
     el.setAttribute('data-original', original);
-    function frame() {
-      let result = '';
-      for (let i = 0; i < original.length; i++) {
-        const ch = original[i];
-        if (ch === ' ' || ch === '.' || ch === ',' || ch === '—' || ch === '·') {
-          result += ch;
-        } else {
-          result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+    let running = true;
+    let lastSwap = 0;
+    function frame(ts) {
+      if (!running) return;
+      if (ts - lastSwap > 360) {
+        lastSwap = ts;
+        let result = '';
+        for (let i = 0; i < original.length; i++) {
+          const ch = original[i];
+          if (ch === ' ' || ch === '.' || ch === ',' || ch === '—' || ch === '·') {
+            result += ch;
+          } else {
+            result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+          }
         }
+        el.textContent = result;
       }
-      el.textContent = result;
+      requestAnimationFrame(frame);
     }
-    frame();
-    const interval = setInterval(frame, CIPHER_SPEED);
-    activeCipherIntervals.push(interval);
-    return interval;
+    requestAnimationFrame(frame);
+    activeCipherStops.push(() => { running = false; });
   }
 
   function stopAllCiphers() {
-    activeCipherIntervals.forEach(id => clearInterval(id));
-    activeCipherIntervals = [];
+    activeCipherStops.forEach(stop => stop());
+    activeCipherStops = [];
   }
 
   // ── STORE ORIGINAL EA CONTENT ──
@@ -1354,34 +1339,38 @@
   };
 
   // ── DECODE ANIMATION ──
-  // Random scramble then decode left-to-right
+  // Simple left-to-right reveal
   function decodeAnimate(el, finalText, durationMs) {
-    durationMs = durationMs || 1200;
+    durationMs = durationMs || 4000;
     const len = finalText.length;
-    let revealed = 0;
+    const SKIP = new Set([' ', '.', ',', '—', '·', ':', ';', '(', ')', '"', "'", '\n']);
+    const startTime = performance.now();
+    let running = true;
 
-    function frame() {
+    function frame(ts) {
+      if (!running) return;
+      const linear = Math.min((ts - startTime) / durationMs, 1);
+      // easeOutCubic — fast start, gentle landing
+      const progress = 1 - Math.pow(1 - linear, 3);
+      const revealed = Math.floor(progress * len);
+
       let result = '';
       for (let i = 0; i < len; i++) {
-        const ch = finalText[i];
-        if (i < revealed) {
-          result += ch;
-        } else if (ch === ' ' || ch === '.' || ch === ',' || ch === '—' || ch === '·' || ch === ':') {
-          result += ch;
+        if (i < revealed || SKIP.has(finalText[i])) {
+          result += finalText[i];
         } else {
           result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
         }
       }
       el.textContent = result;
-      revealed += Math.max(1, Math.floor(len / (durationMs / CIPHER_SPEED)));
-      if (revealed < len) {
-        const id = setTimeout(frame, CIPHER_SPEED);
-        activeCipherIntervals.push(id);
-      } else {
+      if (progress >= 1) {
         el.textContent = finalText;
+      } else {
+        requestAnimationFrame(frame);
       }
     }
-    frame();
+    activeCipherStops.push(() => { running = false; });
+    requestAnimationFrame(frame);
   }
 
   // ── SHOW DESK ──
@@ -1392,7 +1381,7 @@
     if (deskName === 'East Asia & Pacific') {
       // Subject — decode animate
       const subjectEl = document.getElementById('dispatch-subject');
-      decodeAnimate(subjectEl, originalEA.subject, 800);
+      decodeAnimate(subjectEl, originalEA.subject, 2000);
 
       // Body — restore HTML then decode animate text elements
       document.getElementById('dispatch-body').innerHTML = originalEA.body;
@@ -1413,12 +1402,12 @@
 
       // Decode animate the headline and body text
       const headline = document.getElementById('dispatch-headline');
-      if (headline) decodeAnimate(headline, headline.textContent, 1000);
+      if (headline) decodeAnimate(headline, headline.textContent, 2500);
       document.querySelectorAll('#dispatch-body .dispatch-text').forEach(el => {
-        decodeAnimate(el, el.textContent, 1000);
+        decodeAnimate(el, el.textContent, 2500);
       });
       document.querySelectorAll('#dispatch-body .key-dev-text').forEach(el => {
-        decodeAnimate(el, el.textContent, 800);
+        decodeAnimate(el, el.textContent, 2000);
       });
       return;
     }
@@ -1452,7 +1441,7 @@
 
     // Subject — decode animate
     const subjectEl = document.getElementById('dispatch-subject');
-    decodeAnimate(subjectEl, preview.subject, 800);
+    decodeAnimate(subjectEl, preview.subject, 2000);
 
     // Meta
     document.getElementById('meta-theater').textContent = preview.theater || preview.tags;
@@ -1518,7 +1507,7 @@
     setTimeout(() => {
       document.querySelectorAll('.decode-target').forEach(el => {
         const text = el.textContent;
-        decodeAnimate(el, text, 1000);
+        decodeAnimate(el, text, 2500);
       });
     }, 100);
   }
@@ -1575,14 +1564,14 @@
   if (!window.location.hash || !window.location.hash.startsWith('#desk-')) {
     // Only animate if we're showing the default EA desk (no hash override)
     const headline = document.getElementById('dispatch-headline');
-    if (headline) decodeAnimate(headline, headline.textContent, 1200);
+    if (headline) decodeAnimate(headline, headline.textContent, 3000);
     const subjectEl = document.getElementById('dispatch-subject');
-    if (subjectEl) decodeAnimate(subjectEl, subjectEl.textContent, 800);
+    if (subjectEl) decodeAnimate(subjectEl, subjectEl.textContent, 2000);
     document.querySelectorAll('#dispatch-body .dispatch-text').forEach(el => {
-      decodeAnimate(el, el.textContent, 1400);
+      decodeAnimate(el, el.textContent, 3500);
     });
     document.querySelectorAll('#dispatch-body .key-dev-text').forEach(el => {
-      decodeAnimate(el, el.textContent, 1000);
+      decodeAnimate(el, el.textContent, 2500);
     });
   }
 

@@ -271,7 +271,7 @@
     }
     .cipher span {
       display: inline-block;
-      transition: opacity 3.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+      transition: opacity 6s cubic-bezier(0.45, 0.05, 0.55, 0.95);
     }
     .cipher span.swapping {
       opacity: 0;
@@ -1423,18 +1423,18 @@
     }
     if (!swappable.length) return;
 
-    // Fade out one char, swap it, fade back in — every 8-14 seconds
+    // Fade out one char, swap it, fade back in — every 12-20 seconds
     function tick() {
       const span = swappable[Math.floor(Math.random() * swappable.length)];
       span.classList.add('swapping');
-      // Swap glyph at the deepest point of the fade (3.5s)
+      // Swap glyph at the deepest point of the fade (6s)
       setTimeout(() => {
         span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
         span.classList.remove('swapping');
-      }, 3500);
-      setTimeout(tick, 8000 + Math.random() * 6000);
+      }, 6000);
+      setTimeout(tick, 12000 + Math.random() * 8000);
     }
-    setTimeout(tick, 5000 + Math.random() * 5000);
+    setTimeout(tick, 8000 + Math.random() * 6000);
   }
 
   // Only animate when visible — no work while scrolled away

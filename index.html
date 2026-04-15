@@ -271,11 +271,10 @@
     }
     .cipher span {
       display: inline-block;
-      transition: opacity 0.8s ease;
+      transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .cipher span.swapping {
-      opacity: 0.08;
-      font-size: 10px;
+      opacity: 0;
     }
 
     /* ── ACTIVE THEATERS ── */
@@ -1424,18 +1423,18 @@
     }
     if (!swappable.length) return;
 
-    // Fade out one char, swap it, fade back in — every 2-4 seconds
+    // Fade out one char, swap it, fade back in — every 5-9 seconds
     function tick() {
       const span = swappable[Math.floor(Math.random() * swappable.length)];
       span.classList.add('swapping');
-      // After fade-out completes (0.8s), swap the glyph
+      // After fade-out completes (1.8s), swap the glyph
       setTimeout(() => {
         span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
         span.classList.remove('swapping');
-      }, 800);
-      setTimeout(tick, 2000 + Math.random() * 2000);
+      }, 1800);
+      setTimeout(tick, 5000 + Math.random() * 4000);
     }
-    setTimeout(tick, 1000 + Math.random() * 2000);
+    setTimeout(tick, 3000 + Math.random() * 3000);
   }
 
   // Only animate when visible — no work while scrolled away

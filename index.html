@@ -1624,24 +1624,30 @@
   // ── DECODE ANIMATION ──
   // Smooth wave decode — characters settle probabilistically from left to right
   function decodeAnimate(el, finalText, durationMs) {
-    durationMs = durationMs || 1200;
+    durationMs = durationMs || 4000;
     const len = finalText.length;
     const settled = new Array(len).fill(false);
     const SKIP = new Set([' ', '.', ',', '—', '·', ':', ';', '(', ')', '"', "'", '\n']);
-    // Pre-settle punctuation/spaces
     for (let i = 0; i < len; i++) {
       if (SKIP.has(finalText[i])) settled[i] = true;
     }
     const startTime = performance.now();
     let running = true;
+    let lastSwap = 0;
 
     function frame(ts) {
       if (!running) return;
+      // Only update every 80ms — slower, smoother flicker
+      if (ts - lastSwap < 80) { requestAnimationFrame(frame); return; }
+      lastSwap = ts;
+
       const elapsed = ts - startTime;
       const progress = Math.min(elapsed / durationMs, 1);
-      // Wave front position with easeOutQuad
-      const eased = 1 - (1 - progress) * (1 - progress);
-      const waveFront = eased * (len + 12); // overshoot so tail settles
+      // Smooth ease-in-out curve
+      const eased = progress < 0.5
+        ? 2 * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+      const waveFront = eased * (len + 20);
 
       let result = '';
       let allDone = true;
@@ -1650,15 +1656,12 @@
           result += finalText[i];
           continue;
         }
-        // Distance behind the wave front — higher = more likely to settle
         const dist = waveFront - i;
-        if (dist > 8) {
-          // Well behind the wave — lock in
+        if (dist > 14) {
           settled[i] = true;
           result += finalText[i];
         } else if (dist > 0) {
-          // In the settling zone — probability ramp
-          const chance = (dist / 8) * 0.35;
+          const chance = (dist / 14) * 0.25;
           if (Math.random() < chance) {
             settled[i] = true;
             result += finalText[i];
@@ -1667,7 +1670,6 @@
             allDone = false;
           }
         } else {
-          // Ahead of wave — still scrambled
           result += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
           allDone = false;
         }
@@ -1691,7 +1693,7 @@
     if (deskName === 'East Asia & Pacific') {
       // Subject — decode animate
       const subjectEl = document.getElementById('dispatch-subject');
-      decodeAnimate(subjectEl, originalEA.subject, 800);
+      decodeAnimate(subjectEl, originalEA.subject, 3500);
 
       // Body — restore HTML then decode animate text elements
       document.getElementById('dispatch-body').innerHTML = originalEA.body;
@@ -1712,12 +1714,12 @@
 
       // Decode animate the headline and body text
       const headline = document.getElementById('dispatch-headline');
-      if (headline) decodeAnimate(headline, headline.textContent, 1000);
+      if (headline) decodeAnimate(headline, headline.textContent, 4500);
       document.querySelectorAll('#dispatch-body .dispatch-text').forEach(el => {
-        decodeAnimate(el, el.textContent, 1000);
+        decodeAnimate(el, el.textContent, 4000);
       });
       document.querySelectorAll('#dispatch-body .key-dev-text').forEach(el => {
-        decodeAnimate(el, el.textContent, 800);
+        decodeAnimate(el, el.textContent, 3500);
       });
       return;
     }
@@ -1751,7 +1753,7 @@
 
     // Subject — decode animate
     const subjectEl = document.getElementById('dispatch-subject');
-    decodeAnimate(subjectEl, preview.subject, 800);
+    decodeAnimate(subjectEl, preview.subject, 3500);
 
     // Meta
     document.getElementById('meta-theater').textContent = preview.theater || preview.tags;
@@ -1817,7 +1819,7 @@
     setTimeout(() => {
       document.querySelectorAll('.decode-target').forEach(el => {
         const text = el.textContent;
-        decodeAnimate(el, text, 1000);
+        decodeAnimate(el, text, 4000);
       });
     }, 100);
   }
@@ -1887,14 +1889,14 @@
   if (!window.location.hash || !window.location.hash.startsWith('#desk-')) {
     // Only animate if we're showing the default EA desk (no hash override)
     const headline = document.getElementById('dispatch-headline');
-    if (headline) decodeAnimate(headline, headline.textContent, 1200);
+    if (headline) decodeAnimate(headline, headline.textContent, 5000);
     const subjectEl = document.getElementById('dispatch-subject');
-    if (subjectEl) decodeAnimate(subjectEl, subjectEl.textContent, 800);
+    if (subjectEl) decodeAnimate(subjectEl, subjectEl.textContent, 3500);
     document.querySelectorAll('#dispatch-body .dispatch-text').forEach(el => {
-      decodeAnimate(el, el.textContent, 1400);
+      decodeAnimate(el, el.textContent, 5000);
     });
     document.querySelectorAll('#dispatch-body .key-dev-text').forEach(el => {
-      decodeAnimate(el, el.textContent, 1000);
+      decodeAnimate(el, el.textContent, 4000);
     });
   }
 

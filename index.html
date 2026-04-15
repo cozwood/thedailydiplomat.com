@@ -986,6 +986,42 @@
     .mobile-intel-panel {
       display: none;
     }
+    .mobile-desk-switcher {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .mobile-desk-switcher {
+        display: block;
+        padding: 12px 18px;
+        background: var(--cream);
+        border-bottom: 1px solid var(--rule);
+      }
+      .mobile-desk-switcher select {
+        width: 100%;
+        padding: 10px 14px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        border-radius: 0;
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%239a8570' stroke-width='1.5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        cursor: pointer;
+      }
+      .mobile-desk-label {
+        font-size: 8px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+    }
 
     /* Small phones */
     @media (max-width: 400px) {
@@ -1151,6 +1187,21 @@
         <defs><pattern id="tri" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse"><polygon points="0,0 14,0 7,14" fill="#c8bfa8" opacity="0.4"/></pattern></defs>
         <rect width="800" height="14" fill="url(#tri)"/>
       </svg>
+
+      <!-- MOBILE DESK SWITCHER — hidden on desktop -->
+      <div class="mobile-desk-switcher">
+        <div class="mobile-desk-label">// Select Theater</div>
+        <select id="mobile-desk-select" onchange="switchDeskMobile(this.value)">
+          <option value="East Asia & Pacific" selected>East Asia & Pacific</option>
+          <option value="North America">North America</option>
+          <option value="Europe">Europe</option>
+          <option value="Russia & Eurasia">Russia & Eurasia</option>
+          <option value="Southern Asia">Southern Asia</option>
+          <option value="Middle East">Middle East</option>
+          <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
+          <option value="Latin America">Latin America</option>
+        </select>
+      </div>
 
       <div class="dispatch-header">
         <div class="dispatch-title-row">
@@ -1819,6 +1870,19 @@
   // Run on page load and on hash change
   openDeskFromHash();
   window.addEventListener('hashchange', openDeskFromHash);
+
+  // ── MOBILE DESK SWITCHER ──
+  function switchDeskMobile(deskName) {
+    // Sync sidebar nav if visible
+    document.querySelectorAll('.desk-selectable').forEach(r => {
+      r.classList.remove('active');
+      if (r.getAttribute('data-desk') === deskName) r.classList.add('active');
+    });
+    selectedDesk = deskName;
+    showDesk(deskName);
+    // Scroll to the communiqué
+    document.querySelector('.dispatch-header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   // ── INITIAL PAGE LOAD: cipher decode for East Asia content ──
   if (!window.location.hash || !window.location.hash.startsWith('#desk-')) {

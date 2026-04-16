@@ -1624,7 +1624,7 @@
   // ── DECODE ANIMATION ──
   // Smooth wave decode — characters settle probabilistically from left to right
   function decodeAnimate(el, finalText, durationMs) {
-    durationMs = durationMs || 4000;
+    durationMs = durationMs || 2000;
     const len = finalText.length;
     const settled = new Array(len).fill(false);
     const SKIP = new Set([' ', '.', ',', '—', '·', ':', ';', '(', ')', '"', "'", '\n']);
@@ -1693,7 +1693,7 @@
     if (deskName === 'East Asia & Pacific') {
       // Subject — decode animate
       const subjectEl = document.getElementById('dispatch-subject');
-      decodeAnimate(subjectEl, originalEA.subject, 3500);
+      decodeAnimate(subjectEl, originalEA.subject, 1750);
 
       // Body — restore HTML then decode animate text elements
       document.getElementById('dispatch-body').innerHTML = originalEA.body;
@@ -1714,12 +1714,12 @@
 
       // Decode animate the headline and body text
       const headline = document.getElementById('dispatch-headline');
-      if (headline) decodeAnimate(headline, headline.textContent, 4500);
+      if (headline) decodeAnimate(headline, headline.textContent, 2250);
       document.querySelectorAll('#dispatch-body .dispatch-text').forEach(el => {
-        decodeAnimate(el, el.textContent, 4000);
+        decodeAnimate(el, el.textContent, 2000);
       });
       document.querySelectorAll('#dispatch-body .key-dev-text').forEach(el => {
-        decodeAnimate(el, el.textContent, 3500);
+        decodeAnimate(el, el.textContent, 1750);
       });
       return;
     }
@@ -1753,7 +1753,7 @@
 
     // Subject — decode animate
     const subjectEl = document.getElementById('dispatch-subject');
-    decodeAnimate(subjectEl, preview.subject, 3500);
+    decodeAnimate(subjectEl, preview.subject, 1750);
 
     // Meta
     document.getElementById('meta-theater').textContent = preview.theater || preview.tags;
@@ -1819,7 +1819,7 @@
     setTimeout(() => {
       document.querySelectorAll('.decode-target').forEach(el => {
         const text = el.textContent;
-        decodeAnimate(el, text, 4000);
+        decodeAnimate(el, text, 2000);
       });
     }, 100);
   }
@@ -1889,14 +1889,14 @@
   if (!window.location.hash || !window.location.hash.startsWith('#desk-')) {
     // Only animate if we're showing the default EA desk (no hash override)
     const headline = document.getElementById('dispatch-headline');
-    if (headline) decodeAnimate(headline, headline.textContent, 5000);
+    if (headline) decodeAnimate(headline, headline.textContent, 2500);
     const subjectEl = document.getElementById('dispatch-subject');
-    if (subjectEl) decodeAnimate(subjectEl, subjectEl.textContent, 3500);
+    if (subjectEl) decodeAnimate(subjectEl, subjectEl.textContent, 1750);
     document.querySelectorAll('#dispatch-body .dispatch-text').forEach(el => {
-      decodeAnimate(el, el.textContent, 5000);
+      decodeAnimate(el, el.textContent, 2500);
     });
     document.querySelectorAll('#dispatch-body .key-dev-text').forEach(el => {
-      decodeAnimate(el, el.textContent, 4000);
+      decodeAnimate(el, el.textContent, 2000);
     });
   }
 

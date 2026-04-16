@@ -1624,7 +1624,7 @@
   // ── DECODE ANIMATION ──
   // Smooth wave decode — characters settle probabilistically from left to right
   function decodeAnimate(el, finalText, durationMs) {
-    durationMs = durationMs || 2000;
+    durationMs = durationMs || 1400;
     const len = finalText.length;
     const settled = new Array(len).fill(false);
     const SKIP = new Set([' ', '.', ',', '—', '·', ':', ';', '(', ')', '"', "'", '\n']);
@@ -1637,17 +1637,15 @@
 
     function frame(ts) {
       if (!running) return;
-      // Only update every 80ms — slower, smoother flicker
-      if (ts - lastSwap < 80) { requestAnimationFrame(frame); return; }
+      // 40ms between frames — smooth 25fps
+      if (ts - lastSwap < 40) { requestAnimationFrame(frame); return; }
       lastSwap = ts;
 
       const elapsed = ts - startTime;
       const progress = Math.min(elapsed / durationMs, 1);
-      // Smooth ease-in-out curve
-      const eased = progress < 0.5
-        ? 2 * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-      const waveFront = eased * (len + 20);
+      // Smooth ease-out curve — fast start, gentle finish
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const waveFront = eased * (len + 10);
 
       let result = '';
       let allDone = true;
@@ -1657,11 +1655,11 @@
           continue;
         }
         const dist = waveFront - i;
-        if (dist > 14) {
+        if (dist > 8) {
           settled[i] = true;
           result += finalText[i];
         } else if (dist > 0) {
-          const chance = (dist / 14) * 0.25;
+          const chance = (dist / 8) * 0.45;
           if (Math.random() < chance) {
             settled[i] = true;
             result += finalText[i];
@@ -1693,7 +1691,7 @@
     if (deskName === 'East Asia & Pacific') {
       // Subject — decode animate
       const subjectEl = document.getElementById('dispatch-subject');
-      decodeAnimate(subjectEl, originalEA.subject, 1750);
+      decodeAnimate(subjectEl, originalEA.subject, 1200);
 
       // Body — restore HTML then decode animate text elements
       document.getElementById('dispatch-body').innerHTML = originalEA.body;
@@ -1714,12 +1712,12 @@
 
       // Decode animate the headline and body text
       const headline = document.getElementById('dispatch-headline');
-      if (headline) decodeAnimate(headline, headline.textContent, 2250);
+      if (headline) decodeAnimate(headline, headline.textContent, 1600);
       document.querySelectorAll('#dispatch-body .dispatch-text').forEach(el => {
-        decodeAnimate(el, el.textContent, 2000);
+        decodeAnimate(el, el.textContent, 1400);
       });
       document.querySelectorAll('#dispatch-body .key-dev-text').forEach(el => {
-        decodeAnimate(el, el.textContent, 1750);
+        decodeAnimate(el, el.textContent, 1200);
       });
       return;
     }
@@ -1753,7 +1751,7 @@
 
     // Subject — decode animate
     const subjectEl = document.getElementById('dispatch-subject');
-    decodeAnimate(subjectEl, preview.subject, 1750);
+    decodeAnimate(subjectEl, preview.subject, 1200);
 
     // Meta
     document.getElementById('meta-theater').textContent = preview.theater || preview.tags;
@@ -1819,7 +1817,7 @@
     setTimeout(() => {
       document.querySelectorAll('.decode-target').forEach(el => {
         const text = el.textContent;
-        decodeAnimate(el, text, 2000);
+        decodeAnimate(el, text, 1400);
       });
     }, 100);
   }
@@ -1889,14 +1887,14 @@
   if (!window.location.hash || !window.location.hash.startsWith('#desk-')) {
     // Only animate if we're showing the default EA desk (no hash override)
     const headline = document.getElementById('dispatch-headline');
-    if (headline) decodeAnimate(headline, headline.textContent, 2500);
+    if (headline) decodeAnimate(headline, headline.textContent, 1800);
     const subjectEl = document.getElementById('dispatch-subject');
-    if (subjectEl) decodeAnimate(subjectEl, subjectEl.textContent, 1750);
+    if (subjectEl) decodeAnimate(subjectEl, subjectEl.textContent, 1200);
     document.querySelectorAll('#dispatch-body .dispatch-text').forEach(el => {
-      decodeAnimate(el, el.textContent, 2500);
+      decodeAnimate(el, el.textContent, 1800);
     });
     document.querySelectorAll('#dispatch-body .key-dev-text').forEach(el => {
-      decodeAnimate(el, el.textContent, 2000);
+      decodeAnimate(el, el.textContent, 1400);
     });
   }
 

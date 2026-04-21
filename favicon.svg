@@ -4,18 +4,56 @@
       <stop offset="0%" stop-color="#6b4a2e"/>
       <stop offset="100%" stop-color="#3d2210"/>
     </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5e6c8"/>
+      <stop offset="100%" stop-color="#e0c8a0"/>
+    </linearGradient>
+    <linearGradient id="roll" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c49240"/>
+      <stop offset="30%" stop-color="#ddb870"/>
+      <stop offset="70%" stop-color="#c49240"/>
+      <stop offset="100%" stop-color="#a07830"/>
+    </linearGradient>
   </defs>
 
   <!-- Background -->
   <rect width="512" height="512" rx="64" fill="url(#bg)"/>
 
-  <!-- Red wax seal -->
-  <circle cx="256" cy="256" r="180" fill="#9a2a1a"/>
-  <circle cx="256" cy="256" r="155" fill="#b03a2a"/>
-  <circle cx="256" cy="256" r="130" fill="#c04030"/>
-  <circle cx="256" cy="256" r="105" fill="none" stroke="#e8c0b0" stroke-width="5" opacity="0.3"/>
+  <!-- Scroll body (main parchment area) -->
+  <rect x="146" y="100" width="220" height="312" rx="4" fill="url(#paper)" opacity="0.9"/>
 
-  <!-- Bold D -->
-  <text x="256" y="310" text-anchor="middle" font-family="Georgia,serif" font-size="240" font-weight="bold" fill="#f0d8c0" opacity="0.85">D</text>
+  <!-- Top scroll roll -->
+  <rect x="126" y="82" width="260" height="36" rx="18" fill="url(#roll)"/>
+  <ellipse cx="126" cy="100" rx="18" ry="18" fill="#a07830"/>
+  <ellipse cx="126" cy="100" rx="12" ry="12" fill="#8a6420"/>
+  <ellipse cx="126" cy="100" rx="5" ry="5" fill="#6b4a2e"/>
+  <ellipse cx="386" cy="100" rx="18" ry="18" fill="#a07830"/>
+  <ellipse cx="386" cy="100" rx="12" ry="12" fill="#8a6420"/>
+  <ellipse cx="386" cy="100" rx="5" ry="5" fill="#6b4a2e"/>
+
+  <!-- Bottom scroll roll -->
+  <rect x="126" y="394" width="260" height="36" rx="18" fill="url(#roll)"/>
+  <ellipse cx="126" cy="412" rx="18" ry="18" fill="#a07830"/>
+  <ellipse cx="126" cy="412" rx="12" ry="12" fill="#8a6420"/>
+  <ellipse cx="126" cy="412" rx="5" ry="5" fill="#6b4a2e"/>
+  <ellipse cx="386" cy="412" rx="18" ry="18" fill="#a07830"/>
+  <ellipse cx="386" cy="412" rx="12" ry="12" fill="#8a6420"/>
+  <ellipse cx="386" cy="412" rx="5" ry="5" fill="#6b4a2e"/>
+
+  <!-- Text lines on scroll -->
+  <line x1="176" y1="155" x2="336" y2="155" stroke="#8a6420" stroke-width="3" opacity="0.5"/>
+  <line x1="176" y1="185" x2="320" y2="185" stroke="#8a6420" stroke-width="2" opacity="0.3"/>
+  <line x1="176" y1="210" x2="336" y2="210" stroke="#8a6420" stroke-width="2" opacity="0.3"/>
+  <line x1="176" y1="235" x2="300" y2="235" stroke="#8a6420" stroke-width="2" opacity="0.3"/>
+  <line x1="176" y1="260" x2="336" y2="260" stroke="#8a6420" stroke-width="2" opacity="0.3"/>
+  <line x1="176" y1="285" x2="310" y2="285" stroke="#8a6420" stroke-width="2" opacity="0.3"/>
+  <line x1="176" y1="310" x2="336" y2="310" stroke="#8a6420" stroke-width="2" opacity="0.3"/>
+  <line x1="176" y1="335" x2="280" y2="335" stroke="#8a6420" stroke-width="2" opacity="0.3"/>
+
+  <!-- Wax seal -->
+  <circle cx="300" cy="370" r="24" fill="#b03a2a" opacity="0.85"/>
+  <circle cx="300" cy="370" r="18" fill="#c04030" opacity="0.9"/>
+  <circle cx="300" cy="370" r="10" fill="none" stroke="#e8c0b0" stroke-width="1" opacity="0.4"/>
+  <text x="300" y="375" text-anchor="middle" font-family="serif" font-size="14" font-weight="bold" fill="#e8c0b0" opacity="0.6">D</text>
 
 </svg>

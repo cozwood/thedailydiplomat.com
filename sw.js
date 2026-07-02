@@ -16,7 +16,8 @@ self.addEventListener('push', (event) => {
     self.registration.showNotification('The Daily Diplomat', {
       body: "Today's brief is on the wire — eight desks, one dispatch.",
       icon: '/favicon-192x192.png',
-      badge: '/favicon-192x192.png',
+      // badge must be monochrome-on-transparent or Android shows a white box
+      badge: '/badge-96.png',
       tag: 'tdd-daily-brief',
       data: { url: '/' },
     })

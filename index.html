@@ -1769,6 +1769,9 @@
         activeCipherRAFs.push(() => { running = false; });
       }
     }
+    // Land on the final text even if animation frames never run (hidden tab,
+    // throttled rAF) — the first frame re-scrambles, so the effect is intact.
+    el.textContent = finalText;
     requestAnimationFrame(frame);
   }
 
@@ -2176,11 +2179,13 @@
     const cable = document.getElementById('cable-date');
     if (cable) cable.textContent = `${dd} ${monFull} ${yyyy}`;
 
-    // Communiqué number (day of year)
+    // Communiqué number (day of year). Stamp the default EAP number only when
+    // the EAP desk is showing — on #desk-… loads showDesk() already set the
+    // right desk code and this must not clobber it.
     const start = new Date(yyyy, 0, 0);
     const dayOfYear = String(Math.floor((now - start) / 86400000)).padStart(3, '0');
     const cableNum = document.querySelector('.dispatch-comm-num');
-    if (cableNum) cableNum.textContent = `Communiqué No. EAP-${yyyy}-${dayOfYear}`;
+    if (cableNum && selectedDesk === 'East Asia & Pacific') cableNum.textContent = `Communiqué No. EAP-${yyyy}-${dayOfYear}`;
   })();
 </script>
 </body>

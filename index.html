@@ -1281,6 +1281,14 @@
         </form>
         <div class="gate-note">Free. No noise. Stand down anytime.</div>
         <div id="subscribe-status" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-align:center;margin-top:12px;display:none;"></div>
+
+        <!-- DAILY PUSH — one lock-screen notification each morning (Web Push) -->
+        <div id="push-block" style="display:none;margin-top:28px;padding-top:24px;border-top:1px solid rgba(196,146,64,0.25);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;">// Or Get the Morning Push</div>
+          <button class="gate-btn" id="push-btn" type="button" onclick="toggleDailyPush()">Enable Daily Push →</button>
+          <div class="gate-note" id="push-note">One notification at 08:00 your time, on this device. No email required.</div>
+          <div id="push-status" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-align:center;margin-top:12px;display:none;"></div>
+        </div>
       </div>
     </main>
 
@@ -2029,6 +2037,126 @@
 
     return false;
   }
+
+  // ── DAILY PUSH (Web Push) ──
+  // The tdd-subscribe Worker stores the subscription + this device's timezone
+  // and its hourly cron sends one payloadless push at 08:00 local; sw.js shows
+  // the notification. On iPhone this only works once the site is installed
+  // via Share → Add to Home Screen (iOS 16.4+).
+  const PUSH_API = 'https://tdd-subscribe.carter-oswood.workers.dev';
+
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+
+  function browserTz() {
+    try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Lisbon'; }
+    catch (e) { return 'Europe/Lisbon'; }
+  }
+
+  // Push wants the applicationServerKey as raw bytes, not the base64url string.
+  function urlBase64ToUint8Array(base64url) {
+    const padding = '='.repeat((4 - (base64url.length % 4)) % 4);
+    const base64 = (base64url + padding).replace(/-/g, '+').replace(/_/g, '/');
+    const raw = atob(base64);
+    const out = new Uint8Array(raw.length);
+    for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
+    return out;
+  }
+
+  function setPushStatus(msg, ok) {
+    const el = document.getElementById('push-status');
+    el.style.display = msg ? 'block' : 'none';
+    el.style.color = ok ? 'rgba(122,184,138,0.9)' : 'rgba(220,120,100,0.9)';
+    el.textContent = msg || '';
+  }
+
+  async function currentPushSubscription() {
+    const reg = await navigator.serviceWorker.ready;
+    return reg.pushManager.getSubscription();
+  }
+
+  async function refreshPushUI() {
+    const btn = document.getElementById('push-btn');
+    const note = document.getElementById('push-note');
+    let sub = null;
+    try { sub = await currentPushSubscription(); } catch (e) {}
+    if (sub) {
+      btn.textContent = 'Stand Down Push';
+      note.textContent = 'Morning push active on this device — 08:00 ' + browserTz() + '.';
+    } else {
+      btn.textContent = 'Enable Daily Push →';
+      note.textContent = 'One notification at 08:00 your time, on this device. No email required.';
+    }
+  }
+
+  async function toggleDailyPush() {
+    const btn = document.getElementById('push-btn');
+    btn.disabled = true;
+    try {
+      const existing = await currentPushSubscription();
+      if (existing) {
+        // Stand down: drop it locally and on the server.
+        await existing.unsubscribe();
+        await fetch(PUSH_API + '/api/push-unsubscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ endpoint: existing.endpoint }),
+        }).catch(() => {});
+        setPushStatus('Push disabled on this device.', true);
+        return;
+      }
+
+      const perm = await Notification.requestPermission();
+      if (perm !== 'granted') { setPushStatus('Notification permission denied.', false); return; }
+
+      btn.textContent = 'Transmitting...';
+      const reg = await navigator.serviceWorker.ready;
+      const { key } = await (await fetch(PUSH_API + '/api/vapid-public-key')).json();
+      if (!key) { setPushStatus('Server is missing its push keys — try again later.', false); return; }
+
+      const sub = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(key),
+      });
+      const res = await fetch(PUSH_API + '/api/push-subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subscription: sub, tz: browserTz() }),
+      });
+      if (!res.ok) { setPushStatus('Could not save the subscription — try again later.', false); return; }
+
+      setPushStatus('Confirmed. Your brief will land at 08:00 (' + browserTz() + '). Sending a test push…', true);
+      // Real end-to-end confirmation: a push through the push service, now.
+      fetch(PUSH_API + '/api/push-test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ endpoint: sub.endpoint }),
+      }).catch(() => {});
+    } catch (e) {
+      setPushStatus('Push setup failed: ' + (e && e.message ? e.message : 'unknown error'), false);
+    } finally {
+      btn.disabled = false;
+      refreshPushUI();
+    }
+  }
+
+  // Show the push block where Web Push can work; on iPhone Safari (browser
+  // tab) explain the Add-to-Home-Screen step instead.
+  (function initPushUI() {
+    const block = document.getElementById('push-block');
+    if (!block) return;
+    const supported = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+    if (supported) {
+      block.style.display = 'block';
+      refreshPushUI();
+    } else if (isIOS && !standalone) {
+      block.style.display = 'block';
+      document.getElementById('push-btn').style.display = 'none';
+      document.getElementById('push-note').textContent =
+        'On iPhone: tap Share → Add to Home Screen, then open The Daily Diplomat from your home screen to enable the morning push.';
+    }
+  })();
 
   // ── AUTO-DATE ──
   (function() {

@@ -2050,6 +2050,30 @@
 
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
 
+  // Keep the INSTALLED app fresh. A home-screen PWA usually RESUMES instead of
+  // relaunching, so readers can sit on yesterday's brief indefinitely. On each
+  // resume we ask GitHub Pages (cheap HEAD, no body) whether index.html has
+  // changed since this page loaded, and reload only when there is actually a
+  // new edition/deploy. The resume also re-checks sw.js so worker updates land.
+  (function () {
+    let pageStamp = null;
+    async function stamp() {
+      try {
+        const r = await fetch('/index.html', { method: 'HEAD', cache: 'no-store' });
+        return r.headers.get('etag') || r.headers.get('last-modified');
+      } catch (e) { return null; }
+    }
+    stamp().then((s) => { pageStamp = s; });
+    document.addEventListener('visibilitychange', async () => {
+      if (document.visibilityState !== 'visible') return;
+      if ('serviceWorker' in navigator) {
+        try { const reg = await navigator.serviceWorker.getRegistration(); if (reg) reg.update(); } catch (e) {}
+      }
+      const s = await stamp();
+      if (s && pageStamp && s !== pageStamp) location.reload();
+    });
+  })();
+
   function browserTz() {
     try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Lisbon'; }
     catch (e) { return 'Europe/Lisbon'; }

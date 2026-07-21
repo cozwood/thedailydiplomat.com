@@ -860,15 +860,35 @@
       .dispatch-comm-num {
         font-size: 8px;
       }
+      /* Meta — compact 2-col grid so it yields quickly to the story */
       .dispatch-meta {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+      }
+      .meta-cell {
+        padding: 5px 0;
       }
       .meta-cell:nth-child(odd) {
-        border-right: none;
-        padding-right: 0;
+        padding-right: 14px;
       }
       .meta-cell:nth-child(even) {
-        padding-left: 0;
+        padding-left: 14px;
+      }
+      .meta-key {
+        font-size: 7px;
+        margin-bottom: 2px;
+      }
+      .meta-val {
+        font-size: 10px;
+        letter-spacing: 0.5px;
+      }
+
+      /* Subject — smaller, tighter, straight into the body */
+      .dispatch-subject {
+        padding: 10px 0;
+      }
+      .subject-val {
+        font-size: 10px;
+        line-height: 1.4;
       }
 
       .dispatch-body {

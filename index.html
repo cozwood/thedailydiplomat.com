@@ -331,6 +331,14 @@
     .subject-key { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
     .subject-val { font-size: 11px; color: var(--ink); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; line-height: 1.5; }
 
+    /* Listen / audio narration */
+    .listen-bar { display: flex; align-items: center; gap: 12px; padding: 12px 0 16px; }
+    .listen-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--brown); color: var(--paper); border: none; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; padding: 9px 16px; cursor: pointer; transition: background 0.15s, opacity 0.15s; }
+    .listen-btn:hover { background: #5a3a1e; }
+    .listen-btn:disabled { opacity: 0.55; cursor: default; }
+    .listen-icon { font-size: 12px; line-height: 1; width: 12px; text-align: center; }
+    .listen-status { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+
     .dispatch-body { padding: 28px 36px 0; }
     .dispatch-headline { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--ink); line-height: 1.15; margin-bottom: 24px; text-align: justify; }
     .dispatch-text { font-family: 'Source Serif 4', serif; font-size: 15px; line-height: 1.85; color: #2a1a0e; text-align: justify; margin-bottom: 18px; }
@@ -1241,6 +1249,13 @@
           <div class="subject-key">Subject</div>
           <div class="subject-val" id="dispatch-subject">India-Japan Stealth Warship Partnership Signals Erosion Of U.s. Defense Dependency While China Accelerates Counter-Alliance Military Signaling</div>
         </div>
+        <div class="listen-bar">
+          <button class="listen-btn" id="listen-btn" type="button" onclick="toggleListen()">
+            <span class="listen-icon" id="listen-icon">▶</span><span id="listen-label">Listen</span>
+          </button>
+          <span class="listen-status" id="listen-status">Hands-free brief</span>
+          <audio id="dispatch-audio" preload="none"></audio>
+        </div>
       </div>
 
       <!-- OPEN ACCESS CONTENT -->
@@ -1798,6 +1813,7 @@
   // ── SHOW DESK ──
   function showDesk(deskName) {
     stopAllCiphers();
+    resetListen();
 
     // If East Asia & Pacific, restore original HTML content with decode animation
     if (deskName === 'East Asia & Pacific') {
@@ -1933,6 +1949,114 @@
       });
     }, 100);
   }
+
+  // ── LISTEN / AUDIO NARRATION ──
+  // Each morning the pipeline (generate_audio.py) narrates all 8 desks with
+  // Cloudflare Workers AI and uploads {desk}.mp3 to R2. The button streams the
+  // current desk's MP3 through a real <audio> element (not speechSynthesis, so
+  // it keeps playing with the screen locked) and wires up lock-screen controls
+  // via the Media Session API.
+  const AUDIO_BASE = 'https://pub-14c978acea1b4293a3b2547ee461bf0c.r2.dev';
+  const DESK_CODE = {
+    'North America': 'nam',
+    'Europe': 'eur',
+    'Russia & Eurasia': 'rea',
+    'East Asia & Pacific': 'eap',
+    'Southern Asia': 'sas',
+    'Middle East': 'me',
+    'Sub-Saharan Africa': 'ssa',
+    'Latin America': 'lac',
+  };
+  let listenLoadedFor = null;
+
+  function listenAudio() { return document.getElementById('dispatch-audio'); }
+
+  function currentDeskName() {
+    const active = document.querySelector('.desk-selectable.active');
+    if (active) return active.getAttribute('data-desk');
+    return (typeof selectedDesk !== 'undefined' && selectedDesk) || 'East Asia & Pacific';
+  }
+
+  function setListenUI(state) {
+    const icon = document.getElementById('listen-icon');
+    const label = document.getElementById('listen-label');
+    const status = document.getElementById('listen-status');
+    const btn = document.getElementById('listen-btn');
+    if (!btn) return;
+    const map = {
+      idle:        ['▶', 'Listen',  'Hands-free brief'],
+      loading:     ['◌', 'Loading', 'Fetching narration…'],
+      playing:     ['⏸', 'Pause',   'Now playing'],
+      paused:      ['▶', 'Resume',  'Paused'],
+      ended:       ['▶', 'Listen',  'Finished'],
+      error:       ['⚠', 'Listen',  'Audio not ready yet — check back'],
+      unavailable: ['—', 'Listen',  'Audio unavailable for this desk'],
+    };
+    const [i, l, s] = map[state] || map.idle;
+    icon.textContent = i;
+    label.textContent = l;
+    if (status) status.textContent = s;
+    btn.disabled = (state === 'unavailable');
+  }
+
+  function resetListen() {
+    const a = listenAudio();
+    if (!a) return;
+    a.pause();
+    a.removeAttribute('src');
+    a.load();
+    listenLoadedFor = null;
+    setListenUI('idle');
+  }
+
+  function setMediaSession(desk) {
+    if (!('mediaSession' in navigator)) return;
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: desk + ' Desk',
+        artist: 'The Daily Diplomat',
+        album: "Today's Communiqué",
+        artwork: [
+          { src: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
+        ],
+      });
+      navigator.mediaSession.setActionHandler('play', () => { listenAudio().play(); });
+      navigator.mediaSession.setActionHandler('pause', () => { listenAudio().pause(); });
+    } catch (e) { /* MediaMetadata unsupported — non-fatal */ }
+  }
+
+  async function toggleListen() {
+    const a = listenAudio();
+    if (!a) return;
+    const desk = currentDeskName();
+    const code = DESK_CODE[desk];
+    if (!code) { setListenUI('unavailable'); return; }
+
+    // Playing → pause.
+    if (!a.paused && a.src) { a.pause(); return; }
+    // Already loaded for this desk, just paused → resume.
+    if (listenLoadedFor === code && a.src) {
+      try { await a.play(); } catch (e) { setListenUI('error'); }
+      return;
+    }
+    // Fresh load for this desk. Cache-bust by date so a new morning's file wins.
+    const v = new Date().toISOString().slice(0, 10);
+    a.src = `${AUDIO_BASE}/${code}.mp3?v=${v}`;
+    listenLoadedFor = code;
+    setListenUI('loading');
+    setMediaSession(desk);
+    try { await a.play(); } catch (e) { setListenUI('error'); }
+  }
+
+  (function initListen() {
+    const a = listenAudio();
+    if (!a) return;
+    a.addEventListener('playing', () => setListenUI('playing'));
+    a.addEventListener('pause', () => { if (!a.ended) setListenUI('paused'); });
+    a.addEventListener('ended', () => { setListenUI('ended'); listenLoadedFor = null; });
+    a.addEventListener('error', () => { if (a.src) setListenUI('error'); });
+  })();
 
   // ── DESK NAVIGATION ──
   document.querySelectorAll('.desk-selectable').forEach(row => {

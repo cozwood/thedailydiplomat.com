@@ -4,6 +4,14 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+  <!-- Machine-readable edition stamp (YYYY-MM-DD, Europe/Lisbon). Rewritten by
+       update_landing.py on every successful run, so it is the one thing on this
+       page that proves today's cables actually shipped. The tdd-subscribe
+       Worker's watchdog cron reads it daily and alerts if it falls behind or
+       goes missing — a missing tag also catches the stale-template-deployed-
+       over-live-page mistake. Do not hand-edit; do not remove. -->
+  <meta name="tdd-edition" content="2026-07-28"/>
+
   <!-- SEO Core -->
   <title>The Daily Diplomat — Geopolitical Intelligence Briefings</title>
   <meta name="description" content="Intelligence-grade geopolitical briefings covering 8 global theaters — from East Asia to Latin America. Classified-style analysis delivered to your inbox every morning."/>
@@ -2288,10 +2296,15 @@
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(key),
       });
+      // Operator claim: loading the site as ?admin=<WATCHDOG_SECRET> on a
+      // device also signs it up for watchdog alarms (publish failed / resumed),
+      // which ordinary subscribers never see. The Worker validates the secret
+      // and ignores it otherwise, so a wrong or absent value is a plain signup.
+      const adminSecret = new URLSearchParams(location.search).get('admin');
       const res = await fetch(PUSH_API + '/api/push-subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subscription: sub, tz: browserTz() }),
+        body: JSON.stringify({ subscription: sub, tz: browserTz(), adminSecret }),
       });
       if (!res.ok) { setPushStatus('Could not save the subscription — try again later.', false); return; }
 
